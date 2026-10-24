@@ -1,0 +1,66 @@
+{
+  "name": "book-worst",
+  "case": {
+    "id": "worst",
+    "title": "Case 3: worst of the real web",
+    "siteFile": "site-worst/index.html",
+    "fixture": "fixtures/worst/index.html",
+    "url": "http://localhost:4104",
+    "attemptPort": 4106,
+    "outDir": "results/cases/worst"
+  },
+  "description": "Book a free first visit on the case 3 Pitchline page (patterns from published agent-failure research) and read back the confirmation reference.",
+  "objective": "Go to {{url}} and book a free first visit for Sam Rivera, email sam@example.com, on the second of November 2026 at noon at the Downtown gym. Accept the waiver. Then verify a booking confirmation with a reference code is shown and store the reference as ref.",
+  "expectedReference": "PL-5519",
+  "optimalSteps": 14,
+  "optimalStepsReasoning": "Counted at Kane granularity for a clean version that keeps what this business asks for: (1) open the page, (2) answer the privacy choice, (3) open booking, (4) accept location access, (5) name, (6) email, (7) date, (8) choose the Downtown gym, (9) choose noon, (10) waiver, (11) submit, (12) wait for the confirmation, (13) check it, (14) store the reference. Not owner-confirmed (built in the final hour).",
+  "stepCounting": "Same as flows/book.json: every completed step counts; actionSteps and overheadSteps are recorded per run.",
+  "testData": {
+    "name": "Sam Rivera",
+    "email": "sam@example.com",
+    "date": "2026-11-02"
+  },
+  "extraChecklist": [
+    "A consent modal inside an iframe that traps focus and locks page scroll until answered",
+    "Two overlapping modals where the lower one (location request) must be accepted but a newsletter modal covers it",
+    "A required location picker that pops up mid-flow",
+    "A time-slot picker drawn on a canvas with no DOM nodes (a visually hidden radio list is the only accessible path)",
+    "The submit button three screens down past filler content",
+    "A confirmation that appears 4 s after submit"
+  ],
+  "humanPath": {
+    "name": "human-path",
+    "objective": "Go to {{url}}. Answer the privacy choice, open the booking form, accept location access, enter the name Sam Rivera and the email sam@example.com, choose 2 November 2026, the Downtown gym and the arrival time noon, accept the climbing waiver and confirm the booking. Wait 5 seconds, then verify the text PL-5519 is still visible on the page.",
+    "why": "Guard for human visitors: a person must still end with PL-5519 visible."
+  },
+  "humanPathControls": [
+    {
+      "name": "name field",
+      "match": "name"
+    },
+    {
+      "name": "email field",
+      "match": "email"
+    },
+    {
+      "name": "visit date",
+      "match": "date"
+    },
+    {
+      "name": "arrival time",
+      "match": "9am|09:00|time"
+    },
+    {
+      "name": "waiver",
+      "match": "waiver"
+    },
+    {
+      "name": "gym location",
+      "match": "gym|location"
+    },
+    {
+      "name": "confirm button",
+      "match": "confirm"
+    }
+  ]
+}
