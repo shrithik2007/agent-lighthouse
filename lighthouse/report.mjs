@@ -80,7 +80,7 @@ export async function buildLatest({ cwd = process.cwd(), loopFile, proposeLoopFi
       attempt: a.attempt, commit: a.commit ?? null, filesChanged: a.filesChanged ?? [], cause: a.diagnosis?.cause ?? null, error: a.error ?? null,
       score: a.summary?.score ?? null, humanPath: a.humanPath?.status ?? null, gate: a.gate, gateReason: a.gateReason ?? null,
       scopeGuardReverted: a.scopeGuard?.reverted ?? [], fixer: a.fixer ?? null,
-      highlight: a.summary?.score != null && a.summary.score >= (loop.threshold ?? 80) && a.humanPath?.status !== 'passed',
+      highlight: a.gate === 'suspect' || (a.summary?.score != null && a.summary.score >= (loop.threshold ?? 80) && a.humanPath?.status !== 'passed'),
     })),
     humanPath: { baseline: loop?.baseline.humanPath ? slim(loop.baseline.humanPath) : null, final: final?.humanPath ? slim(final.humanPath) : null },
     proposal,

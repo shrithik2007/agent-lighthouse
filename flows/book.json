@@ -10,5 +10,36 @@
     "name": "human-path",
     "objective": "Go to {{url}}. Open the booking form for a free first visit. Enter the name Sam Rivera and the email sam@example.com, choose the visit date 2 November 2026 and the arrival time noon, accept the climbing waiver and confirm the booking. Wait 5 seconds, then verify the text PL-4821 is still visible on the page.",
     "why": "Guard for human visitors: the scripted booking a person would make must still end with the PL-4821 reference visible five seconds after confirming. A patch that only helps agents does not qualify."
-  }
+  },
+  "testData": {
+    "name": "Sam Rivera",
+    "email": "sam@example.com",
+    "date": "2026-11-02"
+  },
+  "humanPathControls": [
+    {
+      "name": "name field",
+      "match": "name"
+    },
+    {
+      "name": "email field",
+      "match": "email"
+    },
+    {
+      "name": "arrival time",
+      "match": "arrival|9am|09:00"
+    },
+    {
+      "name": "waiver",
+      "match": "waiver"
+    },
+    {
+      "name": "visit date",
+      "match": "date"
+    },
+    {
+      "name": "confirm button",
+      "match": "confirm my free visit|confirm"
+    }
+  ]
 }

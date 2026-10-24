@@ -9,6 +9,7 @@ import { packExcerpts, extractFailedScreenshot } from './pack.mjs';
 import { callOpenAI } from './openai.mjs';
 import { compare, agentTax, gateDecision } from '../core/score.mjs';
 import { createSiteServer } from '../scripts/serve.mjs';
+import { leakCheck, describeFindings } from './leak.mjs';
 
 const exec = promisify(execFile);
 const git = async (args, cwd) => (await exec('git', args, { cwd, maxBuffer: 10 * 1024 * 1024 })).stdout.trim();
@@ -249,6 +250,14 @@ export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3,
       entry.commit = await git(['rev-parse', 'HEAD'], worktree);
       entry.filesChanged = (await git(['diff', '--name-only', `${parent}..${entry.commit}`], worktree)).split('\n').filter(Boolean);
       entry.diffStat = await git(['diff', '--shortstat', `${parent}..${entry.commit}`], worktree);
+      // Fixture-leak check: a patch that teaches to the test cannot qualify, whatever it scores.
+      const [diff, baseHtml, patchedHtml] = await Promise.all([
+        git(['diff', `${parent}..${entry.commit}`, '--', ctx.siteFile], worktree),
+        git(['show', `${parent}:${ctx.siteFile}`], worktree),
+        git(['show', `${entry.commit}:${ctx.siteFile}`], worktree),
+      ]);
+      entry.leakCheck = leakCheck({ flow, diff, baseHtml, patchedHtml });
+      if (entry.leakCheck.suspect) log(`  leak check: SUSPECT, ${describeFindings(entry.leakCheck.findings)}`);
       log(`  committed ${entry.commit.slice(0, 7)} (${entry.diffStat})`);
 
       server = await serve(join(worktree, ctx.siteFile), ctx.attemptPort);
@@ -263,11 +272,18 @@ export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3,
       entry.humanPathPassed = entry.humanPath.status === 'passed';
       entry.gate = scoreGate === 'pass' && !entry.humanPathPassed ? (attempt >= maxAttempts ? 'escalate' : 'retry') : scoreGate;
       entry.gateReason = scoreGate === 'pass' && !entry.humanPathPassed ? 'score qualified but the human path failed' : `score ${entry.summary.score ?? 'n/a'} vs threshold ${threshold}`;
+      if (entry.leakCheck.suspect) {
+        entry.gate = 'suspect';
+        entry.gateReason = `suspect, owner review required: ${describeFindings(entry.leakCheck.findings)} (score ${entry.summary.score ?? 'n/a'}, human path ${entry.humanPath.status})`;
+      }
       log(`  score ${entry.summary.score ?? 'n/a'} · human path ${entry.humanPath.status} · gate ${entry.gate}`);
       parent = entry.commit;
       lastRuns = entry.runs;
       lastHuman = entry.humanPath;
-      previous = { cause: diagnosis.json.cause, changes: diagnosis.json.changes, score: entry.summary.score, humanPath: entry.humanPath.status };
+      previous = {
+        cause: diagnosis.json.cause, changes: diagnosis.json.changes, score: entry.summary.score, humanPath: entry.humanPath.status,
+        ...(entry.leakCheck.suspect ? { rejectedBecause: `The previous patch was blocked as suspect: it ${describeFindings(entry.leakCheck.findings)}. Never use the test's data (name, email, date) anywhere in the page, including hints, placeholders or defaults, and never remove a control the human path needs (such as human verification).` } : {}),
+      };
     } catch (error) {
       entry.error = error.message;
       entry.gate = attempt >= maxAttempts ? 'escalate' : 'retry';
@@ -285,6 +301,7 @@ export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3,
       break;
     }
     if (entry.gate === 'escalate') { record.outcome = 'escalated'; break; }
+    if (entry.gate === 'suspect' && attempt >= maxAttempts) { record.outcome = 'suspect'; break; }
   }
 
   if (record.outcome === 'qualified' && mode === 'apply') {
@@ -305,6 +322,7 @@ export function proposal(record) {
   const final = record.attempts.find(a => a.attempt === record.qualified?.attempt) ?? record.attempts.at(-1);
   const head = record.outcome === 'qualified'
     ? `Qualified on attempt ${record.qualified.attempt}: score ${fmt(final.summary?.score)} (threshold ${record.threshold}) and the human path passed.`
+    : record.outcome === 'suspect' ? `Suspect, owner review required: the last attempt ${record.attempts.at(-1)?.leakCheck ? describeFindings(record.attempts.at(-1).leakCheck.findings) : 'failed the fixture-leak check'}. Not qualified.`
     : record.outcome === 'escalated' ? `Escalated after ${record.attempts.length} attempts: no attempt reached score ${record.threshold} with a passing human path. Owner input needed.` : `Outcome: ${record.outcome}.`;
   const tax = final?.agentTaxBefore;
   const lines = [
@@ -326,6 +344,7 @@ export function proposal(record) {
       ...(a.diagnosis?.changes ?? []).map(c => `- ${c}`),
       a.fixer ? `Fixer: ${a.fixer}. Files: ${a.filesChanged?.join(', ') ?? 'n/a'}. Scope guard reverted: ${a.scopeGuard?.reverted.join(', ') || 'nothing'}.` : '',
       a.summary ? `Result: score ${fmt(a.summary.score)}, ${a.summary.passedCount}/${a.summary.runCount} passed, human path ${a.humanPath?.status}. ${a.gateReason}.` : '',
+      a.leakCheck ? `Fixture-leak check: ${a.leakCheck.suspect ? `**SUSPECT**: ${describeFindings(a.leakCheck.findings)}` : 'clean'}.` : '',
       '',
     ]),
     '## Evidence', '',
