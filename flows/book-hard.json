@@ -13,7 +13,7 @@
   "objective": "Go to {{url}} and book the free first visit class for Sam Rivera, email sam@example.com, on the second of November 2026 at noon. Accept the waiver. Then verify a booking confirmation with a reference code is shown and store the reference as 'ref'.",
   "expectedReference": "PL-7302",
   "optimalSteps": 14,
-  "optimalStepsReasoning": "Counted at Kane's granularity for a clean two-step version that keeps everything this business asks for: (1) open the page, (2) open booking, (3) choose 'Free first visit', (4) continue to details, (5) name, (6) email, (7) date, (8) time, (9) waiver, (10) human check, (11) submit details, (12) confirm 'Yes', (13) check the confirmation, (14) store the reference. The newsletter modal, cookie wall and month navigation are friction, not required steps. Not yet confirmed by the owner (recorded during the post-evaluation build).",
+  "optimalStepsReasoning": "Counted at Kane's granularity for a clean two-step version that keeps everything this business asks for: (1) open the page, (2) open booking, (3) choose 'Free first visit', (4) continue to details, (5) name, (6) email, (7) date, (8) time, (9) waiver, (10) human check, (11) submit details, (12) confirm 'Yes', (13) check the confirmation, (14) store the reference. The newsletter modal, cookie wall and month navigation are friction, not required steps. Confirmed by the owner on 2026-10-24.",
   "stepCounting": "Same as flows/book.json: every completed step counts; actionSteps and overheadSteps are recorded per run.",
   "extraChecklist": [
     "A newsletter or marketing modal that opens on a timer over the form, dismissed by a tiny or text-only control",
@@ -26,5 +26,6 @@
     "name": "human-path-hard",
     "objective": "Go to {{url}}. Book the free first visit class: choose that class, enter the name Sam Rivera and the email sam@example.com, pick 2 November 2026 and the arrival time noon, accept the climbing waiver, complete the human check and confirm the booking. Wait 5 seconds, then verify the text PL-7302 is still visible on the page.",
     "why": "Guard for human visitors: a person's booking must still end with PL-7302 visible five seconds after confirming."
-  }
+  },
+  "baselineNote": "Baseline Agent Tax is n/a: no pre-fix run succeeded, so there is no per-booking extra work to measure. All three baseline runs (KR-190, KR-191, KR-193) stopped at the fake captcha with reason_code blocker.captcha: Kane refuses to pretend to be human."
 }

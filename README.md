@@ -44,7 +44,7 @@ All numbers come from real Kane CLI 0.10.0-rc.3 runs on October 24, 2026, launch
 
 ## Case 2: hard mode
 
-A second sample site (`fixtures/hard/`, working copy `site-hard/` on :4103) has a two-step class booking with the six original problems plus five more: a newsletter modal that opens 3 s after load, time slots in a custom dropdown that opens on hover only, a date picker made of unlabeled divs that starts on the wrong month, an "Are you sure?" step whose primary button says "Go back", and a reCAPTCHA-style check that is a styled div. jsdom tests (`tests/hard.test.mjs`) prove a careful human can complete it. Reference `PL-7302`, optimalSteps 14 (reasoning in `flows/book-hard.json`; not yet owner-confirmed).
+A second sample site (`fixtures/hard/`, working copy `site-hard/` on :4103) has a two-step class booking with the six original problems plus five more: a newsletter modal that opens 3 s after load, time slots in a custom dropdown that opens on hover only, a date picker made of unlabeled divs that starts on the wrong month, an "Are you sure?" step whose primary button says "Go back", and a reCAPTCHA-style check that is a styled div. jsdom tests (`tests/hard.test.mjs`) prove a careful human can complete it. Reference `PL-7302`, optimalSteps 14 (reasoning in `flows/book-hard.json`, confirmed by the owner).
 
 | | Score | Passed | Median steps | Human path |
 | --- | --- | --- | --- | --- |
@@ -52,7 +52,8 @@ A second sample site (`fixtures/hard/`, working copy `site-hard/` on :4103) has 
 | Proposed fix, attempt 1 (`134e5b8`, unmerged) | **98** | 3/3 | 16 | passed (KR-206) |
 
 - **What Kane caught:** every BEFORE run cleared the newsletter modal, cookie wall, class step, month navigation and hover-only dropdown, then stopped at the fake captcha with `reason_code: blocker.captcha`: "The booking could not be completed because a CAPTCHA required a human verification." Kane will not impersonate a human.
-- **Agent Tax: n/a.** No BEFORE run booked successfully, so there is no per-booking tax or credit ratio to compute; the dashboard says so instead of showing zero.
+- **Kane refuses to pretend to be human.** The fake captcha is where all three baseline runs stopped. That's a feature worth naming: an agent that clicks through "I'm not a robot" would be one site owners can't trust.
+- **Agent Tax: n/a.** No pre-fix run succeeded, so there is no per-booking tax or credit ratio to compute; the dashboard says so instead of showing zero.
 - **The gate passed a patch an owner should reject.** The propose-mode loop qualified on attempt 1, but the fix removed the human-verification check ("Demo mode: no human verification required") and hard-coded the test's date (`selectedDate = '2026-11-02'`). The gate checks outcomes, not intent. The operator review note at the end of `results/cases/hard/proposal.md` says not to merge, and the dashboard chip reads "Qualified · reviewer says do not merge". This is why propose mode is the default: a person decides.
 - Records: `results/cases/hard/` (baseline, latest, proposal), `results/loop/2026-10-24T22-22-59.json`, evidence under `evidence/runs/hard-baseline-*` and `evidence/runs/loop-2026-10-24T22-22-59-*`, packs `evidence/packs/KR-190…`, `KR-194…`, `KR-196…`, `KR-206…`.
 
@@ -174,7 +175,7 @@ All code was written on October 24, 2026 (see `git log`):
 - Codex's ChatGPT-plan quota ran out during the first loop. That loop is kept as `results/loop/2026-10-24T21-11-48.json` (aborted). The fixer now passes the API key to Codex through the environment and falls back to the OpenAI API returning the whole file.
 - **The gate checks outcomes, not intent.** In case 2 it qualified a patch that removed human verification and hard-coded the objective's date. Propose mode and owner review caught it; intent checks in the scope guard are future work.
 - Kane refuses to complete captcha-style human checks (`blocker.captcha`), so sites with real bot protection need an owner-approved test path before they can be measured.
-- Case 2's optimalSteps (14) was counted during the post-evaluation build and has not been confirmed by the owner. Case 2 has no hand-built reference fix.
+- Case 2 has no hand-built reference fix.
 - The demo loop's attempt server moved from :4103 to :4105 when :4103 became the hard-mode working copy (port only; the loop is otherwise unchanged).
 - The product page quotes an illustrative (not measured) 92% vs 12% figure from Future AGI and labels it as illustrative.
 - The first calibration run exited 2 because Kane was launched inside Codex's sandbox (EPERM on `~/.testmuai`, Chrome never started). Kane now always runs from the operator's shell.
