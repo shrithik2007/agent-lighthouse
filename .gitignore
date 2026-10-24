@@ -1,0 +1,8 @@
+node_modules/
+.testmuai/
+results/raw/
+results/*.tmp
+.env*
+.DS_Store
+*.log
+coverage/
