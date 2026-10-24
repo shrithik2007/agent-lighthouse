@@ -1,0 +1,57 @@
+{"type":"stream_start","cli_version":"0.10.0-rc.3","surface":"run","pid":49889,"v":1,"ts":"2026-10-24T23:32:08.929Z"}
+{"type":"recording_state","enabled":true,"session_id":"569d6aea-12f7-4343-a434-cf0891ec9ff1","persist":false,"v":1,"ts":"2026-10-24T23:32:08.932Z"}
+{"type":"bifurcation","flows":["Navigate to http://localhost:4106 then book a free first visit for Sam Rivera, email sam@example.com, on the second of November 2026 at noon at the Downtown gym.\nAccept the waiver.\nThen verify a booking confirmation with a reference code is shown and store the reference as {{ref}}."],"count":1,"v":1,"ts":"2026-10-24T23:32:17.816Z"}
+{"step":2,"status":"running","remark":"Step 1","v":1,"ts":"2026-10-24T23:32:18.004Z"}
+{"step":2,"status":"done","remark":"navigate: Navigate to http://localhost:4106","v":1,"ts":"2026-10-24T23:32:18.006Z"}
+{"step":3,"status":"running","remark":"Step 2","v":1,"ts":"2026-10-24T23:32:21.867Z"}
+{"step":3,"status":"done","remark":"click: Clicking reject non-essential cookies button","v":1,"ts":"2026-10-24T23:32:26.179Z"}
+{"step":4,"status":"running","remark":"Step 3","v":1,"ts":"2026-10-24T23:32:26.760Z"}
+{"step":4,"status":"done","remark":"click: Clicking Book a free first visit button","v":1,"ts":"2026-10-24T23:32:30.490Z"}
+{"step":5,"status":"running","remark":"Step 4","v":1,"ts":"2026-10-24T23:32:31.068Z"}
+{"step":5,"status":"done","remark":"click: Clicking Accept to allow location access","v":1,"ts":"2026-10-24T23:32:34.995Z"}
+{"step":6,"status":"running","remark":"Step 5","v":1,"ts":"2026-10-24T23:32:35.590Z"}
+{"step":6,"status":"done","remark":"wait: queued plan (5 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"","v":1,"ts":"2026-10-24T23:32:42.078Z"}
+{"step":7,"status":"running","remark":"Step 6","v":1,"ts":"2026-10-24T23:32:42.669Z"}
+{"step":7,"status":"done","remark":"type: Type \"Sam Rivera\" into \"Your name\"","v":1,"ts":"2026-10-24T23:32:42.733Z"}
+{"step":8,"status":"running","remark":"Step 7","v":1,"ts":"2026-10-24T23:32:43.316Z"}
+{"step":8,"status":"done","remark":"scroll: Scroll \"Email address\" into view","v":1,"ts":"2026-10-24T23:32:43.346Z"}
+{"step":9,"status":"running","remark":"Step 8","v":1,"ts":"2026-10-24T23:32:43.954Z"}
+{"step":9,"status":"done","remark":"type: Type \"sam@example.com\" into \"Email address\"","v":1,"ts":"2026-10-24T23:32:44.022Z"}
+{"step":10,"status":"running","remark":"Step 9","v":1,"ts":"2026-10-24T23:32:44.599Z"}
+{"step":10,"status":"done","remark":"scroll: Scroll \"Visit date\" into view","v":1,"ts":"2026-10-24T23:32:44.628Z"}
+{"step":11,"status":"running","remark":"Step 10","v":1,"ts":"2026-10-24T23:32:45.239Z"}
+{"step":11,"status":"done","remark":"type: Type \"2026-11-02\" into \"Visit date\"","v":1,"ts":"2026-10-24T23:32:45.304Z"}
+{"step":12,"status":"running","remark":"Step 11","v":1,"ts":"2026-10-24T23:32:45.882Z"}
+{"step":12,"status":"done","remark":"scroll: Scroll \"Gym location\" into view","v":1,"ts":"2026-10-24T23:32:45.912Z"}
+{"step":13,"status":"running","remark":"Step 12","v":1,"ts":"2026-10-24T23:32:46.519Z"}
+{"step":13,"status":"done","remark":"select: Select \"Downtown\" in \"Gym location\"","v":1,"ts":"2026-10-24T23:32:46.550Z"}
+{"step":14,"status":"running","remark":"Step 13","v":1,"ts":"2026-10-24T23:32:47.135Z"}
+{"step":14,"status":"done","remark":"scroll: Scroll \"12pm (noon)\" into view","v":1,"ts":"2026-10-24T23:32:47.162Z"}
+{"step":15,"status":"running","remark":"Step 14","v":1,"ts":"2026-10-24T23:32:47.767Z"}
+{"step":15,"status":"done","remark":"click: Click \"12pm (noon)\"","v":1,"ts":"2026-10-24T23:32:53.319Z"}
+{"step":16,"status":"running","remark":"Step 15","v":1,"ts":"2026-10-24T23:32:53.896Z"}
+{"step":16,"status":"done","remark":"scroll: Scrolling into view the 12pm (noon) arrival time option","v":1,"ts":"2026-10-24T23:32:58.506Z"}
+{"step":17,"status":"running","remark":"Step 16","v":1,"ts":"2026-10-24T23:32:59.097Z"}
+{"step":17,"status":"done","remark":"click: Clicking the 12pm (noon) arrival time option","v":1,"ts":"2026-10-24T23:33:04.659Z"}
+{"step":18,"status":"running","remark":"Step 17","v":1,"ts":"2026-10-24T23:33:05.248Z"}
+{"step":18,"status":"done","remark":"scroll: Scrolling the booking page left to reveal the noon option","v":1,"ts":"2026-10-24T23:33:11.693Z"}
+{"step":19,"status":"running","remark":"Step 18","v":1,"ts":"2026-10-24T23:33:12.248Z"}
+{"step":19,"status":"done","remark":"scroll: Scrolling the booking page horizontally right to reveal the noon option","v":1,"ts":"2026-10-24T23:33:19.466Z"}
+{"step":20,"status":"running","remark":"Step 19","v":1,"ts":"2026-10-24T23:33:20.046Z"}
+{"step":20,"status":"done","remark":"scroll: Scrolling to the 12pm (noon) arrival-time option","v":1,"ts":"2026-10-24T23:33:24.382Z"}
+{"step":21,"status":"running","remark":"Step 20","v":1,"ts":"2026-10-24T23:33:24.960Z"}
+{"step":21,"status":"done","remark":"click: Clicking 12pm (noon) arrival time option","v":1,"ts":"2026-10-24T23:33:30.517Z"}
+{"step":22,"status":"running","remark":"Step 21","v":1,"ts":"2026-10-24T23:33:31.096Z"}
+{"step":22,"status":"done","remark":"click: PRIMARY: noon arrival-time option; role=radio; text=\"12pm (noon)\" | HINTS: visib","v":1,"ts":"2026-10-24T23:33:38.542Z"}
+{"step":23,"status":"running","remark":"Step 22","v":1,"ts":"2026-10-24T23:33:39.129Z"}
+{"step":23,"status":"done","remark":"scroll: Scrolling into view the climbing waiver acceptance checkbox","v":1,"ts":"2026-10-24T23:33:43.560Z"}
+{"step":24,"status":"running","remark":"Step 23","v":1,"ts":"2026-10-24T23:33:44.182Z"}
+{"step":24,"status":"done","remark":"click: Clicking the climbing waiver acceptance checkbox","v":1,"ts":"2026-10-24T23:33:44.752Z"}
+{"step":25,"status":"running","remark":"Step 24","v":1,"ts":"2026-10-24T23:33:45.335Z"}
+{"step":25,"status":"done","remark":"click: Clicking Confirm my free visit button","v":1,"ts":"2026-10-24T23:33:50.105Z"}
+{"step":26,"status":"running","remark":"Step 25","v":1,"ts":"2026-10-24T23:33:50.658Z"}
+{"step":26,"status":"done","remark":"analyze: The reference code is stored as {{ref}}.","v":1,"ts":"2026-10-24T23:34:02.166Z"}
+{"step":27,"status":"running","remark":"Step 26","v":1,"ts":"2026-10-24T23:34:02.719Z"}
+{"step":27,"status":"done","remark":"assert: A booking confirmation with a reference code is shown.","v":1,"ts":"2026-10-24T23:34:02.722Z"}
+{"type":"coverage","status":"written","computed_by":"local","coverage_version":2,"scope":"run","pct":0,"usecases":{"total":1,"proven":0,"partial":0,"failing":0,"not_run":1,"not_designed":0,"no_criteria":0},"criteria":{"total":15,"proven":0},"this_run":{"usecases":[],"criteria_passed":[],"criteria_failed":[]},"flags":{"stale_sources":0,"sources_not_fully_extracted":[],"orphaned_usecases":0},"pack":"~/.testmuai/kaneai/sessions/569d6aea-12f7-4343-a434-cf0891ec9ff1/evidence/e8c13675-e742-458d-95d2-635e877e81d3.evidence","v":1,"ts":"2026-10-24T23:34:13.132Z"}
+{"type":"run_end","status":"passed","summary":"Booked a free first visit for Sam Rivera at the Downtown gym for November 2, 2026 at noon using sam@example.com.\nAccepted the waiver.\nThe booking was confirmed and displayed reference code PL-5519.","one_liner":"booked a free first visit on the Downtown gym booking site","final_state":{"url":"http://localhost:4106/","booking_confirmation_shown":"true","reference_code_shown":"true","ref":"PL-5519"},"reason":"Objective completed","duration":111.3,"bifurcated":false,"total_runs":1,"context":{"memory":{"booking_confirmation_shown":{"extracted_value":"true","operator":"equals","transforms":[],"json_path":null,"reasoning":"value: 'true' -> 'true'; equals 'true' -> PASS","analyzer_type":"textual_visual","step":25,"query":"whether booking confirmation is present (in the booking form status)","condition":"A booking confirmation is shown.","human_description":"Checking whether the booking confirmation is present","expected_value":"true","subject":"booking confirmation","must_be":"present","code_js":"el(24).textContent.trim() === 'Booking confirmed'","wrapped_js":"(els) => {\n  const __m = {24: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(24).textContent.trim() === 'Booking confirmed');\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}","locators":["internal:role=heading[name=\"Booking confirmed\"i]"],"needs_unit_conversion":false},"reference_code_shown":{"extracted_value":"true","operator":"equals","transforms":[],"json_path":null,"reasoning":"value: 'true' -> 'true'; equals 'true' -> PASS","analyzer_type":"textual_visual","step":25,"query":"whether reference code is present (in the booking confirmation status)","condition":"A reference code is shown.","human_description":"Checking whether the reference code is present","expected_value":"true","subject":"reference code","must_be":"present","code_js":"/\\b[A-Z]{2}-\\d{4}\\b/.test(el(25).textContent)","wrapped_js":"(els) => {\n  const __m = {25: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (/\\b[A-Z]{2}-\\d{4}\\b/.test(el(25).textContent));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}","locators":["internal:text=\"Reference PL-\"i"],"needs_unit_conversion":false},"ref":{"extracted_value":"PL-5519","operator":"equals","transforms":["strip"],"json_path":null,"reasoning":"value: 'PL-5519' (stored, no comparison)","analyzer_type":"textual_visual","step":25,"query":"the reference code in the booking confirmation","condition":"The reference code is stored as {{ref}}.","human_description":"Extracting the reference code from the booking confirmation","expected_value":"","code_js":"(el(25).textContent.match(/\\b[A-Z]{2}-\\d{4}\\b/) || [null])[0]","wrapped_js":"(els) => {\n  const __m = {25: 0};\n  const el = (i) => els[__m[i]];\n  const __v = ((el(25).textContent.match(/\\b[A-Z]{2}-\\d{4}\\b/) || [null])[0]);\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}","locators":["internal:text=\"Reference PL-\"i"],"needs_unit_conversion":false}},"variables":{"ref":{"syntax":"{{ref}}","value":"PL-5519","type":"memory","secret":false,"source":"runtime"},"booking_confirmation_shown":{"syntax":"{{booking_confirmation_shown}}","value":"true","type":"memory","secret":false},"reference_code_shown":{"syntax":"{{reference_code_shown}}","value":"true","type":"memory","secret":false}},"pointer":"(passed) booked a free first visit on the Downtown gym booking site"},"credits_consumed":30.765010000000007,"session_dir":"~/.testmuai/kaneai/sessions/569d6aea-12f7-4343-a434-cf0891ec9ff1","run_dir":"~/.testmuai/kaneai/sessions/569d6aea-12f7-4343-a434-cf0891ec9ff1/runs/0","result_code":100,"reason_code":"success.complete","per_flow_metadata":[{"result_code":"100","reason_code":"success.complete","error_message":null,"summary":"Booked a free first visit for Sam Rivera at the Downtown gym for November 2, 2026 at noon using sam@example.com.\nAccepted the waiver.\nThe booking was confirmed and displayed reference code PL-5519.","one_liner":"booked a free first visit on the Downtown gym booking site","credits_consumed":30.765010000000007}],"run_id":"run-0","test_url":"https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R43VRBK5ENJKKX4ZNKV7TV/dashboard/share/US_DKOR54LX7K40AYXP31PO273OEXF17RL00100E9IS3DSLXHL81RVY0XLCGXFKKF4F?type=summary&agentView=true&fqdn=summary-page","coverage":{"status":"written","pct":0},"v":1,"ts":"2026-10-24T23:34:13.132Z"}

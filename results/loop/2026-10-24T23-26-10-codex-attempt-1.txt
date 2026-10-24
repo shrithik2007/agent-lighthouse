@@ -1,0 +1,18 @@
+Implemented — I edited only `site-worst/index.html` and applied the requested friction fixes in order.
+
+**What I changed**
+- Replaced read-only gym text + surprise modal dependency with inline native select: `site-worst/index.html:29`
+- Replaced canvas arrival picker with visible native radio options (including exact `12pm (noon)` text) styled as `.time` pills: `site-worst/index.html:31`
+- Updated submit button placement to be directly after waiver (before long filler): `site-worst/index.html:33` and `site-worst/index.html:34`
+- Simplified booking entry overlays to one location dialog only (removed newsletter overlap path): `site-worst/index.html:44`
+- Disabled unused `#location-picker` flow and removed `#gym-save` dependency: `site-worst/index.html:48`
+- Converted consent from iframe overlay to in-page cookie bar with real buttons (`Accept all` / reject): `site-worst/index.html:20`
+- Kept confirmation DOM with `role="status"`/`aria-live="polite"` and exact `PL-5519`, no auto-hide: `site-worst/index.html:40`
+- Reduced confirmation delay from 4s to 1s to cut latency while keeping persistence: `site-worst/index.html:78`
+
+**JS behavior updates**
+- `chooseTime()` now simply sets `time`, checks matching radio, updates visible selected state, and updates `#time-chosen` (no location modal trigger): `site-worst/index.html:63`
+- `gym` now comes from inline select `change` event and is validated on submit: `site-worst/index.html:69` and `site-worst/index.html:74`
+- Location `Accept` now opens booking immediately, with no newsletter prerequisite: `site-worst/index.html:59`
+
+If you want, I can do a quick local browser sanity pass (manual click-through) against the exact acceptance path before you run Kane.

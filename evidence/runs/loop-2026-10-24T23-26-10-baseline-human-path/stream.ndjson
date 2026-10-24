@@ -1,0 +1,64 @@
+{"type":"stream_start","cli_version":"0.10.0-rc.3","surface":"run","pid":49064,"v":1,"ts":"2026-10-24T23:26:11.257Z"}
+{"type":"recording_state","enabled":true,"session_id":"c5dedd78-300a-487f-8ce8-ecd26c5fdd8f","persist":true,"session_name":"human-path","test_path":"~/Projects/kane-hack/.testmuai/tests/human-path_test.md","output_path":"~/Projects/kane-hack/.testmuai/tests/output-human-path","v":1,"ts":"2026-10-24T23:26:11.260Z"}
+{"type":"bifurcation","flows":["Navigate to http://localhost:4104 then Answer the privacy choice, open the booking form, accept location access, enter the name Sam Rivera and the email sam@example.com, choose 2 November 2026, the Downtown gym and the arrival time noon, accept the climbing waiver and confirm the booking.\nWait 5 seconds, then verify the text PL-5519 is still visible on the page."],"count":1,"v":1,"ts":"2026-10-24T23:26:20.996Z"}
+{"step":2,"status":"running","remark":"Step 1","v":1,"ts":"2026-10-24T23:26:21.205Z"}
+{"step":2,"status":"done","remark":"navigate: Navigate to http://localhost:4104","v":1,"ts":"2026-10-24T23:26:21.206Z"}
+{"step":3,"status":"running","remark":"Step 2","v":1,"ts":"2026-10-24T23:26:24.438Z"}
+{"step":3,"status":"done","remark":"click: Clicking Accept all privacy choices button","v":1,"ts":"2026-10-24T23:26:28.036Z"}
+{"step":4,"status":"running","remark":"Step 3","v":1,"ts":"2026-10-24T23:26:28.660Z"}
+{"step":4,"status":"done","remark":"click: Clicking Book a free first visit","v":1,"ts":"2026-10-24T23:26:31.603Z"}
+{"step":5,"status":"running","remark":"Step 4","v":1,"ts":"2026-10-24T23:26:32.193Z"}
+{"step":5,"status":"done","remark":"click: Clicking dismiss discount offer button No thanks","v":1,"ts":"2026-10-24T23:26:35.565Z"}
+{"step":6,"status":"running","remark":"Step 5","v":1,"ts":"2026-10-24T23:26:36.132Z"}
+{"step":6,"status":"done","remark":"click: Clicking Accept to allow location access","v":1,"ts":"2026-10-24T23:26:38.561Z"}
+{"step":7,"status":"running","remark":"Step 6","v":1,"ts":"2026-10-24T23:26:39.151Z"}
+{"step":7,"status":"done","remark":"type: Typing name Sam Rivera in the visitor name field","v":1,"ts":"2026-10-24T23:26:49.949Z"}
+{"step":8,"status":"running","remark":"Step 7","v":1,"ts":"2026-10-24T23:26:50.514Z"}
+{"step":8,"status":"done","remark":"wait: queued plan (3 steps): type \"Email address\"; type \"Visit date\"; click \"12pm (noo","v":1,"ts":"2026-10-24T23:26:56.776Z"}
+{"step":9,"status":"running","remark":"Step 8","v":1,"ts":"2026-10-24T23:26:57.359Z"}
+{"step":9,"status":"done","remark":"scroll: Scroll \"Email address\" into view","v":1,"ts":"2026-10-24T23:26:57.391Z"}
+{"step":10,"status":"running","remark":"Step 9","v":1,"ts":"2026-10-24T23:26:58.000Z"}
+{"step":10,"status":"done","remark":"type: Type \"sam@example.com\" into \"Email address\"","v":1,"ts":"2026-10-24T23:26:58.068Z"}
+{"step":11,"status":"running","remark":"Step 10","v":1,"ts":"2026-10-24T23:26:58.645Z"}
+{"step":11,"status":"done","remark":"scroll: Scroll \"Visit date\" into view","v":1,"ts":"2026-10-24T23:26:58.675Z"}
+{"step":12,"status":"running","remark":"Step 11","v":1,"ts":"2026-10-24T23:26:59.260Z"}
+{"step":12,"status":"done","remark":"type: Type \"2026-11-02\" into \"Visit date\"","v":1,"ts":"2026-10-24T23:26:59.328Z"}
+{"step":13,"status":"running","remark":"Step 12","v":1,"ts":"2026-10-24T23:26:59.919Z"}
+{"step":13,"status":"done","remark":"","v":1,"ts":"2026-10-24T23:27:00.196Z"}
+{"step":14,"status":"running","remark":"Step 13","v":1,"ts":"2026-10-24T23:27:00.758Z"}
+{"step":14,"status":"done","remark":"scroll: Scrolling to 12pm (noon) arrival time option","v":1,"ts":"2026-10-24T23:27:03.328Z"}
+{"step":15,"status":"running","remark":"Step 14","v":1,"ts":"2026-10-24T23:27:03.911Z"}
+{"step":15,"status":"done","remark":"click: Clicking 12pm (noon) arrival time option","v":1,"ts":"2026-10-24T23:27:09.467Z"}
+{"step":16,"status":"running","remark":"Step 15","v":1,"ts":"2026-10-24T23:27:10.043Z"}
+{"step":16,"status":"done","remark":"click: PRIMARY: noon arrival time control; role=canvas; text=\"12pm (noon)\" | HINTS: mid","v":1,"ts":"2026-10-24T23:27:20.282Z"}
+{"step":17,"status":"running","remark":"Step 16","v":1,"ts":"2026-10-24T23:27:20.872Z"}
+{"step":17,"status":"done","remark":"scroll: Scrolling to 12pm (noon) arrival time option","v":1,"ts":"2026-10-24T23:27:26.268Z"}
+{"step":18,"status":"running","remark":"Step 17","v":1,"ts":"2026-10-24T23:27:26.849Z"}
+{"step":18,"status":"done","remark":"scroll: Scrolling upward to the arrival time controls in the booking form","v":1,"ts":"2026-10-24T23:27:29.939Z"}
+{"step":19,"status":"running","remark":"Step 18","v":1,"ts":"2026-10-24T23:27:30.523Z"}
+{"step":19,"status":"done","remark":"scroll: Scrolling down to the visible Arrival time section in the booking form","v":1,"ts":"2026-10-24T23:27:35.619Z"}
+{"step":20,"status":"running","remark":"Step 19","v":1,"ts":"2026-10-24T23:27:36.209Z"}
+{"step":20,"status":"done","remark":"click: PRIMARY: noon arrival time control; role=canvas; text=\"12pm\" | HINTS: middle seg","v":1,"ts":"2026-10-24T23:27:43.093Z"}
+{"step":21,"status":"running","remark":"Step 20","v":1,"ts":"2026-10-24T23:27:43.715Z"}
+{"step":21,"status":"done","remark":"wait: queued plan (2 steps): select \"Gym\"; click \"Save location\"","v":1,"ts":"2026-10-24T23:27:47.077Z"}
+{"step":22,"status":"running","remark":"Step 21","v":1,"ts":"2026-10-24T23:27:47.660Z"}
+{"step":22,"status":"done","remark":"select: Select \"Downtown\" in \"Gym\"","v":1,"ts":"2026-10-24T23:27:47.699Z"}
+{"step":23,"status":"running","remark":"Step 22","v":1,"ts":"2026-10-24T23:27:48.296Z"}
+{"step":23,"status":"done","remark":"click: Click \"Save location\"","v":1,"ts":"2026-10-24T23:27:48.880Z"}
+{"step":24,"status":"running","remark":"Step 23","v":1,"ts":"2026-10-24T23:27:49.456Z"}
+{"step":24,"status":"done","remark":"click: PRIMARY: arrival time 12pm button; role=button; text=\"12pm\" | HINTS: middle ligh","v":1,"ts":"2026-10-24T23:27:59.302Z"}
+{"step":25,"status":"running","remark":"Step 24","v":1,"ts":"2026-10-24T23:27:59.891Z"}
+{"step":25,"status":"done","remark":"click: Clicking the climbing waiver acceptance checkbox","v":1,"ts":"2026-10-24T23:28:11.227Z"}
+{"step":26,"status":"running","remark":"Step 25","v":1,"ts":"2026-10-24T23:28:11.826Z"}
+{"step":26,"status":"done","remark":"scroll: Scrolling into view the Confirm my free visit button","v":1,"ts":"2026-10-24T23:28:16.869Z"}
+{"step":27,"status":"running","remark":"Step 26","v":1,"ts":"2026-10-24T23:28:17.457Z"}
+{"step":27,"status":"done","remark":"click: Clicking Confirm my free visit button","v":1,"ts":"2026-10-24T23:28:18.028Z"}
+{"step":28,"status":"running","remark":"Step 27","v":1,"ts":"2026-10-24T23:28:18.574Z"}
+{"step":28,"status":"done","remark":"wait: PRIMARY: wait 5000 ms after confirming the booking","v":1,"ts":"2026-10-24T23:28:26.110Z"}
+{"step":29,"status":"running","remark":"Step 28","v":1,"ts":"2026-10-24T23:28:26.693Z"}
+{"step":29,"status":"done","remark":"analyze: the text PL-5519 is still visible on the page","v":1,"ts":"2026-10-24T23:28:33.119Z"}
+{"step":30,"status":"running","remark":"Step 29","v":1,"ts":"2026-10-24T23:28:33.687Z"}
+{"step":30,"status":"done","remark":"assert: the text PL-5519 is still visible on the page","v":1,"ts":"2026-10-24T23:28:33.691Z"}
+{"type":"test_md_bundle_sync","status":"ok","commit_id":"c5dedd78-300a-487f-8ce8-ecd26c5fdd8f","path":"~/Projects/kane-hack/.testmuai/tests/human-path-14_test.md","bytes":21650,"v":1,"ts":"2026-10-24T23:28:44.902Z"}
+{"type":"coverage","status":"written","computed_by":"local","coverage_version":2,"scope":"run","pct":0,"usecases":{"total":1,"proven":0,"partial":0,"failing":0,"not_run":1,"not_designed":0,"no_criteria":0},"criteria":{"total":15,"proven":0},"this_run":{"usecases":[],"criteria_passed":[],"criteria_failed":[]},"flags":{"stale_sources":0,"sources_not_fully_extracted":[],"orphaned_usecases":0},"pack":"~/.testmuai/kaneai/sessions/c5dedd78-300a-487f-8ce8-ecd26c5fdd8f/evidence/08851dc3-e0e2-448b-a59a-a37b352656ee.evidence","v":1,"ts":"2026-10-24T23:28:44.903Z"}
+{"type":"run_end","status":"passed","summary":"Completed the requested climbing booking flow: answered the privacy choice, allowed location access, and opened the booking form.\nEntered Sam Rivera’s details with sam@example.com, selected 2 November 2026 at the Downtown gym, and set the arrival time to noon.\nAccepted the climbing waiver and confirmed the booking.\nWaited 5 seconds; the confirmation remained visible with reference PL-5519.","one_liner":"confirmed a climbing booking on localhost","final_state":{"url":"http://localhost:4104/","booking_reference":"PL-5519","pl_5519_visible":"true"},"reason":"Objective completed","duration":138.8,"bifurcated":false,"total_runs":1,"context":{"memory":{"pl_5519_visible":{"extracted_value":"true","operator":"equals","transforms":[],"json_path":null,"reasoning":"value: 'true' -> 'true'; equals 'true' -> PASS","analyzer_type":"textual_visual","step":28,"query":"whether the text PL-5519 is present (in the booking confirmation reference)","condition":"the text PL-5519 is still visible on the page","human_description":"Checking whether the text PL-5519 is present","expected_value":"true","subject":"the text PL-5519","must_be":"present","code_js":"el(25).textContent.includes('PL-5519')","wrapped_js":"(els) => {\n  const __m = {25: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(25).textContent.includes('PL-5519'));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}","locators":["internal:text=\"Reference PL-\"i"],"needs_unit_conversion":false}},"variables":{"pl_5519_visible":{"syntax":"{{pl_5519_visible}}","value":"true","type":"memory","secret":false}},"pointer":"(passed) confirmed a climbing booking on localhost"},"credits_consumed":41.934015,"session_dir":"~/.testmuai/kaneai/sessions/c5dedd78-300a-487f-8ce8-ecd26c5fdd8f","run_dir":"~/.testmuai/kaneai/sessions/c5dedd78-300a-487f-8ce8-ecd26c5fdd8f/runs/0","result_code":100,"reason_code":"success.complete","per_flow_metadata":[{"result_code":"100","reason_code":"success.complete","error_message":null,"summary":"Completed the requested climbing booking flow: answered the privacy choice, allowed location access, and opened the booking form.\nEntered Sam Rivera’s details with sam@example.com, selected 2 November 2026 at the Downtown gym, and set the arrival time to noon.\nAccepted the climbing waiver and confirmed the booking.\nWaited 5 seconds; the confirmation remained visible with reference PL-5519.","one_liner":"confirmed a climbing booking on localhost","credits_consumed":41.934015}],"run_id":"run-0","test_url":"https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R3RZ65F6W1X3JX4TD6VJ9P/dashboard/share/US_WDHR12SWUWG5NLIHNEI4VIE1TMT4U84YHN4EHOAXTAV9E9UDZ8FI5ZA8PCIE7Z4X?type=summary&agentView=true&fqdn=summary-page","coverage":{"status":"written","pct":0},"v":1,"ts":"2026-10-24T23:28:44.904Z"}

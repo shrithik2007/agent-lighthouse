@@ -1,0 +1,72 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Completed the requested climbing booking flow: answered the privacy choice, allowed location access, and opened the booking form.\nEntered Sam Rivera’s details with sam@example.com, selected 2 November 2026 at the Downtown gym, and set the arrival time to noon.\nAccepted the climbing waiver and confirmed the booking.\nWaited 5 seconds; the confirmation remained visible with reference PL-5519.",
+  "one_liner": "confirmed a climbing booking on localhost",
+  "final_state": {
+    "url": "http://localhost:4104/",
+    "booking_reference": "PL-5519",
+    "pl_5519_visible": "true"
+  },
+  "reason": "Objective completed",
+  "duration": 138.8,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "pl_5519_visible": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 28,
+        "query": "whether the text PL-5519 is present (in the booking confirmation reference)",
+        "condition": "the text PL-5519 is still visible on the page",
+        "human_description": "Checking whether the text PL-5519 is present",
+        "expected_value": "true",
+        "subject": "the text PL-5519",
+        "must_be": "present",
+        "code_js": "el(25).textContent.includes('PL-5519')",
+        "wrapped_js": "(els) => {\n  const __m = {25: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(25).textContent.includes('PL-5519'));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Reference PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "pl_5519_visible": {
+        "syntax": "{{pl_5519_visible}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) confirmed a climbing booking on localhost"
+  },
+  "credits_consumed": 41.934015,
+  "session_dir": "~/.testmuai/kaneai/sessions/c5dedd78-300a-487f-8ce8-ecd26c5fdd8f",
+  "run_dir": "~/.testmuai/kaneai/sessions/c5dedd78-300a-487f-8ce8-ecd26c5fdd8f/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Completed the requested climbing booking flow: answered the privacy choice, allowed location access, and opened the booking form.\nEntered Sam Rivera’s details with sam@example.com, selected 2 November 2026 at the Downtown gym, and set the arrival time to noon.\nAccepted the climbing waiver and confirmed the booking.\nWaited 5 seconds; the confirmation remained visible with reference PL-5519.",
+      "one_liner": "confirmed a climbing booking on localhost",
+      "credits_consumed": 41.934015
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R3RZ65F6W1X3JX4TD6VJ9P/dashboard/share/US_WDHR12SWUWG5NLIHNEI4VIE1TMT4U84YHN4EHOAXTAV9E9UDZ8FI5ZA8PCIE7Z4X?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "written",
+    "pct": 0
+  },
+  "v": 1,
+  "ts": "2026-10-24T23:28:44.904Z"
+}

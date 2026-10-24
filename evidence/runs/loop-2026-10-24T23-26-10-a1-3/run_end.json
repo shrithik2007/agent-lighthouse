@@ -1,0 +1,126 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Booked a free first visit for Sam Rivera (sam@example.com) at the Downtown gym for November 2, 2026 at noon.\nAccepted the waiver.\nThe booking was confirmed with reference code PL-5519.",
+  "one_liner": "booked a free first visit on the Downtown gym booking site",
+  "final_state": {
+    "url": "http://localhost:4106/",
+    "booking_reference_code": "PL-5519"
+  },
+  "reason": "Objective completed",
+  "duration": 143.7,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "booking_confirmation_reference_code_shown": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 32,
+        "query": "whether a booking confirmation with a reference code is present (in the booking confirmation status message)",
+        "condition": "a booking confirmation with a reference code is shown",
+        "human_description": "Checking whether a booking confirmation with a reference code is present",
+        "expected_value": "true",
+        "subject": "a booking confirmation with a reference code",
+        "must_be": "present",
+        "code_js": "((e)=>{const t=e.innerText||''; return /Booking confirmed/.test(t)&&/Reference\\s*PL-\\d+/.test(t)})(el(23))",
+        "wrapped_js": "(els) => {\n  const __m = {23: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (((e)=>{const t=e.innerText||''; return /Booking confirmed/.test(t)&&/Reference\\s*PL-\\d+/.test(t)})(el(23)));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Booking confirmedReference PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      },
+      "ref": {
+        "extracted_value": "PL-5519",
+        "operator": "equals",
+        "transforms": [
+          "strip"
+        ],
+        "json_path": null,
+        "reasoning": "value: 'PL-5519' (stored, no comparison)",
+        "analyzer_type": "textual_visual",
+        "step": 32,
+        "query": "the reference code in the booking confirmation",
+        "condition": "the reference code is stored as {{ref}}",
+        "human_description": "Extracting the booking reference code",
+        "expected_value": "",
+        "code_js": "((e)=>{const m=(e.innerText||'').match(/Reference\\s*(PL-\\d+)/);return m?m[1]:null})(el(23))",
+        "wrapped_js": "(els) => {\n  const __m = {23: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (((e)=>{const m=(e.innerText||'').match(/Reference\\s*(PL-\\d+)/);return m?m[1]:null})(el(23)));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Booking confirmedReference PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      },
+      "ref_2": {
+        "extracted_value": "PL-5519",
+        "operator": "equals",
+        "transforms": [
+          "strip"
+        ],
+        "json_path": null,
+        "reasoning": "value: 'PL-5519' (stored, no comparison)",
+        "analyzer_type": "textual_visual",
+        "step": 32,
+        "query": "the reference code in the booking confirmation",
+        "condition": "the reference code from the booking confirmation is saved as {{ref}}",
+        "human_description": "Extracting the booking reference code for storage",
+        "expected_value": "",
+        "code_js": "((e)=>{const m=(e.innerText||'').match(/Reference\\s*(PL-\\d+)/);return m?m[1]:null})(el(23))",
+        "wrapped_js": "(els) => {\n  const __m = {23: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (((e)=>{const m=(e.innerText||'').match(/Reference\\s*(PL-\\d+)/);return m?m[1]:null})(el(23)));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Booking confirmedReference PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "PL-5519",
+        "type": "memory",
+        "secret": false,
+        "source": "runtime"
+      },
+      "booking_confirmation_reference_code_shown": {
+        "syntax": "{{booking_confirmation_reference_code_shown}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      },
+      "ref_2": {
+        "syntax": "{{ref_2}}",
+        "value": "PL-5519",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) booked a free first visit on the Downtown gym booking site"
+  },
+  "credits_consumed": 38.02775750000001,
+  "session_dir": "~/.testmuai/kaneai/sessions/cce04d2f-e38b-452e-bac8-15543bd4b9d5",
+  "run_dir": "~/.testmuai/kaneai/sessions/cce04d2f-e38b-452e-bac8-15543bd4b9d5/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Booked a free first visit for Sam Rivera (sam@example.com) at the Downtown gym for November 2, 2026 at noon.\nAccepted the waiver.\nThe booking was confirmed with reference code PL-5519.",
+      "one_liner": "booked a free first visit on the Downtown gym booking site",
+      "credits_consumed": 38.02775750000001
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R47PXWTE9S5YTEKQTT7MA2/dashboard/share/US_SFXVADTR89ODCFABBN6HAQWROQ7VJCATA3GLB51NO3Y3V8MYLF7XZUPGG67CPR32?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "written",
+    "pct": 0
+  },
+  "v": 1,
+  "ts": "2026-10-24T23:36:52.151Z"
+}

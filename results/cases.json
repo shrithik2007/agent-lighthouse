@@ -24,7 +24,7 @@
     "latest": "results/cases/worst/latest.json",
     "sources": {
       "baseline": "results/cases/worst/baseline.json",
-      "loop": null
+      "loop": "results/loop/2026-10-24T23-26-10.json"
     }
   },
   {
