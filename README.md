@@ -60,6 +60,13 @@ A second sample site (`fixtures/hard/`, working copy `site-hard/` on :4103) has 
 - **The first loop's gate passed a patch an owner should reject** (kept as-is): it qualified on attempt 1, but the fix removed the human-verification check ("Demo mode: no human verification required") and hard-coded the test's date (`selectedDate = '2026-11-02'`). The gate checks outcomes, not intent. The operator review note at the end of `results/loop/2026-10-24T22-22-59-proposal.md` says not to merge, and the dashboard chip reads "Qualified · reviewer says do not merge". This is why propose mode is the default: a person decides.
 - Records: `results/cases/hard/` (baseline, latest, proposal), `results/loop/2026-10-24T22-22-59.json`, evidence under `evidence/runs/hard-baseline-*` and `evidence/runs/loop-2026-10-24T22-22-59-*`, packs `evidence/packs/KR-190…`, `KR-194…`, `KR-196…`, `KR-206…`.
 
+## Case 3: worst of the real web
+
+A third sample site (`fixtures/worst/`, working copy `site-worst/` on :4104) plants six patterns taken from published agent-failure research, each cited inline and in [FRICTION.md](FRICTION.md) after reading the source: a consent modal in a same-origin iframe that traps focus and locks scroll (maxaeo.ai: 38% completion when consent blocks scroll vs 79%), overlapping newsletter and location modals with focus on the lower one (Future AGI), a required mid-flow location picker (geotoolbox.ai), time slots drawn on a canvas with no DOM nodes plus a visually hidden accessible list (MERJ: ~24–34% on canvas apps), the submit button three screens down (maxaeo.ai, citing a study where agents "essentially never scrolled beyond two viewports"), and a confirmation that appears 4 s after submit (geotoolbox.ai). No captcha; case 2 covers that. jsdom tests (`tests/worst.test.mjs`) prove a careful human can complete it. Reference `PL-5519`, optimalSteps 14 (reasoning in `flows/book-worst.json`; not owner-confirmed).
+
+- **Baseline: Kane booked in 3 of 3 runs** (KR-243, KR-244, KR-247): score **88**, but a median of **33 steps** (27–31 actions) against an optimum of 14, 169 s and 46.7 credits per booking. The research patterns cost Kane time and steps but did not stop it. Without a repaired measurement, only the step tax is computable at baseline: +19 steps over optimal.
+- Records: `results/cases/worst/`, evidence under `evidence/runs/worst-baseline-*`.
+
 ## Savings panel
 
 The dashboard turns Agent Tax into credits saved per booking, the before/after credit ratio, and a projection "at N agent bookings a month" (N editable, default 500). For case 1: 36.2 credits saved per booking and a 2.9× ratio (55.4 vs 19.2 median credits); about 18,100 credits a month at 500 bookings. A dollar figure appears only if the viewer enters their plan's rate; no price is assumed. Everything is in Kane's unit, credits (`credits_consumed`), never tokens.
@@ -71,7 +78,7 @@ Requires Node.js 24.15+ LTS and npm (Node 22.22.2+ and 26+ also work). The fix l
 ```sh
 npm ci
 npm test                    # unit, jsdom and stream-parser tests (no network)
-npm run serve               # :4101 BEFORE / working copy (site/), :4102 AFTER reference fix, :4103 hard mode (site-hard/)
+npm run serve               # :4101 BEFORE / working copy (site/), :4102 AFTER reference fix, :4103 hard mode, :4104 worst of the real web
 npm run dashboard           # :4100 → /dashboard/ (cases, savings) and /site-public/ (product page)
 
 # Measure a page: 3 fresh wrapped Kane runs

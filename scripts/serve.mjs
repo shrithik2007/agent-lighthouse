@@ -27,6 +27,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
     [4101, new URL('../site/index.html', import.meta.url), 'BEFORE / working copy'],
     [4102, new URL('../fixtures/after/index.html', import.meta.url), 'AFTER / reference'],
     [4103, new URL('../site-hard/index.html', import.meta.url), 'HARD / working copy (case 2)'],
+    [4104, new URL('../site-worst/index.html', import.meta.url), 'WORST / working copy (case 3)'],
   ].map(([port, file, label]) => {
     const server = createSiteServer(file);
     server.on('error', error => {
