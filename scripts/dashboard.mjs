@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.md': 'text/plain; charset=utf-8', '.jpg': 'image/jpeg', '.png': 'image/png' };
 // Only the dashboard, the results it reads and committed evidence are served.
-const allowed = [/^dashboard\//, /^results\/(latest|demo-backup)\.json$/, /^results\/proposal\.md$/, /^evidence\/.+\.(jpg|png|json|txt|md)$/];
+const allowed = [/^dashboard\//, /^results\/(latest|demo-backup)\.json$/, /^results\/proposal\.md$/, /^results\/loop\/[^/]+\.md$/, /^evidence\/.+\.(jpg|png|json|txt|md)$/];
 
 export function createDashboardServer() {
   return http.createServer(async (req, res) => {

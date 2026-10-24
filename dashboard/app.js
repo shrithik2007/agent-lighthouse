@@ -1,5 +1,6 @@
 // Renders results/latest.json (or results/demo-backup.json with ?recorded=1). Unknown values render as n/a.
 const params = new URLSearchParams(location.search);
+if (['light', 'dark'].includes(params.get('theme'))) document.documentElement.dataset.theme = params.get('theme');
 const recorded = params.has('recorded');
 const source = recorded ? '/results/demo-backup.json' : '/results/latest.json';
 
@@ -30,7 +31,7 @@ export function taxLine(tax) {
 
 function runTip(run) {
   const steps = run.stepsTaken == null ? 'n/a steps' : `${run.stepsTaken} steps: ${na(run.actionSteps)} actions, ${na(run.overheadSteps)} overhead`;
-  return `${run.kaneRunId ?? run.label} · ${run.status}\n${steps}\n${num(run.durationSec, 1)} s · ${num(run.credits, 1)} credits${run.failedRemarks?.length ? `\nFailed: ${run.failedRemarks[0]}` : ''}`;
+  return `${run.kaneRunId ?? run.label}${run.humanPath ? ' · human path' : ''} · ${run.status}\n${steps}\n${num(run.durationSec, 1)} s · ${num(run.credits, 1)} credits${run.failedRemarks?.length ? `\nFailed: ${run.failedRemarks[0]}` : ''}`;
 }
 
 function dotsRow(groups) {
@@ -38,8 +39,8 @@ function dotsRow(groups) {
     el('span', { class: 'group' }, name),
     runs?.length
       ? el('ol', {}, runs.map(run => el('li', {},
-        el('button', { class: 'dot', type: 'button', 'data-status': run.status, 'aria-label': runTip(run).replaceAll('\n', '; ') },
-          String(run.stepsTaken ?? '?'), el('span', { class: 'tip', role: 'tooltip' }, ...runTip(run).split('\n').flatMap((line, i) => i ? [el('br'), line] : [line]))))))
+        el('button', { class: `dot${run.humanPath ? ' human' : ''}`, type: 'button', 'data-status': run.status, 'aria-label': runTip(run).replaceAll('\n', '; ') },
+          run.humanPath ? 'H' : String(run.stepsTaken ?? '?'), el('span', { class: 'tip', role: 'tooltip' }, ...runTip(run).split('\n').flatMap((line, i) => i ? [el('br'), line] : [line]))))))
       : el('span', { class: 'note' }, 'No runs recorded'),
   ]);
 }

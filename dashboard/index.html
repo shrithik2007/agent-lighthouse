@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent Lighthouse</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/dashboard/style.css">
 </head>
 <body>
 <header class="top">
@@ -37,7 +37,7 @@
   <section class="row row-2" aria-labelledby="h-runs">
     <h2 id="h-runs">Every Kane run</h2>
     <div class="dots" data-slot="dots"></div>
-    <p class="note">Green passed, red failed. Hover or focus a dot for steps (actions vs overhead), time and credits.</p>
+    <p class="note">Green passed, red failed; the number is completed steps. H is the human-path run. Hover or focus a dot for actions vs overhead, time and credits.</p>
   </section>
 
   <section class="row row-3" aria-labelledby="h-fail">
@@ -60,6 +60,6 @@
   </section>
 </template>
 
-<script src="app.js" type="module"></script>
+<script src="/dashboard/app.js" type="module"></script>
 </body>
 </html>

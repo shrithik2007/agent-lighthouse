@@ -61,6 +61,7 @@ h2 { margin: 0 0 12px; font-size: 14px; font-weight: 800; text-transform: upperc
 .dot[data-status="passed"] { background: var(--pass); }
 .dot[data-status="failed"], .dot[data-status="timeout"] { background: var(--fail); }
 .dot[data-status="unknown"], .dot[data-status="not_started"] { background: var(--concrete); color: var(--ink); }
+.dot.human { box-shadow: 0 0 0 3px var(--wall), 0 0 0 5px var(--ink); margin-left: 6px; }
 .dot .tip { display: none; position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%); min-width: 220px; background: var(--ink); color: var(--wall); padding: 8px 10px; font: 12px/1.4 var(--sans); text-align: left; z-index: 2; white-space: normal; }
 .dot:hover .tip, .dot:focus .tip { display: block; }
 
@@ -93,9 +94,11 @@ h2 { margin: 0 0 12px; font-size: 14px; font-weight: 800; text-transform: upperc
   .dots { grid-template-columns: 1fr; }
 }
 @media print {
+  :root { --ink: #14181F; --wall: #FFFFFF; --surface: #FFFFFF; --concrete: #D5DAE1; --muted: #4A5361; --rope: #1E3A5F; --pass: #1F7A4D; --fail: #B3261E; }
   body { background: #fff; color: #000; }
   .chip { border: 1px solid #000; }
-  .dot .tip { display: none !important; }
+  .dot.human { box-shadow: 0 0 0 3px var(--wall), 0 0 0 5px var(--ink); margin-left: 6px; }
+.dot .tip { display: none !important; }
   .row { break-inside: avoid; }
   a { color: #000; }
 }

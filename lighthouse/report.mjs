@@ -1,9 +1,17 @@
 import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
+import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { extractFailedScreenshot } from './pack.mjs';
 
 const slim = ({ steps, ...run }) => run;
+// Prefer the pack committed under evidence/packs/ (portable) over the local session path.
+function committedPack(cwd, kaneRunId) {
+  if (!kaneRunId) return null;
+  const dir = join(cwd, 'evidence', 'packs');
+  if (!existsSync(dir)) return null;
+  const name = readdirSync(dir).find(file => file.startsWith(`${kaneRunId}-`) && file.endsWith('.evidence'));
+  return name ? `evidence/packs/${name}` : null;
+}
 const sideSummary = (summary, label) => summary ? {
   label, score: summary.score, passedCount: summary.passedCount, runCount: summary.runCount,
   medianSteps: summary.medianSteps, medianDurationSec: summary.medianDurationSec, medianCredits: summary.medianCredits, lowConfidence: summary.lowConfidence,
@@ -49,13 +57,14 @@ export async function buildLatest({ cwd = process.cwd(), loopFile, headline, lin
     agentTax: agentTaxValue, agentTaxBasis: final?.agentTaxBefore ? 'BEFORE vs repaired page, successful-run medians' : 'BEFORE vs AFTER reference fixture, successful-run medians',
     runGroups: [
       ['Before', beforeRuns.map(slim)],
-      ...(loop?.attempts ?? []).filter(a => a.runs).map(a => [`Attempt ${a.attempt}`, [...a.runs, ...(a.humanPath ? [{ ...a.humanPath, label: `${a.humanPath.label}` }] : [])].map(slim)]),
+      ...(loop?.attempts ?? []).filter(a => a.runs).map(a => [`Attempt ${a.attempt}`, [...a.runs, ...(a.humanPath ? [{ ...a.humanPath, humanPath: true }] : [])].map(slim)]),
       ['Reference fix', baseline.after.runs.map(slim)],
     ],
     failingStep: failing ? {
       runLabel: failing.label, kaneRunId: failing.kaneRunId, site: failing.url, step: failedStep?.step ?? null,
       remark: failedStep?.remark ?? failing.oneLiner, summary: failing.oneLiner, reasonCode: failing.reasonCode, testUrl: failing.testUrl,
-      screenshot, evidencePack: failing.evidencePack, viewerCommand: failing.evidencePack ? `kane-cli evidence serve ${failing.evidencePack}` : null,
+      screenshot, evidencePack: committedPack(cwd, failing.kaneRunId) ?? failing.evidencePack,
+      viewerCommand: `kane-cli evidence serve ${committedPack(cwd, failing.kaneRunId) ?? failing.evidencePack}`,
     } : null,
     attempts: (loop?.attempts ?? []).map(a => ({
       attempt: a.attempt, commit: a.commit ?? null, filesChanged: a.filesChanged ?? [], cause: a.diagnosis?.cause ?? null, error: a.error ?? null,

@@ -73,17 +73,17 @@ function leadFinding(runs, human) {
   return failing[0] ?? null;
 }
 
-async function failingScreenshot(cwd, run, attempt) {
+async function failingScreenshot(cwd, run, attempt, loopId) {
   if (!run?.evidencePack) return null;
-  const out = join(cwd, 'results', 'loop', `attempt-${attempt}-failing-step.jpg`);
+  const out = join(cwd, 'results', 'loop', `${loopId}-attempt-${attempt}-failing-step.jpg`);
   return extractFailedScreenshot(run.evidencePack.replace(/^~/, process.env.HOME), out).catch(() => null);
 }
 
-async function diagnose({ cwd, worktree, runs, human, attempt, previous }) {
+async function diagnose({ cwd, worktree, runs, human, attempt, previous, loopId }) {
   const lead = leadFinding(runs, human);
   const failing = runs.filter(run => run.status !== 'passed');
   const excerpts = await Promise.all(failing.slice(0, 2).map(run => packExcerpts(run.evidencePack?.replace(/^~/, process.env.HOME))));
-  const screenshot = await failingScreenshot(cwd, lead, attempt);
+  const screenshot = await failingScreenshot(cwd, lead, attempt, loopId);
   const html = await readFile(join(worktree, 'site', 'index.html'), 'utf8');
   const passed = runs.filter(run => run.status === 'passed');
   const brief = JSON.stringify({
@@ -116,9 +116,9 @@ function fixBrief(diagnosis, attempt, lead) {
 const FILE_SCHEMA = { name: 'file', schema: { type: 'object', additionalProperties: false, required: ['html', 'summary'], properties: { html: { type: 'string' }, summary: { type: 'string' } } } };
 
 /** Codex non-interactively in the attempt worktree (API key via CODEX_API_KEY, env only); falls back to the OpenAI API returning the whole file. */
-async function applyFix({ cwd, worktree, diagnosis, attempt, log }) {
+async function applyFix({ cwd, worktree, diagnosis, attempt, log, loopId }) {
   const brief = fixBrief(diagnosis.json, attempt, diagnosis.lead);
-  const lastMessage = join(cwd, 'results', 'loop', `codex-attempt-${attempt}.txt`);
+  const lastMessage = join(cwd, 'results', 'loop', `${loopId}-codex-attempt-${attempt}.txt`);
   const model = process.env.CODEX_MODEL ?? 'gpt-5.3-codex';
   const args = ['exec', '-m', model, '-C', worktree, '-s', 'workspace-write', '--ephemeral', '--skip-git-repo-check', '-o', lastMessage];
   if (diagnosis.screenshot) args.push('-i', diagnosis.screenshot);
@@ -219,10 +219,10 @@ export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3,
     let server;
     try {
       log(`attempt ${attempt}/${maxAttempts}: diagnosis`);
-      const diagnosis = await diagnose({ cwd, worktree, runs: lastRuns, human: lastHuman, attempt, previous });
+      const diagnosis = await diagnose({ cwd, worktree, runs: lastRuns, human: lastHuman, attempt, previous, loopId });
       entry.diagnosis = { ...diagnosis.json, model: diagnosis.model, responseId: diagnosis.responseId };
       log(`  cause: ${diagnosis.json.cause}`);
-      const fix = await applyFix({ cwd, worktree, diagnosis, attempt, log });
+      const fix = await applyFix({ cwd, worktree, diagnosis, attempt, log, loopId });
       entry.fixer = fix.tool;
       entry.scopeGuard = await scopeGuard(worktree);
       if (entry.scopeGuard.reverted.length) log(`  scope guard reverted: ${entry.scopeGuard.reverted.join(', ')}`);
