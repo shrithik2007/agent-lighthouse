@@ -1,0 +1,69 @@
+{"type":"stream_start","cli_version":"0.10.0-rc.3","surface":"run","pid":47856,"v":1,"ts":"2026-10-24T23:16:07.763Z"}
+{"type":"recording_state","enabled":true,"session_id":"0cf1ee42-3f7e-4698-9589-4036aabe71ae","persist":false,"v":1,"ts":"2026-10-24T23:16:07.768Z"}
+{"type":"bifurcation","flows":["Navigate to http://localhost:4104 then book a free first visit for Sam Rivera, email sam@example.com, on the second of November 2026 at noon at the Downtown gym.\nAccept the waiver.\nThen verify a booking confirmation with a reference code is shown and store the reference as ref."],"count":1,"v":1,"ts":"2026-10-24T23:16:16.625Z"}
+{"step":2,"status":"running","remark":"Step 1","v":1,"ts":"2026-10-24T23:16:16.846Z"}
+{"step":2,"status":"done","remark":"navigate: Navigate to http://localhost:4104","v":1,"ts":"2026-10-24T23:16:16.847Z"}
+{"step":3,"status":"running","remark":"Step 2","v":1,"ts":"2026-10-24T23:16:20.344Z"}
+{"step":3,"status":"done","remark":"click: Clicking Accept all cookie consent button","v":1,"ts":"2026-10-24T23:16:23.643Z"}
+{"step":4,"status":"running","remark":"Step 3","v":1,"ts":"2026-10-24T23:16:24.244Z"}
+{"step":4,"status":"done","remark":"click: Clicking Book a free first visit button","v":1,"ts":"2026-10-24T23:16:27.494Z"}
+{"step":5,"status":"running","remark":"Step 4","v":1,"ts":"2026-10-24T23:16:28.081Z"}
+{"step":5,"status":"done","remark":"click: Clicking No thanks to decline the promotional discount","v":1,"ts":"2026-10-24T23:16:31.081Z"}
+{"step":6,"status":"running","remark":"Step 5","v":1,"ts":"2026-10-24T23:16:31.645Z"}
+{"step":6,"status":"done","remark":"click: Clicking Not now to decline location access","v":1,"ts":"2026-10-24T23:16:34.465Z"}
+{"step":7,"status":"running","remark":"Step 6","v":1,"ts":"2026-10-24T23:16:35.049Z"}
+{"step":7,"status":"done","remark":"click: Clicking Accept on the location access prompt","v":1,"ts":"2026-10-24T23:16:39.175Z"}
+{"step":8,"status":"running","remark":"Step 7","v":1,"ts":"2026-10-24T23:16:39.768Z"}
+{"step":8,"status":"done","remark":"wait: queued plan (5 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"","v":1,"ts":"2026-10-24T23:16:51.886Z"}
+{"step":9,"status":"running","remark":"Step 8","v":1,"ts":"2026-10-24T23:16:52.467Z"}
+{"step":9,"status":"done","remark":"type: Type \"Sam Rivera\" into \"Your name\"","v":1,"ts":"2026-10-24T23:16:52.531Z"}
+{"step":10,"status":"running","remark":"Step 9","v":1,"ts":"2026-10-24T23:16:53.099Z"}
+{"step":10,"status":"done","remark":"scroll: Scroll \"Email address\" into view","v":1,"ts":"2026-10-24T23:16:53.125Z"}
+{"step":11,"status":"running","remark":"Step 10","v":1,"ts":"2026-10-24T23:16:53.719Z"}
+{"step":11,"status":"done","remark":"type: Type \"sam@example.com\" into \"Email address\"","v":1,"ts":"2026-10-24T23:16:53.782Z"}
+{"step":12,"status":"running","remark":"Step 11","v":1,"ts":"2026-10-24T23:16:54.348Z"}
+{"step":12,"status":"done","remark":"scroll: Scroll \"Visit date\" into view","v":1,"ts":"2026-10-24T23:16:54.373Z"}
+{"step":13,"status":"running","remark":"Step 12","v":1,"ts":"2026-10-24T23:16:54.950Z"}
+{"step":13,"status":"done","remark":"type: Type \"2026-11-02\" into \"Visit date\"","v":1,"ts":"2026-10-24T23:16:55.011Z"}
+{"step":14,"status":"running","remark":"Step 13","v":1,"ts":"2026-10-24T23:16:55.580Z"}
+{"step":14,"status":"done","remark":"","v":1,"ts":"2026-10-24T23:16:55.853Z"}
+{"step":15,"status":"running","remark":"Step 14","v":1,"ts":"2026-10-24T23:16:56.442Z"}
+{"step":15,"status":"done","remark":"wait: queued plan (2 steps): click \"12pm (noon)\"; click \"I accept the climbing waiver.","v":1,"ts":"2026-10-24T23:17:04.269Z"}
+{"step":16,"status":"running","remark":"Step 15","v":1,"ts":"2026-10-24T23:17:04.842Z"}
+{"step":16,"status":"done","remark":"scroll: Scroll \"12pm (noon)\" into view","v":1,"ts":"2026-10-24T23:17:04.871Z"}
+{"step":17,"status":"running","remark":"Step 16","v":1,"ts":"2026-10-24T23:17:05.479Z"}
+{"step":17,"status":"done","remark":"click: Click \"12pm (noon)\"","v":1,"ts":"2026-10-24T23:17:11.033Z"}
+{"step":18,"status":"running","remark":"Step 17","v":1,"ts":"2026-10-24T23:17:11.616Z"}
+{"step":18,"status":"done","remark":"scroll: Scroll \"I accept the climbing waiver.\" into view","v":1,"ts":"2026-10-24T23:17:11.645Z"}
+{"step":19,"status":"running","remark":"Step 18","v":1,"ts":"2026-10-24T23:17:12.245Z"}
+{"step":19,"status":"done","remark":"click: Click \"I accept the climbing waiver.\"","v":1,"ts":"2026-10-24T23:17:12.824Z"}
+{"step":20,"status":"running","remark":"Step 19","v":1,"ts":"2026-10-24T23:17:13.408Z"}
+{"step":20,"status":"done","remark":"click: Clicking the 12pm (noon) arrival time radio option","v":1,"ts":"2026-10-24T23:17:27.036Z"}
+{"step":21,"status":"running","remark":"Step 20","v":1,"ts":"2026-10-24T23:17:27.631Z"}
+{"step":21,"status":"done","remark":"scroll: Scrolling to the Confirm my free visit button","v":1,"ts":"2026-10-24T23:17:39.583Z"}
+{"step":22,"status":"running","remark":"Step 21","v":1,"ts":"2026-10-24T23:17:40.206Z"}
+{"step":22,"status":"done","remark":"click: Clicking Confirm my free visit submit button","v":1,"ts":"2026-10-24T23:17:41.033Z"}
+{"step":23,"status":"running","remark":"Step 22","v":1,"ts":"2026-10-24T23:17:41.629Z"}
+{"step":23,"status":"done","remark":"scroll: Scrolling to the Arrival time section","v":1,"ts":"2026-10-24T23:17:53.722Z"}
+{"step":24,"status":"running","remark":"Step 23","v":1,"ts":"2026-10-24T23:17:54.306Z"}
+{"step":24,"status":"done","remark":"click: PRIMARY: noon time slot in the arrival-time selector; role=button; text=\"12pm\" |","v":1,"ts":"2026-10-24T23:18:01.121Z"}
+{"step":25,"status":"running","remark":"Step 24","v":1,"ts":"2026-10-24T23:18:01.709Z"}
+{"step":25,"status":"done","remark":"wait: queued plan (2 steps): select \"Gym\"; click \"Save location\"","v":1,"ts":"2026-10-24T23:18:04.935Z"}
+{"step":26,"status":"running","remark":"Step 25","v":1,"ts":"2026-10-24T23:18:05.526Z"}
+{"step":26,"status":"done","remark":"select: Select \"Downtown\" in \"Gym\"","v":1,"ts":"2026-10-24T23:18:05.566Z"}
+{"step":27,"status":"running","remark":"Step 26","v":1,"ts":"2026-10-24T23:18:06.164Z"}
+{"step":27,"status":"done","remark":"click: Click \"Save location\"","v":1,"ts":"2026-10-24T23:18:06.743Z"}
+{"step":28,"status":"running","remark":"Step 27","v":1,"ts":"2026-10-24T23:18:07.324Z"}
+{"step":28,"status":"done","remark":"click: PRIMARY: noon time slot in the arrival-time selector; role=button; text=\"12pm\" |","v":1,"ts":"2026-10-24T23:18:12.678Z"}
+{"step":29,"status":"running","remark":"Step 28","v":1,"ts":"2026-10-24T23:18:13.259Z"}
+{"step":29,"status":"done","remark":"scroll: Scrolling into view Confirm my free visit button","v":1,"ts":"2026-10-24T23:18:20.710Z"}
+{"step":30,"status":"running","remark":"Step 29","v":1,"ts":"2026-10-24T23:18:21.288Z"}
+{"step":30,"status":"done","remark":"click: Clicking Confirm my free visit submit button","v":1,"ts":"2026-10-24T23:18:22.218Z"}
+{"step":31,"status":"running","remark":"Step 30","v":1,"ts":"2026-10-24T23:18:22.776Z"}
+{"step":31,"status":"done","remark":"wait: PRIMARY: wait 4500 ms for the submitted booking confirmation to appear","v":1,"ts":"2026-10-24T23:18:32.228Z"}
+{"step":32,"status":"running","remark":"Step 31","v":1,"ts":"2026-10-24T23:18:32.788Z"}
+{"step":32,"status":"done","remark":"analyze: the reference is stored as {{ref}}","v":1,"ts":"2026-10-24T23:18:44.663Z"}
+{"step":33,"status":"running","remark":"Step 32","v":1,"ts":"2026-10-24T23:18:45.239Z"}
+{"step":33,"status":"done","remark":"assert: a booking confirmation with a reference code is shown","v":1,"ts":"2026-10-24T23:18:45.243Z"}
+{"type":"coverage","status":"written","computed_by":"local","coverage_version":2,"scope":"run","pct":0,"usecases":{"total":1,"proven":0,"partial":0,"failing":0,"not_run":1,"not_designed":0,"no_criteria":0},"criteria":{"total":15,"proven":0},"this_run":{"usecases":[],"criteria_passed":[],"criteria_failed":[]},"flags":{"stale_sources":0,"sources_not_fully_extracted":[],"orphaned_usecases":0},"pack":"~/.testmuai/kaneai/sessions/0cf1ee42-3f7e-4698-9589-4036aabe71ae/evidence/b19498e8-f5ac-421a-a87a-52fcac2cac6b.evidence","v":1,"ts":"2026-10-24T23:18:56.301Z"}
+{"type":"run_end","status":"passed","summary":"Booked a free first visit for Sam Rivera (sam@example.com) at the Downtown gym for November 2, 2026, at 12:00 PM.\nAccepted the waiver and completed the booking.\nThe booking was confirmed with reference code PL-5519.","one_liner":"booked a free first visit on the Downtown gym site","final_state":{"url":"http://localhost:4104/","booking_confirmation":"Booking confirmed","reference_code":"PL-5519"},"reason":"Objective completed","duration":153.4,"bifurcated":false,"total_runs":1,"context":{"memory":{"booking_confirmation_shown":{"extracted_value":"true","operator":"equals","transforms":[],"json_path":null,"reasoning":"value: 'true' -> 'true'; equals 'true' -> PASS","analyzer_type":"textual_visual","step":31,"query":"whether booking confirmation is present (in the booking status message)","condition":"a booking confirmation is shown","human_description":"Checking whether the booking confirmation is present","expected_value":"true","subject":"booking confirmation","must_be":"present","code_js":"el(24).textContent.trim() === 'Booking confirmed'","wrapped_js":"(els) => {\n  const __m = {24: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(24).textContent.trim() === 'Booking confirmed');\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}","locators":["internal:role=heading[name=\"Booking confirmed\"i]"],"needs_unit_conversion":false},"reference_code_shown":{"extracted_value":"true","operator":"equals","transforms":[],"json_path":null,"reasoning":"value: 'true' -> 'true'; equals 'true' -> PASS","analyzer_type":"textual_visual","step":31,"query":"whether reference code is present (in the booking status message)","condition":"a reference code is shown","human_description":"Checking whether the reference code is present","expected_value":"true","subject":"reference code","must_be":"present","code_js":"/Reference\\s+\\S+/.test(el(25).textContent)","wrapped_js":"(els) => {\n  const __m = {25: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (/Reference\\s+\\S+/.test(el(25).textContent));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}","locators":["internal:text=\"Reference PL-\"i"],"needs_unit_conversion":false},"ref":{"extracted_value":"PL-5519","operator":"equals","transforms":["strip"],"json_path":null,"reasoning":"value: 'PL-5519' (stored, no comparison)","analyzer_type":"textual_visual","step":31,"query":"the booking reference code in the confirmation message","condition":"the reference is stored as {{ref}}","human_description":"Extracting the booking reference code","expected_value":"","code_js":"(el(25).textContent.match(/Reference\\s+([^\\s]+)/) || [])[1] || null","wrapped_js":"(els) => {\n  const __m = {25: 0};\n  const el = (i) => els[__m[i]];\n  const __v = ((el(25).textContent.match(/Reference\\s+([^\\s]+)/) || [])[1] || null);\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}","locators":["internal:text=\"Reference PL-\"i"],"needs_unit_conversion":false}},"variables":{"ref":{"syntax":"{{ref}}","value":"PL-5519","type":"memory","secret":false,"source":"runtime"},"booking_confirmation_shown":{"syntax":"{{booking_confirmation_shown}}","value":"true","type":"memory","secret":false},"reference_code_shown":{"syntax":"{{reference_code_shown}}","value":"true","type":"memory","secret":false}},"pointer":"(passed) booked a free first visit on the Downtown gym site"},"credits_consumed":46.7327025,"session_dir":"~/.testmuai/kaneai/sessions/0cf1ee42-3f7e-4698-9589-4036aabe71ae","run_dir":"~/.testmuai/kaneai/sessions/0cf1ee42-3f7e-4698-9589-4036aabe71ae/runs/0","result_code":100,"reason_code":"success.complete","per_flow_metadata":[{"result_code":"100","reason_code":"success.complete","error_message":null,"summary":"Booked a free first visit for Sam Rivera (sam@example.com) at the Downtown gym for November 2, 2026, at 12:00 PM.\nAccepted the waiver and completed the booking.\nThe booking was confirmed with reference code PL-5519.","one_liner":"booked a free first visit on the Downtown gym site","credits_consumed":46.7327025}],"run_id":"run-0","test_url":"https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R36HPQS75YTTT5MV1DSP50/dashboard/share/US_XKBAKKJ763X3JVZZOW5CW7A5970UOHODT4OSGD50ICKOUKNAZVOYI77BR9OHDNHZ?type=summary&agentView=true&fqdn=summary-page","coverage":{"status":"written","pct":0},"v":1,"ts":"2026-10-24T23:18:56.301Z"}

@@ -1,0 +1,100 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Booked a free first visit for Sam Rivera at the Downtown gym for November 2, 2026 at 12:00 PM using sam@example.com.\nAccepted the waiver.\nThe booking was confirmed, and the reference code was saved as PL-5519.",
+  "one_liner": "booked a free first visit on the Downtown gym site",
+  "final_state": {
+    "url": "http://localhost:4104/",
+    "booking_confirmation_with_reference_code_shown": "true",
+    "ref": "PL-5519"
+  },
+  "reason": "Objective completed",
+  "duration": 169.3,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "booking_confirmation_with_reference_code_shown": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 32,
+        "query": "whether booking confirmation with a reference code is present (in the booking status message)",
+        "condition": "A booking confirmation with a reference code is shown.",
+        "human_description": "Checking whether the booking confirmation with reference code is present",
+        "expected_value": "true",
+        "subject": "booking confirmation with a reference code",
+        "must_be": "present",
+        "code_js": "!!(el(23).querySelector('h3')?.textContent.trim()==='Booking confirmed' && /^[A-Za-z0-9-]+$/.test(el(23).querySelector('.reference')?.textContent.trim()||''))",
+        "wrapped_js": "(els) => {\n  const __m = {23: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (!!(el(23).querySelector('h3')?.textContent.trim()==='Booking confirmed' && /^[A-Za-z0-9-]+$/.test(el(23).querySelector('.reference')?.textContent.trim()||'')));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Booking confirmedReference PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      },
+      "ref": {
+        "extracted_value": "PL-5519",
+        "operator": "equals",
+        "transforms": [
+          "strip"
+        ],
+        "json_path": null,
+        "reasoning": "value: 'PL-5519' (stored, no comparison)",
+        "analyzer_type": "textual_visual",
+        "step": 32,
+        "query": "the booking reference code in the confirmation message",
+        "condition": "The reference code is stored as {{ref}}.",
+        "human_description": "Extracting the booking reference code from the confirmation",
+        "expected_value": "",
+        "code_js": "el(25).querySelector('.reference')?.textContent.trim() || null",
+        "wrapped_js": "(els) => {\n  const __m = {25: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(25).querySelector('.reference')?.textContent.trim() || null);\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Reference PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "PL-5519",
+        "type": "memory",
+        "secret": false,
+        "source": "runtime"
+      },
+      "booking_confirmation_with_reference_code_shown": {
+        "syntax": "{{booking_confirmation_with_reference_code_shown}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) booked a free first visit on the Downtown gym site"
+  },
+  "credits_consumed": 43.31321250000001,
+  "session_dir": "~/.testmuai/kaneai/sessions/303e7896-eddc-4cca-964a-ec35fae31dd9",
+  "run_dir": "~/.testmuai/kaneai/sessions/303e7896-eddc-4cca-964a-ec35fae31dd9/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Booked a free first visit for Sam Rivera at the Downtown gym for November 2, 2026 at 12:00 PM using sam@example.com.\nAccepted the waiver.\nThe booking was confirmed, and the reference code was saved as PL-5519.",
+      "one_liner": "booked a free first visit on the Downtown gym site",
+      "credits_consumed": 43.31321250000001
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R3BQZ1GWMF1VXCEAKRTBD0/dashboard/share/US_JSLDVHW0HB6CAZWSZ7L4TN88PE7HTGLJPPKDDJFCHP0U285QSBQCXC4T6ZKC7ORJ?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "written",
+    "pct": 0
+  },
+  "v": 1,
+  "ts": "2026-10-24T23:22:01.802Z"
+}

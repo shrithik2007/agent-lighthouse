@@ -1,0 +1,843 @@
+{
+  "case": "worst",
+  "flow": "book-worst",
+  "optimalSteps": 14,
+  "generatedAt": "2026-10-24T23:25:53.696Z",
+  "before": {
+    "url": "http://localhost:4104",
+    "summary": {
+      "score": 88,
+      "runCount": 3,
+      "passedCount": 3,
+      "passRate": 1,
+      "medianSteps": 33,
+      "medianFailedSteps": 0,
+      "medianDurationSec": 169.3,
+      "medianCredits": 46.7327025,
+      "efficiency": 0.42424242424242425,
+      "cleanliness": 1,
+      "flakiness": 0,
+      "lowConfidence": false,
+      "timeoutCount": 0,
+      "excluded": 0
+    },
+    "runs": [
+      {
+        "label": "worst-baseline-1",
+        "id": "2026-10-24T23-16-07.473Z-64aa1183",
+        "url": "http://localhost:4104",
+        "startedAt": "2026-10-24T23:16:07.473Z",
+        "finishedAt": "2026-10-24T23:18:57.961Z",
+        "kaneRunId": "KR-243",
+        "wrapperLabel": "errored",
+        "evidenceDir": "evidence/runs/worst-baseline-1",
+        "status": "passed",
+        "started": true,
+        "exitCode": 0,
+        "kaneStatus": "passed",
+        "stepsTaken": 32,
+        "failedSteps": 0,
+        "actionSteps": 27,
+        "overheadSteps": 5,
+        "durationSec": 153.4,
+        "credits": 46.7327025,
+        "reference": "PL-5519",
+        "summary": "Booked a free first visit for Sam Rivera (sam@example.com) at the Downtown gym for November 2, 2026, at 12:00 PM.\nAccepted the waiver and completed the booking.\nThe booking was confirmed with reference code PL-5519.",
+        "oneLiner": "booked a free first visit on the Downtown gym site",
+        "reasonCode": "success.complete",
+        "testUrl": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R36HPQS75YTTT5MV1DSP50/dashboard/share/US_XKBAKKJ763X3JVZZOW5CW7A5970UOHODT4OSGD50ICKOUKNAZVOYI77BR9OHDNHZ?type=summary&agentView=true&fqdn=summary-page",
+        "sessionDir": "~/.testmuai/kaneai/sessions/0cf1ee42-3f7e-4698-9589-4036aabe71ae",
+        "evidencePack": "~/.testmuai/kaneai/sessions/0cf1ee42-3f7e-4698-9589-4036aabe71ae/evidence/b19498e8-f5ac-421a-a87a-52fcac2cac6b.evidence",
+        "firstFailedStep": null,
+        "failedRemarks": [],
+        "rejectedLines": 0,
+        "steps": [
+          {
+            "step": 2,
+            "context": "root",
+            "status": "done",
+            "remark": "navigate: Navigate to http://localhost:4104",
+            "overhead": false
+          },
+          {
+            "step": 3,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Accept all cookie consent button",
+            "overhead": false
+          },
+          {
+            "step": 4,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Book a free first visit button",
+            "overhead": false
+          },
+          {
+            "step": 5,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking No thanks to decline the promotional discount",
+            "overhead": false
+          },
+          {
+            "step": 6,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Not now to decline location access",
+            "overhead": false
+          },
+          {
+            "step": 7,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Accept on the location access prompt",
+            "overhead": false
+          },
+          {
+            "step": 8,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (5 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"",
+            "overhead": true
+          },
+          {
+            "step": 9,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"Sam Rivera\" into \"Your name\"",
+            "overhead": false
+          },
+          {
+            "step": 10,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scroll \"Email address\" into view",
+            "overhead": false
+          },
+          {
+            "step": 11,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"sam@example.com\" into \"Email address\"",
+            "overhead": false
+          },
+          {
+            "step": 12,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scroll \"Visit date\" into view",
+            "overhead": false
+          },
+          {
+            "step": 13,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 14,
+            "context": "root",
+            "status": "done",
+            "remark": "",
+            "overhead": true
+          },
+          {
+            "step": 15,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (2 steps): click \"12pm (noon)\"; click \"I accept the climbing waiver.",
+            "overhead": true
+          },
+          {
+            "step": 16,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scroll \"12pm (noon)\" into view",
+            "overhead": false
+          },
+          {
+            "step": 17,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"12pm (noon)\"",
+            "overhead": false
+          },
+          {
+            "step": 18,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scroll \"I accept the climbing waiver.\" into view",
+            "overhead": false
+          },
+          {
+            "step": 19,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"I accept the climbing waiver.\"",
+            "overhead": false
+          },
+          {
+            "step": 20,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking the 12pm (noon) arrival time radio option",
+            "overhead": false
+          },
+          {
+            "step": 21,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling to the Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 22,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit submit button",
+            "overhead": false
+          },
+          {
+            "step": 23,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling to the Arrival time section",
+            "overhead": false
+          },
+          {
+            "step": 24,
+            "context": "root",
+            "status": "done",
+            "remark": "click: PRIMARY: noon time slot in the arrival-time selector; role=button; text=\"12pm\" |",
+            "overhead": false
+          },
+          {
+            "step": 25,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (2 steps): select \"Gym\"; click \"Save location\"",
+            "overhead": true
+          },
+          {
+            "step": 26,
+            "context": "root",
+            "status": "done",
+            "remark": "select: Select \"Downtown\" in \"Gym\"",
+            "overhead": false
+          },
+          {
+            "step": 27,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"Save location\"",
+            "overhead": false
+          },
+          {
+            "step": 28,
+            "context": "root",
+            "status": "done",
+            "remark": "click: PRIMARY: noon time slot in the arrival-time selector; role=button; text=\"12pm\" |",
+            "overhead": false
+          },
+          {
+            "step": 29,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling into view Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 30,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit submit button",
+            "overhead": false
+          },
+          {
+            "step": 31,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait 4500 ms for the submitted booking confirmation to appear",
+            "overhead": true
+          },
+          {
+            "step": 32,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: the reference is stored as {{ref}}",
+            "overhead": false
+          },
+          {
+            "step": 33,
+            "context": "root",
+            "status": "done",
+            "remark": "assert: a booking confirmation with a reference code is shown",
+            "overhead": false
+          }
+        ]
+      },
+      {
+        "label": "worst-baseline-2",
+        "id": "2026-10-24T23-18-57.965Z-acd7e433",
+        "url": "http://localhost:4104",
+        "startedAt": "2026-10-24T23:18:57.965Z",
+        "finishedAt": "2026-10-24T23:22:03.856Z",
+        "kaneRunId": "KR-244",
+        "wrapperLabel": "errored",
+        "evidenceDir": "evidence/runs/worst-baseline-2",
+        "status": "passed",
+        "started": true,
+        "exitCode": 0,
+        "kaneStatus": "passed",
+        "stepsTaken": 33,
+        "failedSteps": 0,
+        "actionSteps": 28,
+        "overheadSteps": 5,
+        "durationSec": 169.3,
+        "credits": 43.31321250000001,
+        "reference": "PL-5519",
+        "summary": "Booked a free first visit for Sam Rivera at the Downtown gym for November 2, 2026 at 12:00 PM using sam@example.com.\nAccepted the waiver.\nThe booking was confirmed, and the reference code was saved as PL-5519.",
+        "oneLiner": "booked a free first visit on the Downtown gym site",
+        "reasonCode": "success.complete",
+        "testUrl": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R3BQZ1GWMF1VXCEAKRTBD0/dashboard/share/US_JSLDVHW0HB6CAZWSZ7L4TN88PE7HTGLJPPKDDJFCHP0U285QSBQCXC4T6ZKC7ORJ?type=summary&agentView=true&fqdn=summary-page",
+        "sessionDir": "~/.testmuai/kaneai/sessions/303e7896-eddc-4cca-964a-ec35fae31dd9",
+        "evidencePack": "~/.testmuai/kaneai/sessions/303e7896-eddc-4cca-964a-ec35fae31dd9/evidence/721c0556-d3de-43b8-9586-e01412a62d07.evidence",
+        "firstFailedStep": null,
+        "failedRemarks": [],
+        "rejectedLines": 0,
+        "steps": [
+          {
+            "step": 2,
+            "context": "root",
+            "status": "done",
+            "remark": "navigate: Navigate to http://localhost:4104",
+            "overhead": false
+          },
+          {
+            "step": 3,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Accept all privacy choices button",
+            "overhead": false
+          },
+          {
+            "step": 4,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Book a free first visit button",
+            "overhead": false
+          },
+          {
+            "step": 5,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (2 steps): click \"Not now\"; click \"No thanks\"",
+            "overhead": true
+          },
+          {
+            "step": 6,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"Not now\"",
+            "overhead": false
+          },
+          {
+            "step": 7,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"No thanks\"",
+            "overhead": false
+          },
+          {
+            "step": 8,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Not now on the location access prompt",
+            "overhead": false
+          },
+          {
+            "step": 9,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Accept on the location access prompt",
+            "overhead": false
+          },
+          {
+            "step": 10,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (4 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"",
+            "overhead": true
+          },
+          {
+            "step": 11,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"Sam Rivera\" into \"Your name\"",
+            "overhead": false
+          },
+          {
+            "step": 12,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scroll \"Email address\" into view",
+            "overhead": false
+          },
+          {
+            "step": 13,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"sam@example.com\" into \"Email address\"",
+            "overhead": false
+          },
+          {
+            "step": 14,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scroll \"Visit date\" into view",
+            "overhead": false
+          },
+          {
+            "step": 15,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 16,
+            "context": "root",
+            "status": "done",
+            "remark": "",
+            "overhead": true
+          },
+          {
+            "step": 17,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling to the 12pm noon arrival time option",
+            "overhead": false
+          },
+          {
+            "step": 18,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Selecting 12pm (noon) arrival time option",
+            "overhead": false
+          },
+          {
+            "step": 19,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling to the 12pm (noon) arrival time option",
+            "overhead": false
+          },
+          {
+            "step": 20,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking 12pm (noon) arrival time option",
+            "overhead": false
+          },
+          {
+            "step": 21,
+            "context": "root",
+            "status": "done",
+            "remark": "click: PRIMARY: noon arrival time option; role=radio; text=\"12pm\" | HINTS: center optio",
+            "overhead": false
+          },
+          {
+            "step": 22,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (2 steps): select \"Gym\"; click \"Save location\"",
+            "overhead": true
+          },
+          {
+            "step": 23,
+            "context": "root",
+            "status": "done",
+            "remark": "select: Select \"Downtown\" in \"Gym\"",
+            "overhead": false
+          },
+          {
+            "step": 24,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"Save location\"",
+            "overhead": false
+          },
+          {
+            "step": 25,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling into the 12pm (noon) arrival time option",
+            "overhead": false
+          },
+          {
+            "step": 26,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking the 12pm (noon) arrival time option",
+            "overhead": false
+          },
+          {
+            "step": 27,
+            "context": "root",
+            "status": "done",
+            "remark": "click: PRIMARY: noon arrival time option; role=radio; text=\"12pm\" | HINTS: middle recta",
+            "overhead": false
+          },
+          {
+            "step": 28,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling to the climbing waiver acceptance checkbox",
+            "overhead": false
+          },
+          {
+            "step": 29,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking the I accept the climbing waiver checkbox",
+            "overhead": false
+          },
+          {
+            "step": 30,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling to the Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 31,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 32,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait 1000 ms for booking processing to finish",
+            "overhead": true
+          },
+          {
+            "step": 33,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: The reference code is stored as {{ref}}.",
+            "overhead": false
+          },
+          {
+            "step": 34,
+            "context": "root",
+            "status": "done",
+            "remark": "assert: A booking confirmation with a reference code is shown.",
+            "overhead": false
+          }
+        ]
+      },
+      {
+        "label": "worst-baseline-3",
+        "id": "2026-10-24T23-22-03.857Z-4d18a16a",
+        "url": "http://localhost:4104",
+        "startedAt": "2026-10-24T23:22:03.857Z",
+        "finishedAt": "2026-10-24T23:25:43.302Z",
+        "kaneRunId": "KR-247",
+        "wrapperLabel": "errored",
+        "evidenceDir": "evidence/runs/worst-baseline-3",
+        "status": "passed",
+        "started": true,
+        "exitCode": 0,
+        "kaneStatus": "passed",
+        "stepsTaken": 37,
+        "failedSteps": 0,
+        "actionSteps": 31,
+        "overheadSteps": 6,
+        "durationSec": 204.4,
+        "credits": 58.220349999999996,
+        "reference": "PL-5519",
+        "summary": "Booked a free first visit for Sam Rivera (sam@example.com) at the Downtown gym for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed with reference code PL-5519.",
+        "oneLiner": "booked a free first visit on the Downtown gym site",
+        "reasonCode": "success.complete",
+        "testUrl": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R3HDF48WR90FGG9QAN27DS/dashboard/share/US_OEBER3ECTZBIENJ8LZ35MTZT2CJ8DN6W8KCWLCIH9IW6IPSIIOVMM0S7UPXVXBLB?type=summary&agentView=true&fqdn=summary-page",
+        "sessionDir": "~/.testmuai/kaneai/sessions/9ea54755-557b-4ab1-a7b9-c005ccb16e6c",
+        "evidencePack": "~/.testmuai/kaneai/sessions/9ea54755-557b-4ab1-a7b9-c005ccb16e6c/evidence/1e496528-68a3-41f0-bfde-4d48ffe02441.evidence",
+        "firstFailedStep": null,
+        "failedRemarks": [],
+        "rejectedLines": 0,
+        "steps": [
+          {
+            "step": 2,
+            "context": "root",
+            "status": "done",
+            "remark": "navigate: Navigate to http://localhost:4104",
+            "overhead": false
+          },
+          {
+            "step": 3,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Accept all cookies button",
+            "overhead": false
+          },
+          {
+            "step": 4,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Book a free first visit button",
+            "overhead": false
+          },
+          {
+            "step": 5,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking No thanks to decline the newsletter offer",
+            "overhead": false
+          },
+          {
+            "step": 6,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Accept to allow location access",
+            "overhead": false
+          },
+          {
+            "step": 7,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (5 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"",
+            "overhead": true
+          },
+          {
+            "step": 8,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"Sam Rivera\" into \"Your name\"",
+            "overhead": false
+          },
+          {
+            "step": 9,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scroll \"Email address\" into view",
+            "overhead": false
+          },
+          {
+            "step": 10,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"sam@example.com\" into \"Email address\"",
+            "overhead": false
+          },
+          {
+            "step": 11,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scroll \"Visit date\" into view",
+            "overhead": false
+          },
+          {
+            "step": 12,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 13,
+            "context": "root",
+            "status": "done",
+            "remark": "",
+            "overhead": true
+          },
+          {
+            "step": 14,
+            "context": "root",
+            "status": "done",
+            "remark": "press_key: PRIMARY: press the Tab key to move focus from visit date to gym selector",
+            "overhead": false
+          },
+          {
+            "step": 15,
+            "context": "root",
+            "status": "done",
+            "remark": "press_key: PRIMARY: press ArrowDown to choose the first gym option, Downtown, in the focuse",
+            "overhead": false
+          },
+          {
+            "step": 16,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Typing 2026-11-02 into Visit date field",
+            "overhead": false
+          },
+          {
+            "step": 17,
+            "context": "root",
+            "status": "done",
+            "remark": "press_key: PRIMARY: press the Tab key to advance through the native date control toward the",
+            "overhead": false
+          },
+          {
+            "step": 18,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (2 steps): click \"12pm (noon)\"; click \"I accept the climbing waiver.",
+            "overhead": true
+          },
+          {
+            "step": 19,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"12pm (noon)\"",
+            "overhead": false
+          },
+          {
+            "step": 20,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scroll \"I accept the climbing waiver.\" into view",
+            "overhead": false
+          },
+          {
+            "step": 21,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"I accept the climbing waiver.\"",
+            "overhead": false
+          },
+          {
+            "step": 22,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking 12pm (noon) arrival time radio button",
+            "overhead": false
+          },
+          {
+            "step": 23,
+            "context": "root",
+            "status": "done",
+            "remark": "click: PRIMARY: noon arrival time option; role=radio; text=\"12pm\" | HINTS: middle butto",
+            "overhead": false
+          },
+          {
+            "step": 24,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (2 steps): select \"Gym\"; click \"Save location\"",
+            "overhead": true
+          },
+          {
+            "step": 25,
+            "context": "root",
+            "status": "done",
+            "remark": "select: Select \"Downtown\" in \"Gym\"",
+            "overhead": false
+          },
+          {
+            "step": 26,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"Save location\"",
+            "overhead": false
+          },
+          {
+            "step": 27,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling to noon arrival time radio option",
+            "overhead": false
+          },
+          {
+            "step": 28,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking the 12pm (noon) arrival time option",
+            "overhead": false
+          },
+          {
+            "step": 29,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling to the 12pm (noon) arrival time option",
+            "overhead": false
+          },
+          {
+            "step": 30,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Selecting 12pm (noon) arrival time option",
+            "overhead": false
+          },
+          {
+            "step": 31,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling down to the arrival time controls",
+            "overhead": false
+          },
+          {
+            "step": 32,
+            "context": "root",
+            "status": "done",
+            "remark": "click: PRIMARY: noon arrival time option; role=radio; text=\"12pm\" | HINTS: middle optio",
+            "overhead": false
+          },
+          {
+            "step": 33,
+            "context": "root",
+            "status": "done",
+            "remark": "scroll: Scrolling to the Confirm my free visit button in the booking form",
+            "overhead": false
+          },
+          {
+            "step": 34,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit to submit the booking form",
+            "overhead": false
+          },
+          {
+            "step": 35,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait 1000 ms for the booking submission result to load",
+            "overhead": true
+          },
+          {
+            "step": 36,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: booking confirmation is visible for the submitted free first visit",
+            "overhead": true
+          },
+          {
+            "step": 37,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: ANALYZE(textual_visual, 'the reference code from the booking confirmation is sav",
+            "overhead": false
+          },
+          {
+            "step": 38,
+            "context": "root",
+            "status": "done",
+            "remark": "assert: a booking confirmation with a reference code is shown.",
+            "overhead": false
+          }
+        ]
+      }
+    ]
+  },
+  "after": null,
+  "agentTax": {
+    "extraSteps": 19,
+    "extraSeconds": null,
+    "extraCredits": null
+  }
+}
