@@ -1,0 +1,10 @@
+Running on: Desktop · Chrome
+coverage: 0% from this run, which ran no designed test
+  for coverage so far, run: kane-cli cover
+evidence: view locally with `kane-cli evidence serve ~/.testmuai/kaneai/sessions/e446cc64-4603-4b30-82e9-33b6ee10daa1/evidence/08d6fe40-a1f3-491a-8d3a-2e3e5bd16b6a.evidence`
+
+● exit 0 · no completion event (not a pass)
+! Uncommitted changes: the run is tied to HEAD, which isn't exactly what ran.
+Kane run KR-230: ERRORED (UNVERIFIED). Details: /t/lighthouse/proof#run-230
+! Exit code 0 but no completion event: not counted as a pass.
+→ Open Proof tab: https://kaneclihack.sh/t/lighthouse/proof#run-230

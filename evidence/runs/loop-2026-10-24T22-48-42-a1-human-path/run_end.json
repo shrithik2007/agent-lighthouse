@@ -1,0 +1,72 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Booked the free first visit class for Sam Rivera using sam@example.com, scheduled for 2 November 2026 at noon.\nAccepted the climbing waiver, completed the human check, and confirmed the booking.\nWaited 5 seconds after confirmation; the booking reference PL-7302 remained visible on the page.",
+  "one_liner": "booked a free first visit class on the climbing booking site",
+  "final_state": {
+    "url": "http://localhost:4104/",
+    "booking_reference": "PL-7302",
+    "pl_7302_visible": "true"
+  },
+  "reason": "Objective completed",
+  "duration": 67.9,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "pl_7302_visible": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 15,
+        "query": "whether the text PL-7302 is present (in the booking confirmation status)",
+        "condition": "the text PL-7302 is still visible on the page",
+        "human_description": "Checking whether the text PL-7302 is present",
+        "expected_value": "true",
+        "subject": "the text PL-7302",
+        "must_be": "present",
+        "code_js": "el(27).textContent.includes('PL-7302')",
+        "wrapped_js": "(els) => {\n  const __m = {27: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(27).textContent.includes('PL-7302'));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:label=\"Book a class\"i >> internal:text=\"Booked! Ref PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "pl_7302_visible": {
+        "syntax": "{{pl_7302_visible}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) booked a free first visit class on the climbing booking site"
+  },
+  "credits_consumed": 18.679440000000003,
+  "session_dir": "~/.testmuai/kaneai/sessions/bcb8dd54-cbe2-4d9c-951a-d99bc27af918",
+  "run_dir": "~/.testmuai/kaneai/sessions/bcb8dd54-cbe2-4d9c-951a-d99bc27af918/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Booked the free first visit class for Sam Rivera using sam@example.com, scheduled for 2 November 2026 at noon.\nAccepted the climbing waiver, completed the human check, and confirmed the booking.\nWaited 5 seconds after confirmation; the booking reference PL-7302 remained visible on the page.",
+      "one_liner": "booked a free first visit class on the climbing booking site",
+      "credits_consumed": 18.679440000000003
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R24FM3RYPE44NGQXBHTVCE/dashboard/share/US_EVJM4R6YLYXWQIZ74DXXNW6L1HV3HGR1GB7N7VIRJ22JHYZCBU8AU8EUL7N0ASIN?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "written",
+    "pct": 0
+  },
+  "v": 1,
+  "ts": "2026-10-24T22:58:53.837Z"
+}

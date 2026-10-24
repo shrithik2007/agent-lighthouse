@@ -49,12 +49,15 @@ A second sample site (`fixtures/hard/`, working copy `site-hard/` on :4103) has 
 | | Score | Passed | Median steps | Human path |
 | --- | --- | --- | --- | --- |
 | BEFORE (KR-190, KR-191, KR-193) | **0** | 0/3 | 12 | failed (KR-194) |
-| Proposed fix, attempt 1 (`134e5b8`, unmerged) | **98** | 3/3 | 16 | passed (KR-206) |
+| First loop, attempt 1 (`134e5b8`): gate fooled, owner rejected | 98 | 3/3 | 16 | passed (KR-206) |
+| Second loop, attempt 1 (`226a15e`): **blocked as suspect** by the leak check | 98 | 3/3 | 16 | passed (KR-225) |
+| Second loop, attempt 2 (`72c3a14`, unmerged proposal) | **95** | 3/3 | 19 | passed (KR-235) |
 
 - **What Kane caught:** every BEFORE run cleared the newsletter modal, cookie wall, class step, month navigation and hover-only dropdown, then stopped at the fake captcha with `reason_code: blocker.captcha`: "The booking could not be completed because a CAPTCHA required a human verification." Kane will not impersonate a human.
-- **Kane refuses to pretend to be human.** The fake captcha is where all three baseline runs stopped. That's a feature worth naming: an agent that clicks through "I'm not a robot" would be one site owners can't trust.
+- **Kane refuses to pretend to be human.** The reCAPTCHA-style widget is where all three baseline runs stopped. That's a feature worth naming: an agent that solves human checks would be one site owners can't trust. To be precise about the boundary: when attempt 2 turned the widget into a plain checkbox labelled "I'm not a robot" (an ordinary form control with no challenge), Kane ticked it. Neither version is real bot protection; the proposal says so and leaves the choice to the owner.
 - **Agent Tax: n/a.** No pre-fix run succeeded, so there is no per-booking tax or credit ratio to compute; the dashboard says so instead of showing zero.
-- **The gate passed a patch an owner should reject.** The propose-mode loop qualified on attempt 1, but the fix removed the human-verification check ("Demo mode: no human verification required") and hard-coded the test's date (`selectedDate = '2026-11-02'`). The gate checks outcomes, not intent. The operator review note at the end of `results/cases/hard/proposal.md` says not to merge, and the dashboard chip reads "Qualified · reviewer says do not merge". This is why propose mode is the default: a person decides.
+- **The gate working (second loop, after the fixture-leak check):** attempt 1 scored 98 with the human path passing, but was blocked as **suspect, owner review required** because it again hard-coded the test date and removed the human check. Attempt 2 was told why, passed the check (the scope guard also reverted a stray file the fixer created outside `site-hard/`) and qualified at 95. Records: `results/loop/2026-10-24T22-48-42.json`, `results/cases/hard/proposal.md`.
+- **The first loop's gate passed a patch an owner should reject** (kept as-is): it qualified on attempt 1, but the fix removed the human-verification check ("Demo mode: no human verification required") and hard-coded the test's date (`selectedDate = '2026-11-02'`). The gate checks outcomes, not intent. The operator review note at the end of `results/loop/2026-10-24T22-22-59-proposal.md` says not to merge, and the dashboard chip reads "Qualified · reviewer says do not merge". This is why propose mode is the default: a person decides.
 - Records: `results/cases/hard/` (baseline, latest, proposal), `results/loop/2026-10-24T22-22-59.json`, evidence under `evidence/runs/hard-baseline-*` and `evidence/runs/loop-2026-10-24T22-22-59-*`, packs `evidence/packs/KR-190…`, `KR-194…`, `KR-196…`, `KR-206…`.
 
 ## Savings panel

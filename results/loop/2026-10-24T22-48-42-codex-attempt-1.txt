@@ -1,0 +1,15 @@
+Implemented in `site-hard/index.html` only.
+
+**What I Changed**
+- Removed CAPTCHA from flow entirely (no `#captcha`, no human-check handler/state, no `!human` submit dependency) and kept submit validation to name/email/date/time/waiver only (`site-hard/index.html:41`, `site-hard/index.html:56`).
+- Replaced hover-only time dropdown with native labeled select: `#arrival-time` (`site-hard/index.html:30`, `site-hard/index.html:54`).
+- Replaced fake waiver checkbox with real labeled checkbox `#waiver-check` and validate via `.checked` (`site-hard/index.html:31`, `site-hard/index.html:55`).
+- Added visible labels for name/email, changed email to `type="email"`, and added autocomplete (`site-hard/index.html:27`, `site-hard/index.html:28`).
+- Replaced custom calendar with native labeled date input `#visit-date` (initialized to `2026-11-02`) (`site-hard/index.html:29`, `site-hard/index.html:53`).
+- Updated confirmation UX: primary action is now `#confirm-yes` labeled “Confirm booking”; back action is secondary (`site-hard/index.html:33`, `site-hard/index.html:67`).
+- Added persistent in-page status message with `role="status"` and kept toast visible for 6000ms (`site-hard/index.html:33`, `site-hard/index.html:69`).
+- Updated CTAs and nav behavior: `#hero-go` text, `#step1-next` text, and `#nav-go` now opens booking (`site-hard/index.html:16`, `site-hard/index.html:18`, `site-hard/index.html:25`, `site-hard/index.html:44`).
+- Converted cookie/newsletter close/skip controls to real buttons and removed newsletter auto-open timer during booking flow (`site-hard/index.html:37`, `site-hard/index.html:38`, `site-hard/index.html:46`).
+- Replaced generic error text with specific guidance (`site-hard/index.html:50`, `site-hard/index.html:59`).
+
+If you want, I can run a quick local smoke-check flow against `http://localhost:4103` next.

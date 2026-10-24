@@ -27,7 +27,7 @@
     "objective": "Go to {{url}}. Book the free first visit class: choose that class, enter the name Sam Rivera and the email sam@example.com, pick 2 November 2026 and the arrival time noon, accept the climbing waiver, complete the human check and confirm the booking. Wait 5 seconds, then verify the text PL-7302 is still visible on the page.",
     "why": "Guard for human visitors: a person's booking must still end with PL-7302 visible five seconds after confirming."
   },
-  "baselineNote": "Baseline Agent Tax is n/a: no pre-fix run succeeded, so there is no per-booking extra work to measure. All three baseline runs (KR-190, KR-191, KR-193) stopped at the fake captcha with reason_code blocker.captcha: Kane refuses to pretend to be human.",
+  "baselineNote": "Baseline Agent Tax is n/a: no pre-fix run succeeded, so there is no per-booking extra work to measure. All three baseline runs (KR-190, KR-191, KR-193) stopped at the reCAPTCHA-style widget with reason_code blocker.captcha: Kane refuses to pretend to be human. (It does tick a plain checkbox labelled \"I am not a robot\", which is an ordinary form control, not a challenge; see the second hard-mode loop.)",
   "testData": {
     "name": "Sam Rivera",
     "email": "sam@example.com",

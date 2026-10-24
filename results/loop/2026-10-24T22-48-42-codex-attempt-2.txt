@@ -1,0 +1,16 @@
+Implemented — I edited only `site-hard/index.html` and applied the requested fixes.
+
+**What Changed**
+- Removed hardcoded date defaults: deleted `value="2026-11-02"` from `#visit-date` and initialized `selectedDate` to empty in JS at `site-hard/index.html:42`.
+- Updated date validation copy to neutral text: `Choose your visit date.` at `site-hard/index.html:66`.
+- Reintroduced native human verification checkbox (`#human-check`) and required it before confirmation at `site-hard/index.html:32`, `site-hard/index.html:60`, `site-hard/index.html:69`.
+- Converted class cards to native radio controls inside labels (including unchanged visible text `Free first visit`) at `site-hard/index.html:22`–`site-hard/index.html:24`.
+- Updated class selection logic to read checked radio value and preserve visual selected state at `site-hard/index.html:49`–`site-hard/index.html:52`.
+- Enlarged cookie dismiss hit target to ~32×32 while keeping the same tone/design at `site-hard/index.html:4` (`.cookie-close`).
+
+**Kept Intact (per rules)**
+- Native `#arrival-time` select and native `#waiver-check` checkbox (`site-hard/index.html:30`–`site-hard/index.html:31`).
+- `#confirm-yes` primary and `#confirm-back` secondary flow (`site-hard/index.html:34`).
+- Persistent `#booking-status` with `role="status"` and `PL-7302`; toast still auto-hides after 6000ms (`site-hard/index.html:34`, `site-hard/index.html:74`–`site-hard/index.html:75`).
+
+If you want, I can do a quick local browser sanity walkthrough checklist next (no additional file changes).

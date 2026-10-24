@@ -162,7 +162,7 @@ function render(data) {
   updateSavings();
   const outcome = data.outcome ?? 'baseline';
   if (recorded || data.recorded) setChip('recorded', 'Recorded run');
-  else if (data.operatorNote) setChip('escalated', 'Qualified · reviewer says do not merge');
+  else if (data.operatorVerdict === 'reject') setChip('escalated', 'Qualified · reviewer says do not merge');
   else setChip(outcome, outcome === 'qualified' ? 'Qualified for owner review' : outcome === 'escalated' ? 'Escalated' : outcome === 'baseline' ? 'Baseline measured' : outcome);
 
   const links = data.links ?? {};

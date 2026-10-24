@@ -1,0 +1,128 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Booked the free first-visit class for Sam Rivera using sam@example.com for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed and a reference code was shown and saved: PL-7302.",
+  "one_liner": "booked a first-visit class on the booking site",
+  "final_state": {
+    "url": "http://localhost:4104/",
+    "booking_confirmation_shown": "true",
+    "booking_reference_code_shown": "true",
+    "ref": "PL-7302"
+  },
+  "reason": "Objective completed",
+  "duration": 86,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "booking_confirmation_shown": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 17,
+        "query": "whether booking confirmation is present (in the booking form)",
+        "condition": "a booking confirmation is shown",
+        "human_description": "Checking whether the booking confirmation is present",
+        "expected_value": "true",
+        "subject": "booking confirmation",
+        "must_be": "present",
+        "code_js": "el(27).textContent.includes('Booked!') && !el(27).hidden && getComputedStyle(el(27)).display !== 'none' && getComputedStyle(el(27)).visibility !== 'hidden'",
+        "wrapped_js": "(els) => {\n  const __m = {27: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(27).textContent.includes('Booked!') && !el(27).hidden && getComputedStyle(el(27)).display !== 'none' && getComputedStyle(el(27)).visibility !== 'hidden');\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:label=\"Book a class\"i >> internal:text=\"Booked! Ref PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      },
+      "booking_reference_code_shown": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 17,
+        "query": "whether reference code in the booking confirmation is present (in the booking confirmation)",
+        "condition": "a reference code is shown in the booking confirmation",
+        "human_description": "Checking whether the reference code is present",
+        "expected_value": "true",
+        "subject": "reference code in the booking confirmation",
+        "must_be": "present",
+        "code_js": "(()=>{const r=el(27).querySelector('.reference'); return !!r && r.textContent.trim().length>0 && !r.hidden && getComputedStyle(r).display !== 'none' && getComputedStyle(r).visibility !== 'hidden'})()",
+        "wrapped_js": "(els) => {\n  const __m = {27: 0};\n  const el = (i) => els[__m[i]];\n  const __v = ((()=>{const r=el(27).querySelector('.reference'); return !!r && r.textContent.trim().length>0 && !r.hidden && getComputedStyle(r).display !== 'none' && getComputedStyle(r).visibility !== 'hidden'})());\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:label=\"Book a class\"i >> internal:text=\"Booked! Ref PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      },
+      "ref": {
+        "extracted_value": "PL-7302",
+        "operator": "equals",
+        "transforms": [
+          "strip"
+        ],
+        "json_path": null,
+        "reasoning": "value: 'PL-7302' (stored, no comparison)",
+        "analyzer_type": "textual_visual",
+        "step": 17,
+        "query": "the booking reference code from the booking confirmation",
+        "condition": "the booking reference code from the booking confirmation is saved as {{ref}}",
+        "human_description": "Reading the booking reference code from the booking confirmation",
+        "expected_value": "",
+        "code_js": "el(27).querySelector('.reference')?.textContent.trim() ?? null",
+        "wrapped_js": "(els) => {\n  const __m = {27: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(27).querySelector('.reference')?.textContent.trim() ?? null);\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:label=\"Book a class\"i >> internal:text=\"Booked! Ref PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "PL-7302",
+        "type": "memory",
+        "secret": false,
+        "source": "runtime"
+      },
+      "booking_confirmation_shown": {
+        "syntax": "{{booking_confirmation_shown}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      },
+      "booking_reference_code_shown": {
+        "syntax": "{{booking_reference_code_shown}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) booked a first-visit class on the booking site"
+  },
+  "credits_consumed": 27.49765,
+  "session_dir": "~/.testmuai/kaneai/sessions/65082fa8-f8b0-4b77-ba26-eaaeb3598444",
+  "run_dir": "~/.testmuai/kaneai/sessions/65082fa8-f8b0-4b77-ba26-eaaeb3598444/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Booked the free first-visit class for Sam Rivera using sam@example.com for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed and a reference code was shown and saved: PL-7302.",
+      "one_liner": "booked a first-visit class on the booking site",
+      "credits_consumed": 27.49765
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R1V1BH8XBNPWA0YSS3Q7R4/dashboard/share/US_OMRF53QGX8OW3VUPZJKJ4O2RCWUR8YIMA8YACO40L4EZSAXGM7EZMWY59QOD5QZA?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "written",
+    "pct": 0
+  },
+  "v": 1,
+  "ts": "2026-10-24T22:54:03.417Z"
+}

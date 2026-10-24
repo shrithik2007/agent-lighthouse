@@ -384,5 +384,6 @@
   },
   "recorded": false,
   "generatedAt": "2026-10-24T22:33:13.757Z",
-  "operatorNote": "Operator review: do not merge as is. The gate passed, but the fix removed the human-verification check and hard-coded the test date (2026-11-02). Owner decision needed; see the end of the proposal."
+  "operatorNote": "Operator review: do not merge as is. The gate passed, but the fix removed the human-verification check and hard-coded the test date (2026-11-02). Owner decision needed; see the end of the proposal.",
+  "operatorVerdict": "reject"
 }

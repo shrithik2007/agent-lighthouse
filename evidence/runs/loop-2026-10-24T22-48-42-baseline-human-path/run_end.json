@@ -1,0 +1,86 @@
+{
+  "type": "run_end",
+  "status": "failed",
+  "summary": "The check was set up or interpreted incorrectly. The final screenshot after the five-second wait visibly shows “Booked! Ref PL-7302,” so the expected reference was still on the page.\nFix the final assertion to inspect the rendered confirmation toast or its text after the wait, and rerun the scenario. Do not file a product defect unless the reference is actually absent in a repeat run.",
+  "one_liner": "The booking completed and showed reference PL-7302, but the automated final check was recorded as failed.",
+  "final_state": {},
+  "reason": "Final verification failed: \"the text PL-7302 is still visible on the page\"",
+  "duration": 114.2,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "pl_7302_visible": {
+        "extracted_value": "false",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'false' -> 'false'; equals 'true' -> FAIL",
+        "analyzer_type": "visual",
+        "step": 21,
+        "query": "whether the text PL-7302 is present (on the page)",
+        "condition": "the text PL-7302 is still visible on the page",
+        "human_description": "Checking whether the text PL-7302 is visible",
+        "expected_value": "true",
+        "subject": "the text PL-7302",
+        "must_be": "present"
+      }
+    },
+    "variables": {
+      "pl_7302_visible": {
+        "syntax": "{{pl_7302_visible}}",
+        "value": "false",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(failed) The booking completed and showed reference PL-7302, but the automated final check was recorded as failed."
+  },
+  "credits_consumed": 42.72375100000001,
+  "session_dir": "~/.testmuai/kaneai/sessions/2490922d-84bf-4561-8dbe-2343ba4a3ec5",
+  "run_dir": "~/.testmuai/kaneai/sessions/2490922d-84bf-4561-8dbe-2343ba4a3ec5/runs/0",
+  "result_code": 710,
+  "reason_code": "assertion_error.final_verification",
+  "per_flow_metadata": [
+    {
+      "result_code": "710",
+      "reason_code": "assertion_error.final_verification",
+      "error_message": "Final verification failed: \"the text PL-7302 is still visible on the page\"",
+      "summary": "The check was set up or interpreted incorrectly. The final screenshot after the five-second wait visibly shows “Booked! Ref PL-7302,” so the expected reference was still on the page.\nFix the final assertion to inspect the rendered confirmation toast or its text after the wait, and rerun the scenario. Do not file a product defect unless the reference is actually absent in a repeat run.",
+      "one_liner": "The booking completed and showed reference PL-7302, but the automated final check was recorded as failed.",
+      "credits_consumed": 42.72375100000001
+    }
+  ],
+  "run_id": "run-0",
+  "verdict": {
+    "confirmed": false,
+    "status": "broken",
+    "family": "automation_bug",
+    "category": "config_issue",
+    "category_proposal": "",
+    "severity": "minor",
+    "root_cause": "The check was set up or interpreted incorrectly. The final screenshot after the five-second wait visibly shows “Booked! Ref PL-7302,” so the expected reference was still on the page.",
+    "agent_fault_assessment": "The agent followed the required booking flow: it selected the details, completed the human check, continued, confirmed with Yes, and waited five seconds. There is no evidence that an agent action caused the failed result. The failure came from the verification/reporting logic disagreeing with the visible page state.",
+    "bug_title": "Booking-reference assertion misreports visible confirmation",
+    "signals": [],
+    "confidence": 0.96,
+    "suggestion": "Fix the final assertion to inspect the rendered confirmation toast or its text after the wait, and rerun the scenario. Do not file a product defect unless the reference is actually absent in a repeat run.",
+    "one_liner": "The booking completed and showed reference PL-7302, but the automated final check was recorded as failed.",
+    "relevant_steps": [
+      18,
+      19,
+      20,
+      21
+    ],
+    "culprit_step": "0-21",
+    "credits_consumed": 4.36305,
+    "mode": "terminal"
+  },
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R1MB9251ZP3FDFMR4N3WZT/dashboard/share/US_KTV4NQNP5ZCGDRKNEEYOYG5NACZ118AO2FPYY66BH00QCDSHQ6AMGOSQMWSV3K4I?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "written",
+    "pct": 0
+  },
+  "v": 1,
+  "ts": "2026-10-24T22:50:45.724Z"
+}
