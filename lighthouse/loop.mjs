@@ -12,7 +12,20 @@ import { createSiteServer } from '../scripts/serve.mjs';
 
 const exec = promisify(execFile);
 const git = async (args, cwd) => (await exec('git', args, { cwd, maxBuffer: 10 * 1024 * 1024 })).stdout.trim();
-const ATTEMPT_PORT = 4103;
+// Case 1 (the demo site) unless the flow declares a `case`: which file the fixer may edit,
+// where the page is served, which port attempts use and where results go.
+export function caseConfig(flow) {
+  const c = flow.case ?? {};
+  const siteFile = c.siteFile ?? 'site/index.html';
+  const outDir = c.outDir ?? 'results';
+  return {
+    id: c.id ?? 'demo', siteFile, siteDir: siteFile.slice(0, siteFile.lastIndexOf('/') + 1),
+    url: c.url ?? 'http://localhost:4101', attemptPort: c.attemptPort ?? 4105, outDir,
+    baselineFile: join(outDir, 'baseline.json'), proposalFile: join(outDir, 'proposal.md'),
+    reference: flow.expectedReference ?? 'PL-4821',
+  };
+}
+let ctx = caseConfig({});
 
 export const FRICTION_CHECKLIST = [
   'Ambiguous or duplicate call-to-action labels, or a control that leads to a dead end instead of the booking form',
@@ -84,32 +97,32 @@ async function diagnose({ cwd, worktree, runs, human, attempt, previous, loopId 
   const failing = runs.filter(run => run.status !== 'passed');
   const excerpts = await Promise.all(failing.slice(0, 2).map(run => packExcerpts(run.evidencePack?.replace(/^~/, process.env.HOME))));
   const screenshot = await failingScreenshot(cwd, lead, attempt, loopId);
-  const html = await readFile(join(worktree, 'site', 'index.html'), 'utf8');
+  const html = await readFile(join(worktree, ctx.siteFile), 'utf8');
   const passed = runs.filter(run => run.status === 'passed');
   const brief = JSON.stringify({
     leadKaneFinding: lead ? { run: lead.kaneRunId ?? lead.id, failedRemark: lead.failedRemarks?.[0] ?? null, oneLiner: lead.oneLiner, summary: lead.summary, reasonCode: lead.reasonCode, screenshotAttached: Boolean(screenshot) } : null,
     secondaryFriction: { note: 'Passing runs needed extra actions; these show where the agent hesitated.', optimalSteps: 10, passingRuns: passed.map(run => ({ run: run.kaneRunId, steps: run.stepsTaken, actions: run.actionSteps, remarks: run.steps?.map(step => step.remark) })) },
-    attempt, task: 'Book a free first visit for Sam Rivera on 2 November 2026 at noon and read back the reference PL-4821.',
+    attempt, task: `${ctx.flow?.description ?? 'Book a free first visit'} Data: Sam Rivera, sam@example.com, 2 November 2026 at noon. Expected reference ${ctx.reference}.`,
     kaneFailures: failureBrief(runs), humanPath: { status: human.status, failedRemarks: human.failedRemarks, summary: human.summary },
-    evidenceExcerpts: excerpts, previousAttempt: previous ?? null, checklist: FRICTION_CHECKLIST, file: 'site/index.html', html,
+    evidenceExcerpts: excerpts, previousAttempt: previous ?? null, checklist: [...FRICTION_CHECKLIST, ...(ctx.flow?.extraChecklist ?? [])], file: ctx.siteFile, html,
   });
   const content = [{ type: 'input_text', text: brief }];
   if (screenshot) content.push({ type: 'input_image', image_url: `data:image/jpeg;base64,${(await readFile(screenshot)).toString('base64')}` });
   const result = await callOpenAI({
     cwd, purpose: `diagnosis attempt ${attempt}`, schema: DIAGNOSIS_SCHEMA, input: [{ role: 'user', content }],
-    instructions: 'You diagnose why an AI browser agent (Kane CLI) struggles to complete a booking on a small owned website. Lead with leadKaneFinding: its failed remark and the attached failing-step screenshot are the primary evidence; address it first. Then use secondaryFriction (extra actions in passing runs) and the checklist for further, smaller changes. Only site/index.html may change. Keep the visual design, copy tone and the PL-4821 reference. Human visitors must still be able to complete the booking and see PL-4821 for at least five seconds.',
+    instructions: `You diagnose why an AI browser agent (Kane CLI) struggles to complete a booking on a small owned website. Lead with leadKaneFinding: its failed remark and the attached failing-step screenshot are the primary evidence; address it first. Then use secondaryFriction (extra actions in passing runs) and the checklist for further, smaller changes. Only ${ctx.siteFile} may change. Keep the visual design, copy tone and the ${ctx.reference} reference. Human visitors must still be able to complete the booking and see ${ctx.reference} for at least five seconds.`,
   });
   return { ...result, lead, screenshot };
 }
 
 function fixBrief(diagnosis, attempt, lead) {
   return [
-    `You are fixing site/index.html (attempt ${attempt}) so an AI browser agent and a human can both book a free first visit.`,
+    `You are fixing ${ctx.siteFile} (attempt ${attempt}) so an AI browser agent and a human can both complete the booking.`,
     lead ? `Kane's failing step (${lead.kaneRunId ?? lead.id}): "${lead.failedRemarks?.[0] ?? lead.oneLiner}". Kane said: ${lead.oneLiner ?? ''} The attached image is Kane's screenshot at that step.` : '',
     `Root cause (OpenAI diagnosis): ${diagnosis.cause}`,
     'Make these changes, first one first:', ...diagnosis.changes.map(change => `- ${change}`),
     `Acceptance check: ${diagnosis.acceptanceCheck}`,
-    'Rules: edit ONLY site/index.html. Do not touch fixtures/, tests/, lighthouse/ or any other file. Keep the reference PL-4821 and the overall look. Vanilla HTML/CSS/JS only. Do not commit; just leave the edited file.',
+    `Rules: edit ONLY ${ctx.siteFile}. Do not touch fixtures/, tests/, lighthouse/ or any other file. Keep the reference ${ctx.reference} and the overall look. Vanilla HTML/CSS/JS only. Do not commit; just leave the edited file.`,
   ].filter(Boolean).join('\n');
 }
 
@@ -139,14 +152,14 @@ async function applyFix({ cwd, worktree, diagnosis, attempt, log, loopId }) {
   await appendCall(cwd, { ts: startedAt, finishedAt: new Date().toISOString(), purpose: `fixer attempt ${attempt}`, tool: 'codex exec', model, ok: codex.code === 0, error });
   if (codex.code === 0) { log(`  fixer: codex exec (${model}) finished`); return { tool: `codex exec (${model})`, brief }; }
   log(`  fixer: codex failed (${error}); falling back to the OpenAI API`);
-  const html = await readFile(join(worktree, 'site', 'index.html'), 'utf8');
+  const html = await readFile(join(worktree, ctx.siteFile), 'utf8');
   const result = await callOpenAI({
     cwd, purpose: `fixer attempt ${attempt} (API fallback)`, schema: FILE_SCHEMA,
-    instructions: 'Return the complete corrected site/index.html implementing the brief, and a one-sentence summary. Change only what the brief needs.',
-    input: `${brief}\n\n--- site/index.html ---\n${html}`,
+    instructions: `Return the complete corrected ${ctx.siteFile} implementing the brief, and a one-sentence summary. Change only what the brief needs.`,
+    input: `${brief}\n\n--- ${ctx.siteFile} ---\n${html}`,
   });
-  if (!result.json.html.includes('PL-4821')) throw new Error('fallback output dropped the PL-4821 reference');
-  await writeFile(join(worktree, 'site', 'index.html'), result.json.html);
+  if (!result.json.html.includes(ctx.reference)) throw new Error(`fallback output dropped the ${ctx.reference} reference`);
+  await writeFile(join(worktree, ctx.siteFile), result.json.html);
   return { tool: `openai api fallback (${result.model})`, brief };
 }
 
@@ -159,7 +172,7 @@ async function appendCall(cwd, entry) {
 }
 
 /** Keep only the fixer's changes inside site/. Everything else is reverted and recorded. */
-export async function scopeGuard(worktree) {
+export async function scopeGuard(worktree, allowed = 'site/') {
   // Untrimmed -z output: the two status columns are positional and paths may contain spaces.
   const { stdout } = await exec('git', ['status', '--porcelain', '-z', '--untracked-files=all', '--no-renames'], { cwd: worktree });
   const reverted = [];
@@ -167,7 +180,7 @@ export async function scopeGuard(worktree) {
   for (const line of stdout.split('\0').filter(Boolean)) {
     const code = line.slice(0, 2);
     const path = line.slice(3);
-    if (path.startsWith('site/')) { kept.push(path); continue; }
+    if (path.startsWith(allowed)) { kept.push(path); continue; }
     if (code === '??') await rm(join(worktree, path), { recursive: true, force: true });
     else await git(['checkout', 'HEAD', '--', path], worktree);
     reverted.push(path);
@@ -175,9 +188,9 @@ export async function scopeGuard(worktree) {
   return { kept, reverted };
 }
 
-async function serve(file) {
+async function serve(file, port) {
   const server = createSiteServer(file);
-  await new Promise((ok, fail) => { server.once('error', fail); server.listen(ATTEMPT_PORT, '127.0.0.1', ok); });
+  await new Promise((ok, fail) => { server.once('error', fail); server.listen(port, '127.0.0.1', ok); });
   return server;
 }
 
@@ -193,14 +206,15 @@ export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3,
   await mkdir(join(cwd, 'results', 'loop'), { recursive: true });
 
   // Baseline: reuse the recorded BEFORE measurement, then one named human-path run on the working copy.
-  const baseline = JSON.parse(await readFile(join(cwd, 'results', 'baseline.json'), 'utf8'));
+  ctx = { ...caseConfig(flow), flow };
+  const baseline = JSON.parse(await readFile(join(cwd, ctx.baselineFile), 'utf8'));
   const beforeRuns = baseline.before.runs;
   const beforeSummary = baseline.before.summary;
   log(`baseline: BEFORE score ${beforeSummary.score ?? 'n/a'} from ${beforeRuns.length} recorded runs`);
-  const beforeHuman = await humanPath({ flow, url: 'http://localhost:4101', label: `loop-${loopId}-baseline`, cwd, log });
+  const beforeHuman = await humanPath({ flow, url: ctx.url, label: `loop-${loopId}-baseline`, cwd, log });
 
   const record = {
-    loopId, mode, flow: flow.name, threshold, maxAttempts, baseBranch: branch, baseSha, startedAt: new Date().toISOString(),
+    loopId, mode, flow: flow.name, case: ctx.id, siteFile: ctx.siteFile, reference: ctx.reference, threshold, maxAttempts, baseBranch: branch, baseSha, startedAt: new Date().toISOString(),
     baseline: { score: beforeSummary.score, summary: beforeSummary, runs: beforeRuns.map(({ steps, ...run }) => run), humanPath: beforeHuman },
     attempts: [], outcome: null,
   };
@@ -224,21 +238,21 @@ export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3,
       log(`  cause: ${diagnosis.json.cause}`);
       const fix = await applyFix({ cwd, worktree, diagnosis, attempt, log, loopId });
       entry.fixer = fix.tool;
-      entry.scopeGuard = await scopeGuard(worktree);
+      entry.scopeGuard = await scopeGuard(worktree, ctx.siteDir);
       if (entry.scopeGuard.reverted.length) log(`  scope guard reverted: ${entry.scopeGuard.reverted.join(', ')}`);
-      if (!entry.scopeGuard.kept.length) throw new Error('fixer made no change inside site/');
+      if (!entry.scopeGuard.kept.length) throw new Error(`fixer made no change inside ${ctx.siteDir}`);
       const answers = lastRuns.find(run => run.status !== 'passed') ?? lastHuman;
       const subject = `fix(site): attempt ${attempt} answers Kane ${answers.kaneRunId ?? answers.id}`;
       const body = `Kane failure: ${answers.failedRemarks?.[0] ?? answers.oneLiner ?? answers.status}\nCause (OpenAI diagnosis): ${diagnosis.json.cause}\n\n${diagnosis.json.changes.map(c => `- ${c}`).join('\n')}\n\nFixer: ${fix.tool}. Scope guard reverted: ${entry.scopeGuard.reverted.join(', ') || 'nothing'}.`;
-      await git(['add', 'site'], worktree);
+      await git(['add', ctx.siteDir], worktree);
       await git(['commit', '-q', '-m', subject, '-m', body], worktree);
       entry.commit = await git(['rev-parse', 'HEAD'], worktree);
       entry.filesChanged = (await git(['diff', '--name-only', `${parent}..${entry.commit}`], worktree)).split('\n').filter(Boolean);
       entry.diffStat = await git(['diff', '--shortstat', `${parent}..${entry.commit}`], worktree);
       log(`  committed ${entry.commit.slice(0, 7)} (${entry.diffStat})`);
 
-      server = await serve(join(worktree, 'site', 'index.html'));
-      const url = `http://localhost:${ATTEMPT_PORT}`;
+      server = await serve(join(worktree, ctx.siteFile), ctx.attemptPort);
+      const url = `http://localhost:${ctx.attemptPort}`;
       entry.runs = await measureSite({ flow, url, label: `loop-${loopId}-a${attempt}`, count, cwd, log });
       entry.humanPath = await humanPath({ flow, url, label: `loop-${loopId}-a${attempt}`, cwd, log });
       entry.summary = summarize(entry.runs, flow);
@@ -280,7 +294,8 @@ export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3,
   }
   record.finishedAt = new Date().toISOString();
   await save();
-  await writeFile(join(cwd, 'results', 'proposal.md'), proposal(record));
+  await mkdir(join(cwd, ctx.outDir), { recursive: true });
+  await writeFile(join(cwd, ctx.proposalFile), proposal(record));
   return record;
 }
 
@@ -302,7 +317,7 @@ export function proposal(record) {
     `| Score | ${fmt(record.baseline.score)} | ${fmt(final?.summary?.score)} |`,
     `| Passed runs | ${record.baseline.summary.passedCount}/${record.baseline.summary.runCount} | ${final?.summary?.passedCount ?? 'n/a'}/${final?.summary?.runCount ?? 'n/a'} |`,
     `| Median steps | ${fmt(record.baseline.summary.medianSteps)} | ${fmt(final?.summary?.medianSteps)} |`,
-    `| Human path (PL-4821 visible after 5 s) | ${record.baseline.humanPath.status} | ${final?.humanPath?.status ?? 'n/a'} |`, '',
+    `| Human path (${record.reference ?? 'PL-4821'} visible after 5 s) | ${record.baseline.humanPath.status} | ${final?.humanPath?.status ?? 'n/a'} |`, '',
     `Agent Tax of BEFORE per successful booking: ${tax ? `+${fmt(tax.extraSteps)} steps · +${fmt(tax.extraSeconds)} s · +${fmt(tax.extraCredits, 1)} credits` : 'n/a (BEFORE had no successful booking, so tax per booking is not computable)'}.`, '',
     '## Changes, each linked to the Kane failure it answers', '',
     ...record.attempts.flatMap(a => [
