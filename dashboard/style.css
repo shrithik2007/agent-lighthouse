@@ -46,6 +46,8 @@ h2 { margin: 0 0 12px; font-size: 14px; font-weight: 800; text-transform: upperc
 .mid { font-size: clamp(24px, 2.8vw, 34px); font-weight: 900; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .stat input { font: 700 16px var(--sans); width: 100%; max-width: 140px; padding: 6px 8px; border: 1px solid var(--concrete); border-radius: 4px; background: var(--wall); color: var(--ink); }
 .projection input { display: inline-block; width: 90px; margin: 0 4px; }
+.compare { max-width: 1120px; margin: 0 auto; padding: 16px 24px 0; }
+.compare h2 { margin-bottom: 8px; }
 .row { padding: 22px 0; border-bottom: 1px solid var(--concrete); }
 .state { padding: 64px 0; color: var(--muted); }
 .state.error { color: var(--fail); }
@@ -115,3 +117,4 @@ a.dot { display: inline-grid; place-items: center; text-decoration: none; }
   .row { break-inside: avoid; }
   a { color: #000; }
 }
+.timeline a, .compare a { color: var(--rope); font-weight: 700; }

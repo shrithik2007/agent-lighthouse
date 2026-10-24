@@ -17,12 +17,32 @@ async function loadCases() {
     const cases = await response.json();
     const current = cases.find(c => c.id === caseId) ?? cases[0];
     window.__caseSources = current.sources ?? null;
+    renderCompare(cases.filter(c => !c.id.endsWith('-first')));
     source = at(recorded && current.recorded ? current.recorded : current.latest);
     document.getElementById('cases').replaceChildren(...cases.map(c => el('a', {
       href: `?case=${encodeURIComponent(c.id)}${params.get('theme') ? `&theme=${params.get('theme')}` : ''}`,
       'aria-current': c.id === current.id ? 'page' : null,
     }, c.title)));
   } catch { /* single-case view */ }
+}
+
+async function renderCompare(cases) {
+  const rows = await Promise.all(cases.map(async c => {
+    try { const r = await fetch(at(c.latest), { cache: 'no-store' }); return r.ok ? { c, d: await r.json() } : null; } catch { return null; }
+  }));
+  const body = document.getElementById('compare-body');
+  const ok = rows.filter(Boolean);
+  if (!ok.length) return;
+  body.replaceChildren(...ok.map(({ c, d }) => el('tr', {},
+    el('td', {}, el('a', { href: `?case=${encodeURIComponent(c.id)}` }, c.title)),
+    el('td', {}, `${na(d.before?.score)} → ${na(d.postFix?.score)}`),
+    el('td', {}, `${na(d.before?.passedCount)}/${na(d.before?.runCount)} → ${na(d.postFix?.passedCount)}/${na(d.postFix?.runCount)}`),
+    el('td', {}, `${num(d.before?.medianSteps)} → ${num(d.postFix?.medianSteps)}`),
+    el('td', {}, `${num(d.before?.medianCredits, 1)}${d.before?.passedCount === 0 ? '*' : ''} → ${num(d.postFix?.medianCredits, 1)}`),
+    el('td', {}, d.failingStep?.reasonCode ? `${d.failingStep.reasonCode}` : (d.failingStep?.remark ?? 'n/a')),
+    el('td', {}, (d.attempts ?? []).map(a => `${a.attempt}: ${a.gate}`).join(', ') || 'n/a'),
+  )));
+  document.getElementById('compare').hidden = false;
 }
 
 function renderSavings(view, data) {

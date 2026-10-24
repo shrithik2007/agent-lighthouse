@@ -65,7 +65,19 @@ A second sample site (`fixtures/hard/`, working copy `site-hard/` on :4103) has 
 A third sample site (`fixtures/worst/`, working copy `site-worst/` on :4104) plants six patterns taken from published agent-failure research, each cited inline and in [FRICTION.md](FRICTION.md) after reading the source: a consent modal in a same-origin iframe that traps focus and locks scroll (maxaeo.ai: 38% completion when consent blocks scroll vs 79%), overlapping newsletter and location modals with focus on the lower one (Future AGI), a required mid-flow location picker (geotoolbox.ai), time slots drawn on a canvas with no DOM nodes plus a visually hidden accessible list (MERJ: ~24–34% on canvas apps), the submit button three screens down (maxaeo.ai, citing a study where agents "essentially never scrolled beyond two viewports"), and a confirmation that appears 4 s after submit (geotoolbox.ai). No captcha; case 2 covers that. jsdom tests (`tests/worst.test.mjs`) prove a careful human can complete it. Reference `PL-5519`, optimalSteps 14 (reasoning in `flows/book-worst.json`; not owner-confirmed).
 
 - **Baseline: Kane booked in 3 of 3 runs** (KR-243, KR-244, KR-247): score **88**, but a median of **33 steps** (27–31 actions) against an optimum of 14, 169 s and 46.7 credits per booking. The research patterns cost Kane time and steps but did not stop it. Without a repaired measurement, only the step tax is computable at baseline: +19 steps over optimal.
-- Records: `results/cases/worst/`, evidence under `evidence/runs/worst-baseline-*`.
+- **Propose loop (2-attempt cap for time): qualified on attempt 1, 88 → 91.** 3/3 passed, median 26 steps (from 33), 111 s and 31.7 credits; human path passed (KR-264); fixture-leak check clean; scope guard reverted nothing. **Agent Tax removed: +7 steps · +58 s · +15.1 credits per booking.** Branch `lighthouse/2026-10-24T23-26-10/attempt-1` (`34e32a9`), unmerged.
+- **What Kane's runs showed:** no failed step, but 6–9 of 32–37 steps went to selecting "12pm (noon)" on the canvas time picker and its hidden radio list (from Kane's own step remarks).
+- Records: `results/cases/worst/` (baseline, latest, proposal), `results/loop/2026-10-24T23-26-10.json`, evidence under `evidence/runs/worst-baseline-*` and `evidence/runs/loop-2026-10-24T23-26-10-*`.
+
+### All three cases
+
+| Case | Score before → after | Passed | Median steps | Median credits | What Kane caught | Gate |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 Pitchline demo | 51 → 97 | 2/3 → 3/3 | 22 → 12 | 55.4 → 19.2 | `confirmed_product_bug`: confirmation vanishes | qualified, attempt 1 |
+| 2 Hard mode | 0 → 95 | 0/3 → 3/3 | 12 → 19 | 27.1* → 24.1 | `blocker.captcha` on all three runs | attempt 1 **suspect** (blocked), attempt 2 qualified |
+| 3 Worst of the real web | 88 → 91 | 3/3 → 3/3 | 33 → 26 | 46.7 → 31.7 | no failure; canvas time picker cost 6–9 steps | qualified, attempt 1 |
+
+\* Case 2's before medians come from runs that all failed.
 
 ## Savings panel
 
@@ -187,7 +199,7 @@ All code was written on October 24, 2026 (see `git log`):
 - **The gate checked outcomes, not intent, until the fixture-leak check.** In case 2 the first propose loop qualified a patch that removed human verification and hard-coded the objective's date; owner review caught it, and that record is kept as-is. The gate now runs a fixture-leak check (`lighthouse/leak.mjs`): a patch whose added lines contain the test's name, email or date (any common spelling), that introduces the booking reference into a page that never had it, or that removes a control the human path depends on is marked **suspect, owner review required** and cannot qualify. The reference already on the page is allowed to move, since persisting it is the fix Kane asks for.
 - **Run retroactively, the check also flags all three case 1 repairs** for using test data as example text: `94a7f80` and `6c8bed1` put "2026-11-02" (and "2 November 2026") in the date hint, and `81918da` uses "sam@example.com" as the email placeholder. These are mild (example text, not pre-filled values), but they are exactly what an owner should see. Their records and scores are unchanged; the hand-built reference fix passes the check clean.
 - Kane refuses to complete captcha-style human checks (`blocker.captcha`), so sites with real bot protection need an owner-approved test path before they can be measured.
-- Case 2 has no hand-built reference fix.
+- Cases 2 and 3 have no hand-built reference fix. Case 3's optimalSteps (14) is not owner-confirmed, and its loop was capped at 2 attempts for time.
 - The demo loop's attempt server moved from :4103 to :4105 when :4103 became the hard-mode working copy (port only; the loop is otherwise unchanged).
 - The product page quotes an illustrative (not measured) 92% vs 12% figure from Future AGI and labels it as illustrative.
 - The first calibration run exited 2 because Kane was launched inside Codex's sandbox (EPERM on `~/.testmuai`, Chrome never started). Kane now always runs from the operator's shell.
