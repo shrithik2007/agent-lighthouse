@@ -16,6 +16,7 @@ async function loadCases() {
     if (!response.ok) return;
     const cases = await response.json();
     const current = cases.find(c => c.id === caseId) ?? cases[0];
+    window.__caseSources = current.sources ?? null;
     source = at(recorded && current.recorded ? current.recorded : current.latest);
     document.getElementById('cases').replaceChildren(...cases.map(c => el('a', {
       href: `?case=${encodeURIComponent(c.id)}${params.get('theme') ? `&theme=${params.get('theme')}` : ''}`,
@@ -76,7 +77,7 @@ function dotsRow(groups) {
     el('span', { class: 'group' }, name),
     runs?.length
       ? el('ol', {}, runs.map(run => el('li', {},
-        el('button', { class: `dot${run.humanPath ? ' human' : ''}`, type: 'button', 'data-status': run.status, 'aria-label': runTip(run).replaceAll('\n', '; ') },
+        el(run.testUrl ? 'a' : 'button', { class: `dot${run.humanPath ? ' human' : ''}`, ...(run.testUrl ? { href: run.testUrl, target: '_blank', rel: 'noopener' } : { type: 'button' }), 'data-status': run.status, 'aria-label': runTip(run).replaceAll('\n', '; ') },
           run.humanPath ? 'H' : String(run.stepsTaken ?? '?'), el('span', { class: 'tip', role: 'tooltip' }, ...runTip(run).split('\n').flatMap((line, i) => i ? [el('br'), line] : [line]))))))
       : el('span', { class: 'note' }, 'No runs recorded'),
   ]);
@@ -102,6 +103,10 @@ function render(data) {
   slot('after-label').textContent = after ? 'After loop repair' : 'After loop repair (not run yet)';
   slot('after-score').textContent = na(after?.score);
   slot('after-sub').textContent = after ? `${na(after.passedCount)}/${na(after.runCount)} runs passed · median ${num(after.medianSteps)} steps` : 'n/a';
+  const srcLink = (path, label) => path ? el('a', { href: at(path) }, label) : 'n/a';
+  const sources = window.__caseSources ?? {};
+  slot('before-src').replaceChildren('Source: ', srcLink(sources.baseline, 'baseline runs'));
+  slot('after-src').replaceChildren('Source: ', srcLink(sources.loop, 'loop record'));
   const delta = data.before?.score != null && after?.score != null ? after.score - data.before.score : null;
   slot('delta').textContent = signed(delta);
   const low = [data.before, after].some(side => side && side.runCount < 3);

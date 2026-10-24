@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<nav class="cases" id="cases" aria-label="Sample cases"></nav>
 <header class="top">
   <div>
     <p class="eyebrow">Agent Lighthouse · audit report</p>
@@ -14,7 +15,6 @@
   </div>
   <span class="chip" id="status-chip" data-state="loading">Loading</span>
 </header>
-<nav class="cases" id="cases" aria-label="Sample cases"></nav>
 
 <main id="report" aria-live="polite">
   <section class="state" id="state-message"><p>Loading results/latest.json…</p></section>
@@ -27,9 +27,9 @@
     <h2 id="h-scores" class="sr-only">Scores and Agent Tax</h2>
     <p class="tax-line" data-slot="tax-line"></p>
     <div class="scores">
-      <div class="score"><span class="label">Before</span><span class="big" data-slot="before-score"></span><span class="sub" data-slot="before-sub"></span></div>
+      <div class="score"><span class="label">Before</span><span class="big" data-slot="before-score"></span><span class="sub" data-slot="before-sub"></span><span class="sub" data-slot="before-src"></span></div>
       <div class="arrow" aria-hidden="true">→</div>
-      <div class="score"><span class="label" data-slot="after-label">After</span><span class="big" data-slot="after-score"></span><span class="sub" data-slot="after-sub"></span></div>
+      <div class="score"><span class="label" data-slot="after-label">After</span><span class="big" data-slot="after-score"></span><span class="sub" data-slot="after-sub"></span><span class="sub" data-slot="after-src"></span></div>
       <div class="delta"><span class="label">Change</span><span class="big" data-slot="delta"></span></div>
     </div>
     <p class="note" data-slot="score-note"></p>

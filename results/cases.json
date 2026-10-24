@@ -3,16 +3,37 @@
     "id": "demo",
     "title": "Case 1: Pitchline demo",
     "latest": "results/latest.json",
-    "recorded": "results/demo-backup.json"
+    "recorded": "results/demo-backup.json",
+    "sources": {
+      "baseline": "results/baseline.json",
+      "loop": "results/loop/2026-10-24T21-17-14.json"
+    }
   },
   {
     "id": "hard",
     "title": "Case 2: hard mode",
-    "latest": "results/cases/hard/latest.json"
+    "latest": "results/cases/hard/latest.json",
+    "sources": {
+      "baseline": "results/cases/hard/baseline.json",
+      "loop": "results/loop/2026-10-24T22-48-42.json"
+    }
+  },
+  {
+    "id": "worst",
+    "title": "Case 3: worst of the real web",
+    "latest": "results/cases/worst/latest.json",
+    "sources": {
+      "baseline": "results/cases/worst/baseline.json",
+      "loop": null
+    }
   },
   {
     "id": "hard-first",
     "title": "Case 2, first loop (gate fooled)",
-    "latest": "results/cases/hard/latest-2026-10-24T22-22-59.json"
+    "latest": "results/cases/hard/latest-2026-10-24T22-22-59.json",
+    "sources": {
+      "baseline": "results/cases/hard/baseline.json",
+      "loop": "results/loop/2026-10-24T22-22-59.json"
+    }
   }
 ]
