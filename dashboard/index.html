@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Lighthouse</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <p class="eyebrow">Agent Lighthouse · audit report</p>
+    <h1 id="site-title">Booking readiness</h1>
+  </div>
+  <span class="chip" id="status-chip" data-state="loading">Loading</span>
+</header>
+
+<main id="report" aria-live="polite">
+  <section class="state" id="state-message"><p>Loading results/latest.json…</p></section>
+</main>
+
+<footer class="foot" id="footer"></footer>
+
+<template id="report-template">
+  <section class="row row-1" aria-labelledby="h-scores">
+    <h2 id="h-scores" class="sr-only">Scores and Agent Tax</h2>
+    <p class="tax-line" data-slot="tax-line"></p>
+    <div class="scores">
+      <div class="score"><span class="label">Before</span><span class="big" data-slot="before-score"></span><span class="sub" data-slot="before-sub"></span></div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="score"><span class="label" data-slot="after-label">After</span><span class="big" data-slot="after-score"></span><span class="sub" data-slot="after-sub"></span></div>
+      <div class="delta"><span class="label">Change</span><span class="big" data-slot="delta"></span></div>
+    </div>
+    <p class="note" data-slot="score-note"></p>
+  </section>
+
+  <section class="row row-2" aria-labelledby="h-runs">
+    <h2 id="h-runs">Every Kane run</h2>
+    <div class="dots" data-slot="dots"></div>
+    <p class="note">Green passed, red failed. Hover or focus a dot for steps (actions vs overhead), time and credits.</p>
+  </section>
+
+  <section class="row row-3" aria-labelledby="h-fail">
+    <h2 id="h-fail">What Kane caught</h2>
+    <div class="fail-card" data-slot="fail-card"></div>
+  </section>
+
+  <section class="row row-4" aria-labelledby="h-repair">
+    <h2 id="h-repair">Repair timeline</h2>
+    <div class="table-wrap"><table class="timeline">
+      <thead><tr><th>Attempt</th><th>Commit</th><th>Files</th><th>Cause (OpenAI diagnosis)</th><th>Score</th><th>Human path</th><th>Gate</th></tr></thead>
+      <tbody data-slot="timeline"></tbody>
+    </table></div>
+    <p class="note" data-slot="scope-note"></p>
+  </section>
+
+  <section class="row row-5" aria-labelledby="h-review">
+    <h2 id="h-review">Owner review</h2>
+    <div class="review" data-slot="review"></div>
+  </section>
+</template>
+
+<script src="app.js" type="module"></script>
+</body>
+</html>
