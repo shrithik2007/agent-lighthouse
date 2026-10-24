@@ -1,0 +1,74 @@
+{"type":"stream_start","cli_version":"0.10.0-rc.3","surface":"testmd","pid":40199,"v":1,"ts":"2026-10-24T21:45:29.238Z"}
+{"type":"test_md_step_start","step_index":1,"heading":"Step 1","ref":null,"v":1,"ts":"2026-10-24T21:45:31.482Z"}
+{"type":"run_start","objective":"Go to http://localhost:4101. Open the booking form for a free first visit. Enter the name Sam Rivera and the email sam@example.com, choose the visit date 2 November 2026 and the arrival time noon, accept the climbing waiver and confirm the booking. Wait 5 seconds, then verify the text PL-4821 is still visible on the page.","timestamp":1792878331,"environment":{"resolution":"1920x1080"},"v":1,"ts":"2026-10-24T21:45:31.491Z"}
+{"type":"step_event","index":0,"event":"replay_started","detail":"replaying 13 actions","recording_length":13,"v":1,"ts":"2026-10-24T21:45:31.491Z"}
+{"type":"step_start","index":1,"objective":"Step 1","v":1,"ts":"2026-10-24T21:45:31.491Z"}
+{"type":"step_event","index":1,"event":"screenshot","detail":"https://kaneai-playground.lambdatest.io/","v":1,"ts":"2026-10-24T21:45:31.681Z"}
+{"type":"step_event","index":1,"event":"action","detail":"Navigate to http://localhost:4101","action_type":"navigate","success":true,"v":1,"ts":"2026-10-24T21:45:31.713Z"}
+{"type":"step_event","index":1,"event":"reasoning","detail":"Navigate to http://localhost:4101","action_type":"navigate","v":1,"ts":"2026-10-24T21:45:31.713Z"}
+{"type":"step_end","index":1,"status":"passed","duration":0.2,"summary":"navigate: Navigate to http://localhost:4101","ordinal":1,"id":"0-1","kind":"navigate","screenshot":"screenshot.jpg","action_id":"ad2b7bd6-6d96-48e8-80e3-d0306d8cccca","v":1,"ts":"2026-10-24T21:45:31.715Z"}
+{"type":"step_start","index":2,"objective":"Step 2","v":1,"ts":"2026-10-24T21:45:31.715Z"}
+{"type":"step_event","index":2,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:31.772Z"}
+{"type":"step_event","index":2,"event":"action","detail":"Clicking Dismiss cookie notice button","action_type":"click","success":true,"v":1,"ts":"2026-10-24T21:45:32.302Z"}
+{"type":"step_event","index":2,"event":"reasoning","detail":"Clicking Dismiss cookie notice button","action_type":"click","v":1,"ts":"2026-10-24T21:45:32.303Z"}
+{"type":"step_end","index":2,"status":"passed","duration":0.6,"summary":"click: Clicking Dismiss cookie notice button","ordinal":2,"id":"0-2","kind":"click","screenshot":"screenshot.jpg","action_id":"0c389b8f-3fe8-4f62-a017-cbe310d595da","v":1,"ts":"2026-10-24T21:45:32.366Z"}
+{"type":"step_start","index":3,"objective":"Step 3","v":1,"ts":"2026-10-24T21:45:32.367Z"}
+{"type":"step_event","index":3,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:32.391Z"}
+{"type":"step_event","index":3,"event":"action","detail":"Clicking the Book a free visit button","action_type":"click","success":true,"v":1,"ts":"2026-10-24T21:45:32.922Z"}
+{"type":"step_event","index":3,"event":"reasoning","detail":"Clicking the Book a free visit button","action_type":"click","v":1,"ts":"2026-10-24T21:45:32.923Z"}
+{"type":"step_end","index":3,"status":"passed","duration":0.6,"summary":"click: Clicking the Book a free visit button","ordinal":3,"id":"0-3","kind":"click","screenshot":"screenshot.jpg","action_id":"bde3f478-ac61-424e-8563-c8cc1b525977","v":1,"ts":"2026-10-24T21:45:32.974Z"}
+{"type":"step_start","index":4,"objective":"Step 4","v":1,"ts":"2026-10-24T21:45:32.974Z"}
+{"type":"step_event","index":4,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:33.027Z"}
+{"type":"step_event","index":4,"event":"action","detail":"Waiting for the next form step in the queued plan","action_type":"wait","success":true,"v":1,"ts":"2026-10-24T21:45:34.032Z"}
+{"type":"step_event","index":4,"event":"reasoning","detail":"Waiting for the next form step in the queued plan","action_type":"wait","v":1,"ts":"2026-10-24T21:45:34.032Z"}
+{"type":"step_end","index":4,"status":"passed","duration":1.1,"summary":"wait: Waiting for the next form step in the queued plan","ordinal":4,"id":"0-4","kind":"wait","screenshot":"screenshot.jpg","action_id":"66d94b32-098a-4f00-ab20-75f88016187c","v":1,"ts":"2026-10-24T21:45:34.034Z"}
+{"type":"step_start","index":5,"objective":"Step 5","v":1,"ts":"2026-10-24T21:45:34.035Z"}
+{"type":"step_event","index":5,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:34.085Z"}
+{"type":"step_event","index":5,"event":"action","detail":"Type \"Sam Rivera\" into \"Your name\"","action_type":"fill","success":true,"v":1,"ts":"2026-10-24T21:45:34.135Z"}
+{"type":"step_event","index":5,"event":"reasoning","detail":"Type \"Sam Rivera\" into \"Your name\"","action_type":"fill","v":1,"ts":"2026-10-24T21:45:34.135Z"}
+{"type":"step_end","index":5,"status":"passed","duration":0.1,"summary":"fill: Type \"Sam Rivera\" into \"Your name\"","ordinal":5,"id":"0-5","kind":"fill","screenshot":"screenshot.jpg","action_id":"1c1e9157-25de-4a1e-aa2a-23f4d75f5f27","v":1,"ts":"2026-10-24T21:45:34.158Z"}
+{"type":"step_start","index":6,"objective":"Step 6","v":1,"ts":"2026-10-24T21:45:34.158Z"}
+{"type":"step_event","index":6,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:34.207Z"}
+{"type":"step_event","index":6,"event":"action","detail":"Type \"sam@example.com\" into \"Email address\"","action_type":"fill","success":true,"v":1,"ts":"2026-10-24T21:45:34.260Z"}
+{"type":"step_event","index":6,"event":"reasoning","detail":"Type \"sam@example.com\" into \"Email address\"","action_type":"fill","v":1,"ts":"2026-10-24T21:45:34.260Z"}
+{"type":"step_end","index":6,"status":"passed","duration":0.1,"summary":"fill: Type \"sam@example.com\" into \"Email address\"","ordinal":6,"id":"0-6","kind":"fill","screenshot":"screenshot.jpg","action_id":"6777b2a0-1d34-4b21-9a9f-49096e66b798","v":1,"ts":"2026-10-24T21:45:34.282Z"}
+{"type":"step_start","index":7,"objective":"Step 7","v":1,"ts":"2026-10-24T21:45:34.282Z"}
+{"type":"step_event","index":7,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:34.323Z"}
+{"type":"step_event","index":7,"event":"action","detail":"Type \"2026-11-02\" into \"Visit date\"","action_type":"fill","success":true,"v":1,"ts":"2026-10-24T21:45:34.376Z"}
+{"type":"step_event","index":7,"event":"reasoning","detail":"Type \"2026-11-02\" into \"Visit date\"","action_type":"fill","v":1,"ts":"2026-10-24T21:45:34.376Z"}
+{"type":"step_end","index":7,"status":"passed","duration":0.1,"summary":"fill: Type \"2026-11-02\" into \"Visit date\"","ordinal":7,"id":"0-7","kind":"fill","screenshot":"screenshot.jpg","action_id":"f864314b-666a-495d-b622-4f3a6721f356","v":1,"ts":"2026-10-24T21:45:34.397Z"}
+{"type":"step_start","index":8,"objective":"Step 8","v":1,"ts":"2026-10-24T21:45:34.397Z"}
+{"type":"step_event","index":8,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:34.439Z"}
+{"type":"step_event","index":8,"event":"action","detail":"Clicking the 12pm arrival time option","action_type":"click","success":true,"v":1,"ts":"2026-10-24T21:45:34.986Z"}
+{"type":"step_event","index":8,"event":"reasoning","detail":"Clicking the 12pm arrival time option","action_type":"click","v":1,"ts":"2026-10-24T21:45:34.987Z"}
+{"type":"step_end","index":8,"status":"passed","duration":0.6,"summary":"click: Clicking the 12pm arrival time option","ordinal":8,"id":"0-8","kind":"click","screenshot":"screenshot.jpg","action_id":"01422c67-db4b-4efb-858a-387b9983cb6b","v":1,"ts":"2026-10-24T21:45:35.032Z"}
+{"type":"step_start","index":9,"objective":"Step 9","v":1,"ts":"2026-10-24T21:45:35.032Z"}
+{"type":"step_event","index":9,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:35.076Z"}
+{"type":"step_event","index":9,"event":"action","detail":"Clicking the climbing waiver acceptance checkbox","action_type":"click","success":true,"v":1,"ts":"2026-10-24T21:45:35.618Z"}
+{"type":"step_event","index":9,"event":"reasoning","detail":"Clicking the climbing waiver acceptance checkbox","action_type":"click","v":1,"ts":"2026-10-24T21:45:35.619Z"}
+{"type":"step_end","index":9,"status":"passed","duration":0.6,"summary":"click: Clicking the climbing waiver acceptance checkbox","ordinal":9,"id":"0-9","kind":"click","screenshot":"screenshot.jpg","action_id":"a6c8a0cb-649f-4861-9afa-8553d33727ae","v":1,"ts":"2026-10-24T21:45:35.666Z"}
+{"type":"step_start","index":10,"objective":"Step 10","v":1,"ts":"2026-10-24T21:45:35.667Z"}
+{"type":"step_event","index":10,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:35.709Z"}
+{"type":"step_event","index":10,"event":"action","detail":"Clicking Confirm my free visit button","action_type":"click","success":true,"v":1,"ts":"2026-10-24T21:45:36.256Z"}
+{"type":"step_event","index":10,"event":"reasoning","detail":"Clicking Confirm my free visit button","action_type":"click","v":1,"ts":"2026-10-24T21:45:36.256Z"}
+{"type":"step_end","index":10,"status":"passed","duration":0.6,"summary":"click: Clicking Confirm my free visit button","ordinal":10,"id":"0-10","kind":"click","screenshot":"screenshot.jpg","action_id":"670566b1-7271-4d15-a3c0-75e067f45548","v":1,"ts":"2026-10-24T21:45:36.301Z"}
+{"type":"step_start","index":11,"objective":"Step 11","v":1,"ts":"2026-10-24T21:45:36.302Z"}
+{"type":"step_event","index":11,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:36.326Z"}
+{"type":"step_event","index":11,"event":"action","detail":"Waiting for 5 seconds after booking confirmation","action_type":"wait","success":true,"v":1,"ts":"2026-10-24T21:45:41.332Z"}
+{"type":"step_event","index":11,"event":"reasoning","detail":"Waiting for 5 seconds after booking confirmation","action_type":"wait","v":1,"ts":"2026-10-24T21:45:41.332Z"}
+{"type":"step_end","index":11,"status":"passed","duration":5,"summary":"wait: Waiting for 5 seconds after booking confirmation","ordinal":11,"id":"0-11","kind":"wait","screenshot":"screenshot.jpg","action_id":"d097f931-7ec3-4db2-b5c0-131b4f830763","v":1,"ts":"2026-10-24T21:45:41.334Z"}
+{"type":"step_start","index":12,"objective":"Step 12","v":1,"ts":"2026-10-24T21:45:41.334Z"}
+{"type":"step_event","index":12,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:41.375Z"}
+{"type":"step_event","index":12,"event":"action","detail":"Checking whether the reference code is present","action_type":"analyze","success":true,"v":1,"ts":"2026-10-24T21:45:41.387Z"}
+{"type":"step_event","index":12,"event":"reasoning","detail":"Checking whether the reference code is present","action_type":"analyze","v":1,"ts":"2026-10-24T21:45:41.387Z"}
+{"type":"step_end","index":12,"status":"passed","duration":0.1,"summary":"analyze: Checking whether the reference code is present","ordinal":12,"id":"0-12","kind":"analyze","screenshot":"screenshot.jpg","action_id":"f1333cbb-d75e-4a96-b4ea-dfe682796641","v":1,"ts":"2026-10-24T21:45:41.387Z"}
+{"type":"step_start","index":13,"objective":"Step 13","v":1,"ts":"2026-10-24T21:45:41.388Z"}
+{"type":"step_event","index":13,"event":"screenshot","detail":"http://localhost:4101/","v":1,"ts":"2026-10-24T21:45:41.427Z"}
+{"type":"step_event","index":13,"event":"assertion","detail":"the text PL-4821 is still visible on the page","passed":true,"v":1,"ts":"2026-10-24T21:45:41.428Z"}
+{"type":"step_end","index":13,"status":"passed","duration":0,"summary":"assert: the text PL-4821 is still visible on the page","ordinal":13,"id":"0-13","kind":"assert","screenshot":"screenshot.jpg","action_id":"3bc875c7-d436-4915-b7fc-bcca62ac2d90","v":1,"ts":"2026-10-24T21:45:41.429Z"}
+{"type":"run_end","run_id":"run-0","status":"passed","summary":"","reason":"replay completed","duration":9.94,"final_url":"http://localhost:4101/","actions_executed":13,"screenshot_path":"~/.testmuai/kaneai/sessions/66bf2ae2-6974-4a05-b9a8-81b21ca5efe2/scratch/0/replay-test/screenshots/step_013.png","run_dir":"~/.testmuai/kaneai/sessions/66bf2ae2-6974-4a05-b9a8-81b21ca5efe2/scratch/0/replay-test","total_runs":1,"context":{"memory":{},"variables":{"pl_4821_visible":{"syntax":"{{pl_4821_visible}}","value":"true","secret":false}},"pointer":""},"variables_out":{"pl_4821_visible":{"syntax":"{{pl_4821_visible}}","value":"true","secret":false}},"store_out":{},"result_code":100,"reason_code":"success.complete","v":1,"ts":"2026-10-24T21:45:41.431Z"}
+{"type":"test_md_step_end","step_index":1,"status":"passed","duration_s":9.94,"ref_kind":null,"unit_kind":null,"inlined_count":null,"failed_sub_step_index":null,"v":1,"ts":"2026-10-24T21:45:41.432Z"}
+{"type":"test_md_evidence_ingest","status":"ok","evidence_id":"dcd6c136-3a0b-48bc-b4ee-e8baa8ef2b80","v":1,"ts":"2026-10-24T21:45:43.601Z"}
+{"type":"test_md_summary","overall_status":"passed","duration_s":12,"steps":{"total":1,"passed":1,"failed":0,"skipped":0,"replay_decisions":1,"author_decisions":0},"adaptive_heal":{"triggered":false},"commit":{"committed":false,"reason":"readonly_fallback"},"artifacts":{"replaced":false},"upload":{"performed":true,"succeeded":true},"cancelled":false,"v":1,"ts":"2026-10-24T21:45:43.606Z"}
+{"type":"coverage","status":"skipped","reason":"not_assurance_project","pack":"~/.testmuai/kaneai/sessions/66bf2ae2-6974-4a05-b9a8-81b21ca5efe2/evidence/dcd6c136-3a0b-48bc-b4ee-e8baa8ef2b80.evidence","v":1,"ts":"2026-10-24T21:45:43.613Z"}
+{"type":"test_md_done","overall_status":"passed","duration_s":12,"session_id":"66bf2ae2-6974-4a05-b9a8-81b21ca5efe2","coverage":{"status":"skipped"},"v":1,"ts":"2026-10-24T21:45:43.613Z"}

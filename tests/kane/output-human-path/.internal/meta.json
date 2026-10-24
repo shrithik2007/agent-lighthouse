@@ -1,0 +1,18 @@
+{
+  "commit_id": "abd483db-c161-4f74-b5c7-1d4944cc63b6",
+  "test_id": "ee50805c-df75-4e1b-9d82-4946b17a37ce",
+  "testcase_id": "01M5QXXWHFWRC2ZXRAXXBF816Z",
+  "project_id": "01M5QT7HV41JP0TZK95KVHS6K2",
+  "folder_id": "01M5QT7J52AFZ0V9K2CXK9BTZ3",
+  "org_id": "3399006",
+  "session_name": "human-path",
+  "executions": [
+    {
+      "execution_id": "dcd6c136-3a0b-48bc-b4ee-e8baa8ef2b80",
+      "run_kind": "replay",
+      "status": "passed",
+      "valid": true,
+      "at": "2026-10-24T21:45:42.040Z"
+    }
+  ]
+}

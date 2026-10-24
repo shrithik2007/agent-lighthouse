@@ -1,0 +1,6 @@
+evidence: view locally with `kane-cli evidence serve ~/.testmuai/kaneai/sessions/66bf2ae2-6974-4a05-b9a8-81b21ca5efe2/evidence/dcd6c136-3a0b-48bc-b4ee-e8baa8ef2b80.evidence`
+
+● exit 0 · test_md_done
+! Uncommitted changes: the run is tied to HEAD, which isn't exactly what ran.
+Kane run KR-170: PASSED (VERIFIED source). Details: /t/lighthouse/proof#run-170
+→ Open Proof tab: https://kaneclihack.sh/t/lighthouse/proof#run-170

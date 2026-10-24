@@ -28,6 +28,9 @@ Each folder has `stream.ndjson` (Kane's stdout, unchanged except for path redact
 | `loop-2026-10-24T21-17-14-a1-1..3` | KR-150, KR-151, KR-152 | Attempt 1 :4103 | passed, 13/12/11 steps (10 actions each) |
 | `loop-2026-10-24T21-17-14-a1-human-path` | KR-153 | Attempt 1 :4103 | passed |
 
+| `range-human-path-4101` | KR-169 | Repaired `site/` :4101 (`81918da`) | passed: named run that produced `tests/kane/human-path_test.md` |
+| `range-replay-KR-170` | KR-170 | Repaired `site/` :4101 | **replay** of `tests/kane/human-path_test.md` with `kane-cli testmd run`: passed in 12 s. Shown as PASSED (VERIFIED) on the Proof tab, because the wrapper reads `testmd` streams correctly. For feature coverage only; replays are never scored. |
+
 Later loop runs (propose mode, hardening) add folders named `loop-<id>-*`. Their records are in `results/loop/<id>.json`.
 
 ## Proof tab label
