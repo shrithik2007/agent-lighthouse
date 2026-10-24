@@ -27,11 +27,16 @@ Each folder has `stream.ndjson` (Kane's stdout, unchanged except for path redact
 | `loop-2026-10-24T21-17-14-baseline-human-path` | KR-148 | BEFORE | failed: PL-4821 not visible after 5 s |
 | `loop-2026-10-24T21-17-14-a1-1..3` | KR-150, KR-151, KR-152 | Attempt 1 :4103 | passed, 13/12/11 steps (10 actions each) |
 | `loop-2026-10-24T21-17-14-a1-human-path` | KR-153 | Attempt 1 :4103 | passed |
-
+| `loop-2026-10-24T21-25-00-baseline-human-path` | KR-154 | BEFORE | failed (propose-mode loop) |
+| `loop-2026-10-24T21-25-00-a1-1..3` | KR-156, KR-157, KR-159 | Propose attempt 1 :4103 (`6c8bed1`, unmerged) | passed, 13/17/14 steps |
+| `loop-2026-10-24T21-25-00-a1-human-path` | KR-160 | Propose attempt 1 | passed |
+| `loop-2026-10-24T21-35-03-baseline-human-path` | KR-161 | BEFORE | failed (hardening apply loop) |
+| `loop-2026-10-24T21-35-03-a1-1..3` | KR-162, KR-164, KR-165 | Hardening attempt 1 :4103 (`81918da`, applied) | passed, 13/14/19 steps |
+| `loop-2026-10-24T21-35-03-a1-human-path` | KR-166 | Hardening attempt 1 | passed |
 | `range-human-path-4101` | KR-169 | Repaired `site/` :4101 (`81918da`) | passed: named run that produced `tests/kane/human-path_test.md` |
 | `range-replay-KR-170` | KR-170 | Repaired `site/` :4101 | **replay** of `tests/kane/human-path_test.md` with `kane-cli testmd run`: passed in 12 s. Shown as PASSED (VERIFIED) on the Proof tab, because the wrapper reads `testmd` streams correctly. For feature coverage only; replays are never scored. |
 
-Later loop runs (propose mode, hardening) add folders named `loop-<id>-*`. Their records are in `results/loop/<id>.json`.
+Loop records, with diagnoses, Codex briefs and gate decisions, are in `results/loop/<id>.json`.
 
 ## Proof tab label
 
