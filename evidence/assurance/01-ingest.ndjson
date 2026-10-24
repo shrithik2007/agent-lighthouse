@@ -1,0 +1,20 @@
+{"type":"gitignore_updated","v":1,"verb":"extract","path":".gitignore"}
+{"type":"ingested","v":1,"verb":"extract","source_id":"requirements","status":"created","cid":"sha256:c2d42292aed7d070b0f9a61bfa436d94aa623e6f1b7678a60288c9f523a4a8e5"}
+{"type":"run_start","v":1,"verb":"extract","mode":"agent","trace":"~/.testmuai/kaneai/assurance/ctx-bbd308f9c7d6/logs/extract-as-20261024T2234-dcoff04b.log","session":"as-20261024T2234-dcoff04b"}
+{"type":"corpus","v":1,"verb":"extract","sources":[{"source_id":"requirements","cid":"sha256:c2d42292aed7d070b0f9a61bfa436d94aa623e6f1b7678a60288c9f523a4a8e5"}],"skipped":[]}
+{"type":"source_start","v":1,"verb":"extract","source_id":"requirements","cid":"sha256:c2d42292aed7d070b0f9a61bfa436d94aa623e6f1b7678a60288c9f523a4a8e5","index":1,"total":1,"resumed":false}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"tool","label":"→ find similar items…"}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"tool","label":"→ list a source's items…"}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"tool","label":"→ list sources…"}
+{"type":"usage","v":1,"verb":"extract","credits":1.07,"total_credits":1.07}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"decision","label":"checking a possible duplicate"}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"tool","label":"✓ find similar items"}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"decision","label":"checking what came from a source"}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"tool","label":"✓ list a source's items"}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"decision","label":"checking which sources there are"}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"tool","label":"✓ list sources"}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"tool","label":"→ ask…"}
+{"type":"usage","v":1,"verb":"extract","credits":0.74,"total_credits":1.81}
+{"type":"agent_activity","v":1,"verb":"extract","kind":"decision","label":"asking about something unclear"}
+{"type":"session_paused","v":1,"verb":"extract","sid":"ext-20261024T223441-9f5a0bd6-requirements","source_id":"requirements","mode":"agent","resume":"kane-cli context extract --resume ext-20261024T223441-9f5a0bd6-requirements --mode agent","expires_at":"2026-10-25T22:34:41.051Z","pending_questions":[{"id":"q1","header":"date validity","text":"Should the booking reject past dates, or should I leave date-range restrictions unspecified because the requirements do not state one?","risk":"med","rationale":"R4 says only that the visitor chooses a visit date with a control stating its expected format (L14-L15); it gives no permitted date range or behavior for past dates.","options":[{"label":"Leave unspecified","detail":"Extract only the stated date-selection and visible-format promises; do not assume a past-date rule."},{"label":"Reject past dates","detail":"Treat rejection of dates before today as an owner-supplied requirement for this booking goal."}],"recommended_index":0,"allow_free_text":false}],"next":[{"cmd":"kane-cli context extract --resume ext-20261024T223441-9f5a0bd6-requirements --mode agent","why":"resume the paused session","title":"Resume the session"},{"cmd":"kane-cli context extract --resume ext-20261024T223441-9f5a0bd6-requirements --mode agent --answer q1=1","why":"answer the 1 pending question(s) non-interactively — --answer <question-id>=<option number (1-based) or free text>, repeatable; shown with each question's recommended option","title":"Answer via structured flags"}]}
+{"type":"done","v":1,"verb":"extract","status":"paused","exit_code":3,"next":[{"cmd":"kane-cli context extract --resume ext-20261024T223441-9f5a0bd6-requirements --mode agent","why":"resume the paused session","title":"Resume the session"},{"cmd":"kane-cli context extract --resume ext-20261024T223441-9f5a0bd6-requirements --mode agent --answer q1=1","why":"answer the 1 pending question(s) non-interactively — --answer <question-id>=<option number (1-based) or free text>, repeatable; shown with each question's recommended option","title":"Answer via structured flags"}]}

@@ -136,6 +136,7 @@ Verified in this build against `kane-cli run --help` (0.10.0-rc.3):
 - Kane's own failure triage (`reason_code: assertion_error.confirmed_product_bug`)
 - `kanehack report` (event wrapper) to register every run on the team Proof tab
 - Kane's blocker classification (`blocker.captcha`) on the hard-mode site
+- Assurance (stretch, in progress): `kane-cli context ingest docs/requirements.md --mode agent` ingested six requirements and paused at an owner question about past dates; see `evidence/assurance/README.md` for the record and the remaining review, design and cover commands
 
 ## The planted fixture
 
