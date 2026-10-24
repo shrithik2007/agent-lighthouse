@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// lighthouse loop --flow book --threshold 80 --max-attempts 3 --mode propose|apply [--runs 3]
+// lighthouse loop --flow book --threshold 80 --max-attempts 3 --mode propose|apply [--runs 3] [--human-baseline] [--rea]
 import { fileURLToPath } from 'node:url';
 const [command, ...rest] = process.argv.slice(2);
 if (command !== 'loop') {

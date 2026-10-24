@@ -64,6 +64,7 @@ export async function buildLatest({ cwd = process.cwd(), loopFile, proposeLoopFi
     before: sideSummary(baseline.before.summary, 'Before'),
     postFix, postFixScore: postFix?.score ?? null,
     referenceFix, referenceFixScore: referenceFix?.score ?? null,
+    humanBaseline: loop?.humanBaseline ?? baseline.humanBaseline ?? null,
     agentTax: agentTaxValue, agentTaxBasis: final?.agentTaxBefore ? 'BEFORE vs repaired page, successful-run medians' : baseline.after ? 'BEFORE vs AFTER reference fixture, successful-run medians' : 'BEFORE vs optimalSteps only (no repaired measurement yet)',
     runGroups: [
       ['Before', beforeRuns.map(slim)],

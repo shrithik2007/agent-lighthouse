@@ -10,6 +10,8 @@ import { callOpenAI } from './openai.mjs';
 import { compare, agentTax, gateDecision } from '../core/score.mjs';
 import { createSiteServer } from '../scripts/serve.mjs';
 import { leakCheck, describeFindings } from './leak.mjs';
+import { humanBaseline as fetchHumanBaseline } from './human-baseline.mjs';
+import { reaDiagnose } from './rea-diagnose.mjs';
 
 const exec = promisify(execFile);
 const git = async (args, cwd) => (await exec('git', args, { cwd, maxBuffer: 10 * 1024 * 1024 })).stdout.trim();
@@ -116,13 +118,21 @@ async function diagnose({ cwd, worktree, runs, human, attempt, previous, loopId 
   return { ...result, lead, screenshot };
 }
 
-function fixBrief(diagnosis, attempt, lead) {
+// Optional REA findings (LIGHTHOUSE_REA=1 or --rea): script locations behind the failing step.
+function codeEvidenceLines(codeEvidence = []) {
+  if (!codeEvidence.length) return [];
+  return ['Code evidence (REA script capture; locations in the page script, line numbers relative to the script):',
+    ...codeEvidence.map(f => `- ${f.why} (line ${f.line}): ${f.snippet}`)];
+}
+
+function fixBrief(diagnosis, attempt, lead, codeEvidence = []) {
   return [
     `You are fixing ${ctx.siteFile} (attempt ${attempt}) so an AI browser agent and a human can both complete the booking.`,
     lead ? `Kane's failing step (${lead.kaneRunId ?? lead.id}): "${lead.failedRemarks?.[0] ?? lead.oneLiner}". Kane said: ${lead.oneLiner ?? ''} The attached image is Kane's screenshot at that step.` : '',
     `Root cause (OpenAI diagnosis): ${diagnosis.cause}`,
     'Make these changes, first one first:', ...diagnosis.changes.map(change => `- ${change}`),
     `Acceptance check: ${diagnosis.acceptanceCheck}`,
+    ...codeEvidenceLines(codeEvidence),
     `Rules: edit ONLY ${ctx.siteFile}. Do not touch fixtures/, tests/, lighthouse/ or any other file. Keep the reference ${ctx.reference} and the overall look. Vanilla HTML/CSS/JS only. Do not commit; just leave the edited file.`,
   ].filter(Boolean).join('\n');
 }
@@ -131,7 +141,7 @@ const FILE_SCHEMA = { name: 'file', schema: { type: 'object', additionalProperti
 
 /** Codex non-interactively in the attempt worktree (API key via CODEX_API_KEY, env only); falls back to the OpenAI API returning the whole file. */
 async function applyFix({ cwd, worktree, diagnosis, attempt, log, loopId }) {
-  const brief = fixBrief(diagnosis.json, attempt, diagnosis.lead);
+  const brief = fixBrief(diagnosis.json, attempt, diagnosis.lead, diagnosis.codeEvidence);
   const lastMessage = join(cwd, 'results', 'loop', `${loopId}-codex-attempt-${attempt}.txt`);
   const model = process.env.CODEX_MODEL ?? 'gpt-5.3-codex';
   const args = ['exec', '-m', model, '-C', worktree, '-s', 'workspace-write', '--ephemeral', '--skip-git-repo-check', '-o', lastMessage];
@@ -195,7 +205,29 @@ async function serve(file, port) {
   return server;
 }
 
-export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3, mode = 'propose', count = 3, cwd = process.cwd(), log = console.error } = {}) {
+const flagOn = value => ['1', 'true', 'yes'].includes(String(value ?? '').toLowerCase());
+
+// Serve the attempt's starting page on a free port just long enough for REA to read its scripts.
+// Never fatal: any failure here means an empty list, as in reaDiagnose itself.
+async function codeEvidenceFor({ worktree, lead, log }) {
+  const file = join(worktree, ctx.siteFile);
+  let server;
+  try {
+    server = await serve(file, 0);
+    const url = `http://127.0.0.1:${server.address().port}/`;
+    return await reaDiagnose({ url, html: await readFile(file, 'utf8'), failingRemark: lead?.failedRemarks?.[0] ?? lead?.oneLiner ?? '', log });
+  } catch (error) {
+    log(`  rea: could not serve ${ctx.siteFile} for REA (${error.message}); continuing without code evidence`);
+    return { codeEvidence: [], evidenceId: null, reason: `serve failed: ${error.message}` };
+  } finally {
+    if (server) await new Promise(ok => server.close(ok));
+  }
+}
+
+export async function loop({
+  flowName = 'book', threshold = 80, maxAttempts = 3, mode = 'propose', count = 3, cwd = process.cwd(), log = console.error,
+  humanBaseline = flagOn(process.env.LIGHTHOUSE_HUMAN_BASELINE), rea = flagOn(process.env.LIGHTHOUSE_REA),
+} = {}) {
   if (!['propose', 'apply'].includes(mode)) throw new Error('mode must be propose or apply');
   if (!process.env.OPENAI_API_KEY) throw new Error('OPENAI_API_KEY is not set: the diagnosis step requires the OpenAI API');
   const flow = JSON.parse(await readFile(join(cwd, 'flows', `${flowName}.json`), 'utf8'));
@@ -221,6 +253,14 @@ export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3,
   };
   const save = () => writeFile(join(cwd, 'results', 'loop', `${loopId}.json`), JSON.stringify(record, null, 2) + '\n');
 
+  // Optional: observed human medians from PostHog (LIGHTHOUSE_HUMAN_BASELINE=1 or --human-baseline). Null when unavailable.
+  if (humanBaseline) {
+    record.humanBaseline = await fetchHumanBaseline({ pageUrl: process.env.POSTHOG_PAGE_URL ?? ctx.url, from: process.env.POSTHOG_FROM, to: process.env.POSTHOG_TO, log });
+    const usableBefore = beforeRuns.filter(run => run.started && run.status !== 'unknown');
+    record.agentTaxVsHumans = record.humanBaseline && usableBefore.length ? agentTax(usableBefore, { humanBaseline: record.humanBaseline, optimalSteps: flow.optimalSteps }) : null;
+    if (record.humanBaseline) log(`human baseline: median ${record.humanBaseline.medianSteps} steps, ${record.humanBaseline.medianSeconds} s over ${record.humanBaseline.sessions} PostHog sessions`);
+  }
+
   let parent = baseSha;
   let lastRuns = beforeRuns;
   let lastHuman = beforeHuman;
@@ -237,6 +277,12 @@ export async function loop({ flowName = 'book', threshold = 80, maxAttempts = 3,
       const diagnosis = await diagnose({ cwd, worktree, runs: lastRuns, human: lastHuman, attempt, previous, loopId });
       entry.diagnosis = { ...diagnosis.json, model: diagnosis.model, responseId: diagnosis.responseId };
       log(`  cause: ${diagnosis.json.cause}`);
+      if (rea) {
+        const evidence = await codeEvidenceFor({ worktree, lead: diagnosis.lead, log });
+        diagnosis.codeEvidence = evidence.codeEvidence;
+        entry.codeEvidence = evidence.codeEvidence;
+        entry.rea = { evidenceId: evidence.evidenceId, reason: evidence.reason };
+      }
       const fix = await applyFix({ cwd, worktree, diagnosis, attempt, log, loopId });
       entry.fixer = fix.tool;
       entry.scopeGuard = await scopeGuard(worktree, ctx.siteDir);
@@ -363,6 +409,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const record = await loop({
     flowName: opt('flow', 'book'), threshold: Number(opt('threshold', 80)), maxAttempts: Number(opt('max-attempts', 3)),
     mode: opt('mode', 'propose'), count: Number(opt('runs', 3)),
+    ...(args.includes('--human-baseline') ? { humanBaseline: true } : {}), ...(args.includes('--rea') ? { rea: true } : {}),
   }).catch(error => { console.error(`lighthouse loop: ${error.message}`); process.exit(1); });
   console.log(JSON.stringify({ loopId: record.loopId, outcome: record.outcome, attempts: record.attempts.map(a => ({ attempt: a.attempt, commit: a.commit?.slice(0, 7), score: a.summary?.score ?? null, humanPath: a.humanPath?.status ?? null, gate: a.gate })) }, null, 2));
   process.exit(record.outcome === 'qualified' ? 0 : 1);
