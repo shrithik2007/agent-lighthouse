@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 
 /** Capture the real wrapped stream. Interpretation belongs to the verified adapter. */
-export async function runKane({ objective, cwd = process.cwd(), killTimeoutMs = 600_000, onProgress = () => {} }) {
+export async function runKane({ objective, cwd = process.cwd(), killTimeoutMs = 600_000, extraArgs = [], onProgress = () => {} }) {
   if (typeof objective !== 'string' || !objective.trim()) throw new TypeError('objective is required');
   if (!Number.isInteger(killTimeoutMs) || killTimeoutMs <= 0) throw new RangeError('killTimeoutMs must be positive');
   const directory = join(cwd, 'results', 'raw');
@@ -14,7 +14,7 @@ export async function runKane({ objective, cwd = process.cwd(), killTimeoutMs = 
   const rawPath = join(directory, `${id}.ndjson`);
   const stderrPath = join(directory, `${id}.stderr.txt`);
   const metadataPath = join(directory, `${id}.meta.json`);
-  const args = ['report', '--', 'kane-cli', 'run', objective, '--agent', '--headless', '--timeout', '180'];
+  const args = ['report', '--', 'kane-cli', 'run', objective, '--agent', '--headless', '--timeout', '180', ...extraArgs];
   const stdoutChunks = [];
   const stderrChunks = [];
   const child = spawn('kanehack', args, {
