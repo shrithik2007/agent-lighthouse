@@ -1,0 +1,9 @@
+{
+  "name": "book",
+  "description": "Book a free first visit at Pitchline and read back the confirmation reference.",
+  "objective": "Go to {{url}} and book a free first visit for Sam Rivera, email sam@example.com, on the second of November 2026 at noon. Accept the waiver. Then verify a booking confirmation with a reference code is shown and store the reference as 'ref'.",
+  "expectedReference": "PL-4821",
+  "optimalSteps": 10,
+  "optimalStepsReasoning": "Hand-counted on the AFTER fixture (:4102) and confirmed by the owner on 2026-10-24 at Kane's granularity, where one step is one action on one control or one check: (1) open the page, (2) click 'Book a free first visit', (3) type the name, (4) type the email, (5) set the date, (6) choose 12pm (noon), (7) tick the waiver, (8) click 'Confirm my free visit', (9) check the booking confirmation is shown, (10) store the reference. Kane performs the check and the store as separate steps. The AFTER cookie bar does not block the flow, so dismissing it is not counted.",
+  "stepCounting": "Score on every completed step (status done or failed) as Kane reports it. Each run record also splits these into actionSteps and overheadSteps (planning 'queued plan' waits, other waits, blank remarks). Agent Tax compares BEFORE with AFTER, so per-run overhead largely nets out."
+}
