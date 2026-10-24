@@ -137,6 +137,7 @@ Verified in this build against `kane-cli run --help` (0.10.0-rc.3):
 - Kane's own failure triage (`reason_code: assertion_error.confirmed_product_bug`)
 - `kanehack report` (event wrapper) to register every run on the team Proof tab
 - Kane's blocker classification (`blocker.captcha`) on the hard-mode site
+- Kane's official GitHub Action (`LambdaTest/kane-cli/integrations/github-action/kane-cli-browser-run`), in `.github/workflows/kane.yml`: on every pull request it serves the PR's sites, replays the committed human-path test for the site the PR changes (`tests/kane/`) with `--headless --agent`, uploads the evidence pack and posts Kane's verdict on the PR. Credentials come only from the `LT_USERNAME` and `LT_ACCESS_KEY` repository secrets
 - Assurance: `kane-cli context ingest` (6 requirements, one owner question answered), `context review --approve uc-1`, `design tests` (15 acceptance criteria, 5 scenarios, 5 Kane-designed `_test.md` tests, 3 gaps), `cover` (0%, nothing run yet; the designed tests wait at Kane's design checkpoint for owner approval). Record in `evidence/assurance/`
 
 ## The planted fixture

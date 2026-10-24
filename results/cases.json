@@ -1,4 +1,18 @@
 [
-  { "id": "demo", "title": "Case 1: Pitchline demo", "latest": "results/latest.json", "recorded": "results/demo-backup.json" },
-  { "id": "hard", "title": "Case 2: hard mode", "latest": "results/cases/hard/latest.json" }
+  {
+    "id": "demo",
+    "title": "Case 1: Pitchline demo",
+    "latest": "results/latest.json",
+    "recorded": "results/demo-backup.json"
+  },
+  {
+    "id": "hard",
+    "title": "Case 2: hard mode",
+    "latest": "results/cases/hard/latest.json"
+  },
+  {
+    "id": "hard-first",
+    "title": "Case 2, first loop (gate fooled)",
+    "latest": "results/cases/hard/latest-2026-10-24T22-22-59.json"
+  }
 ]
