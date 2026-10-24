@@ -4,7 +4,7 @@ published: false
 tags: ai, testing, accessibility, webdev
 ---
 
-<!-- Placeholders: [REPO_URL] · [VIDEO_URL]. Upload the images in gtm/screenshots/ to dev.to and replace the relative paths. -->
+<!-- Placeholders: [VIDEO_URL]. Upload the images in gtm/screenshots/ to dev.to and replace the relative paths. -->
 
 ![Agent Lighthouse dashboard: BEFORE 51, after the loop's repair 97, Agent Tax +10 steps, +84 s, +36 credits per booking](screenshots/dashboard-row1.png)
 
@@ -59,4 +59,4 @@ We never change a site we don't own. The default `propose` mode leaves the repai
 - Codex's ChatGPT-plan quota ran out during the first loop. That loop is kept as `results/loop/2026-10-24T21-11-48.json` (aborted). The fixer now passes the API key to Codex through the environment and falls back to the OpenAI API returning the whole file.
 - The first calibration run exited 2 because Kane was launched inside Codex's sandbox (EPERM on `~/.testmuai`, Chrome never started). Kane now always runs from the operator's shell.
 
-Repo: [REPO_URL] · Demo video: [VIDEO_URL] · Built for #KaneCLIHackDay
+Repo: https://github.com/shrithik2007/agent-lighthouse · Demo video: [VIDEO_URL] · Built for #KaneCLIHackDay

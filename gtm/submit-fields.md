@@ -1,6 +1,6 @@
 # Submit-tab fields (https://kaneclihack.sh/t/lighthouse/submit)
 
-Placeholders still to fill: [REPO_URL] · [COMMIT_SHA] · [VIDEO_URL] · [DEVPOST_URL]
+Placeholders still to fill: [COMMIT_SHA] · [VIDEO_URL] · [DEVPOST_URL]
 
 Numbers come from `results/latest.json` (generated from the apply-mode loop `2026-10-24T21-17-14` and the baseline in `results/baseline.json`).
 
@@ -10,7 +10,7 @@ Numbers come from `results/latest.json` (generated from the apply-mode loop `202
 
 **One-line pitch:** Measure how agents book, propose fixes for what trips them, and prove the fixes before an owner accepts them.
 
-**Repository URL:** [REPO_URL]
+**Repository URL:** https://github.com/shrithik2007/agent-lighthouse
 
 **Exact commit SHA (40 hex):** [COMMIT_SHA]
 

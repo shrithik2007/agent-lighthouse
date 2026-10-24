@@ -1,10 +1,10 @@
 # Show HN
 
-Placeholders: [REPO_URL]
+Placeholders: none
 
 **Title:** Show HN: Agent Lighthouse – measure how hard your site makes agent bookings, then prove the fix
 
-**URL:** [REPO_URL]
+**URL:** https://github.com/shrithik2007/agent-lighthouse
 
 **Text:**
 

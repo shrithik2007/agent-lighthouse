@@ -1,6 +1,6 @@
 # LinkedIn post
 
-Placeholders: [REPO_URL] · [VIDEO_URL]
+Placeholders still to fill: [VIDEO_URL]
 
 Attach: `screenshots/dashboard-row1.png`. Tag the official **TestMu AI** company page by typing "@TestMu AI" and picking the page from the menu, and tag **OpenAI** the same way.
 
@@ -24,7 +24,7 @@ Result: 97/100 on the first attempt, human path green, and an Agent Tax of +10 s
 
 What's honest about it: three runs per side is a small sample, the weights are my design choice, and the site has planted problems. Everything is in the repo: raw Kane streams, evidence packs and every OpenAI call logged.
 
-Repo: [REPO_URL]
+Repo: https://github.com/shrithik2007/agent-lighthouse
 Demo: [VIDEO_URL]
 
 Thanks @TestMu AI for Kane CLI and @OpenAI for the models behind the diagnosis and the fixer.

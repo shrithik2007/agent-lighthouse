@@ -1,6 +1,6 @@
 # Demo video script (about 3 minutes)
 
-Placeholders: [REPO_URL]
+Placeholders: none
 
 Voiceover. Record at 1280×720 or larger. Tabs ready: 1 Proof tab (https://kaneclihack.sh/t/lighthouse/proof) · 2 Kane run report for KR-133 (Test Manager link from `evidence/runs/baseline-before-1/test_url.txt`) · 3 Pitchline BEFORE http://localhost:4101 · 4 Kane evidence viewer (`kane-cli evidence serve evidence/packs/KR-133-before-failed.evidence`) · 5 dashboard http://localhost:4100 · 6 terminal · 7 `results/proposal.md`.
 
@@ -12,4 +12,4 @@ Voiceover. Record at 1280×720 or larger. Tabs ready: 1 Proof tab (https://kanec
 | 1:15–1:40 | "Three fresh runs: score 51. One failed, and the two that passed took 17 and 18 actions where 10 is optimal. That's the Agent Tax: plus 10 steps, 84 seconds and 36 credits per booking." | Tab 5, dashboard Row 1 and Row 2 (hover a red dot, then a green one to show actions vs overhead). |
 | 1:40–2:20 | "Now the loop. Kane's failing remark and screenshot go to the OpenAI API, which diagnoses the vanishing confirmation. Codex patches only the site files on a branch, and a scope guard reverts anything else. Then Kane measures three fresh runs again, plus a human-path run that checks a person still sees the reference five seconds later. It qualifies only if the score is at least 80 and the human path passes." | Tab 6: `npm run loop -- --flow book --mode apply` starting, then `git log --oneline` showing `fix(site): attempt 1 answers Kane KR-133`. Cut to tab 5, Row 4. |
 | 2:20–2:45 | "First attempt: 97. Three of three passed, exactly 10 actions each, and the human path is green. It failed before the fix. In propose mode, the owner gets this PR description with every change tied to the Kane failure it answers." | Tab 5, Row 4 (attempt 1, 97, passed, pass), then tab 7, the proposal. |
-| 2:45–3:00 | "We never change a site we don't own. Three runs is a small sample, and the raw Kane streams and evidence packs are all in the repo. Agent Lighthouse: Kane measures, OpenAI repairs, Kane proves." | Tab 5, the full dashboard. End card with [REPO_URL] and #KaneCLIHackDay. |
+| 2:45–3:00 | "We never change a site we don't own. Three runs is a small sample, and the raw Kane streams and evidence packs are all in the repo. Agent Lighthouse: Kane measures, OpenAI repairs, Kane proves." | Tab 5, the full dashboard. End card with https://github.com/shrithik2007/agent-lighthouse and #KaneCLIHackDay. |

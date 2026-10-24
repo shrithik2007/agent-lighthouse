@@ -1,6 +1,6 @@
 # Agent Lighthouse: 6-slide deck
 
-Placeholders: [REPO_URL] · [VIDEO_URL]
+Placeholders still to fill: [VIDEO_URL]
 
 Presentable version (Slides artifact, private until shared): https://claude.ai/artifact/GoGwobRmwDmqZnt2gQKXoT
 
@@ -10,7 +10,7 @@ Presentable version (Slides artifact, private until shared): https://claude.ai/a
 
 Measure how agents book. Propose fixes for what trips them. Prove the fixes before an owner accepts them.
 
-Team Lighthouse · Kane CLI Hack Day SF · October 24, 2026 · [REPO_URL]
+Team Lighthouse · Kane CLI Hack Day SF · October 24, 2026 · https://github.com/shrithik2007/agent-lighthouse
 
 > Speaker notes: One sentence, then straight to the problem. "Kane measures, OpenAI repairs, Kane proves."
 
