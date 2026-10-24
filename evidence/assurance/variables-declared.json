@@ -1,0 +1,17 @@
+{
+  "visitor_name": {
+    "value": "",
+    "secret": false,
+    "description": "Valid visitor name for first-visit booking tests."
+  },
+  "visitor_email": {
+    "value": "",
+    "secret": false,
+    "description": "Valid visitor email address for first-visit booking tests."
+  },
+  "visit_date": {
+    "value": "",
+    "secret": false,
+    "description": "Accepted visit date in the booking control's displayed format at test execution time."
+  }
+}
