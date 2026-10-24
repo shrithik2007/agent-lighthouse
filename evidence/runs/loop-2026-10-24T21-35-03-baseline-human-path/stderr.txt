@@ -1,0 +1,8 @@
+Running on: Desktop · Chrome
+evidence: 1 status_disagrees advisory(ies) — self-explained by triaged failure record(s)
+evidence: view locally with `kane-cli evidence serve ~/.testmuai/kaneai/sessions/637ca144-3771-4504-b197-19329a169c20/evidence/698437e0-fed8-49be-aaa7-efaba50455ea.evidence`
+
+● exit 1 · no completion event (not a pass)
+! Uncommitted changes: the run is tied to HEAD, which isn't exactly what ran.
+Kane run KR-161: FAILED (UNVERIFIED). Details: /t/lighthouse/proof#run-161
+→ Open Proof tab: https://kaneclihack.sh/t/lighthouse/proof#run-161

@@ -1,0 +1,153 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Booked a free first visit for Sam Rivera using sam@example.com for 2 November 2026 at noon.\nAccepted the waiver.\nThe booking was confirmed and a reference code was shown: PL-4821.",
+  "one_liner": "booked a free first visit on the booking site",
+  "final_state": {
+    "url": "http://localhost:4103/",
+    "booking_confirmation_visible": "true",
+    "reference_code": "PL-4821"
+  },
+  "reason": "Objective completed",
+  "duration": 66.8,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "booking_confirmation_visible": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 13,
+        "query": "whether booking confirmation is present (in the booking confirmation)",
+        "condition": "The booking confirmation is shown.",
+        "human_description": "Checking whether the booking confirmation is present",
+        "expected_value": "true",
+        "subject": "booking confirmation",
+        "must_be": "present",
+        "code_js": "el(37).textContent.trim().length > 0",
+        "wrapped_js": "(els) => {\n  const __m = {37: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(37).textContent.trim().length > 0);\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:role=heading[name=\"Your free first visit is\"i]"
+        ],
+        "needs_unit_conversion": false
+      },
+      "booking_reference_code_visible": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 13,
+        "query": "whether reference code in the booking confirmation is present (in the booking confirmation)",
+        "condition": "The reference code is shown in the booking confirmation.",
+        "human_description": "Checking whether the reference code is present",
+        "expected_value": "true",
+        "subject": "reference code in the booking confirmation",
+        "must_be": "present",
+        "code_js": "/Reference code:\\s*\\S+/.test(el(40).textContent)",
+        "wrapped_js": "(els) => {\n  const __m = {40: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (/Reference code:\\s*\\S+/.test(el(40).textContent));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Reference code: PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      },
+      "ref": {
+        "extracted_value": "PL-4821",
+        "operator": "equals",
+        "transforms": [
+          "strip"
+        ],
+        "json_path": null,
+        "reasoning": "value: 'PL-4821' (stored, no comparison)",
+        "analyzer_type": "textual_visual",
+        "step": 13,
+        "query": "the reference code from the booking confirmation",
+        "condition": "The reference code from the booking confirmation is stored as {{ref}}.",
+        "human_description": "Extracting the reference code from the booking confirmation",
+        "expected_value": "",
+        "code_js": "(el(40).textContent.match(/Reference code:\\s*(\\S+)/)||[])[1] || null",
+        "wrapped_js": "(els) => {\n  const __m = {40: 0};\n  const el = (i) => els[__m[i]];\n  const __v = ((el(40).textContent.match(/Reference code:\\s*(\\S+)/)||[])[1] || null);\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Reference code: PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      },
+      "ref_2": {
+        "extracted_value": "PL-4821",
+        "operator": "equals",
+        "transforms": [
+          "strip"
+        ],
+        "json_path": null,
+        "reasoning": "value: 'PL-4821' (stored, no comparison)",
+        "analyzer_type": "textual_visual",
+        "step": 13,
+        "query": "the reference code from the booking confirmation",
+        "condition": "The reference code from the booking confirmation is saved as {{ref}}.",
+        "human_description": "Extracting the reference code from the booking confirmation",
+        "expected_value": "",
+        "code_js": "(el(40).textContent.match(/Reference code:\\s*(\\S+)/)||[])[1] || null",
+        "wrapped_js": "(els) => {\n  const __m = {40: 0};\n  const el = (i) => els[__m[i]];\n  const __v = ((el(40).textContent.match(/Reference code:\\s*(\\S+)/)||[])[1] || null);\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Reference code: PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "PL-4821",
+        "type": "memory",
+        "secret": false,
+        "source": "runtime"
+      },
+      "booking_confirmation_visible": {
+        "syntax": "{{booking_confirmation_visible}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      },
+      "booking_reference_code_visible": {
+        "syntax": "{{booking_reference_code_visible}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      },
+      "ref_2": {
+        "syntax": "{{ref_2}}",
+        "value": "PL-4821",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) booked a free first visit on the booking site"
+  },
+  "credits_consumed": 21.797540000000005,
+  "session_dir": "~/.testmuai/kaneai/sessions/748bca22-bf5c-4256-910a-ad0f9d6d665d",
+  "run_dir": "~/.testmuai/kaneai/sessions/748bca22-bf5c-4256-910a-ad0f9d6d665d/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Booked a free first visit for Sam Rivera using sam@example.com for 2 November 2026 at noon.\nAccepted the waiver.\nThe booking was confirmed and a reference code was shown: PL-4821.",
+      "one_liner": "booked a free first visit on the booking site",
+      "credits_consumed": 21.797540000000005
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QXN62Z329DC8SZV7443JVD/dashboard/share/US_W2BLODYO0F5QNEMUCBJGTS8TAAUB9ZSD6OQX93OIQMUL3A3N9PLZI9Y11HTTNKX5?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T21:40:37.482Z"
+}

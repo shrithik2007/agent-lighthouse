@@ -1,0 +1,71 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Opened the free first-visit booking form.\nEntered Sam Rivera’s name and sam@example.com, selected 2 November 2026 at noon, accepted the climbing waiver, and confirmed the booking.\nWaited 5 seconds after confirmation; the booking confirmation remained visible with reference code PL-4821.",
+  "one_liner": "confirmed a free first-visit booking on the booking site",
+  "final_state": {
+    "url": "http://localhost:4103/",
+    "booking_reference": "PL-4821",
+    "pl_4821_visible": "true"
+  },
+  "reason": "Objective completed",
+  "duration": 57.7,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "pl_4821_visible": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 15,
+        "query": "whether the text PL-4821 is present (in the booking confirmation reference code)",
+        "condition": "the text PL-4821 is still visible on the page",
+        "human_description": "Checking whether the PL-4821 reference code is present",
+        "expected_value": "true",
+        "subject": "the text PL-4821",
+        "must_be": "present",
+        "code_js": "el(40).textContent.includes('PL-4821')",
+        "wrapped_js": "(els) => {\n  const __m = {40: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(40).textContent.includes('PL-4821'));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Reference code: PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "pl_4821_visible": {
+        "syntax": "{{pl_4821_visible}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) confirmed a free first-visit booking on the booking site"
+  },
+  "credits_consumed": 14.770132499999997,
+  "session_dir": "~/.testmuai/kaneai/sessions/e3965d72-1ce9-4204-9e8a-500254ab532c",
+  "run_dir": "~/.testmuai/kaneai/sessions/e3965d72-1ce9-4204-9e8a-500254ab532c/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Opened the free first-visit booking form.\nEntered Sam Rivera’s name and sam@example.com, selected 2 November 2026 at noon, accepted the climbing waiver, and confirmed the booking.\nWaited 5 seconds after confirmation; the booking confirmation remained visible with reference code PL-4821.",
+      "one_liner": "confirmed a free first-visit booking on the booking site",
+      "credits_consumed": 14.770132499999997
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QXTPNH71SPCB3BE90SJ1GC/dashboard/share/US_Q2LHQCN9RCQPVY7GZO56Z9PNNGS05BS1ZQ1W383E64NTGOPWW7MI3G3LPJBJ4FOM?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T21:43:28.328Z"
+}

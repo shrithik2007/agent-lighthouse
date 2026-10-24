@@ -1,0 +1,20 @@
+Implemented — I edited only `site/index.html` and applied all requested fixes for KR-133.
+
+**What I changed**
+- Added persistent post-submit confirmation in `section#booking` after the form: `div#booking-confirmation.status[hidden][role="status"][aria-live="polite"][tabindex="-1]` with visible `Reference code: PL-4821` in `site/index.html:22`.
+- Updated submit behavior to:
+  - validate with specific error messages in `p#error`,
+  - hide the form on success,
+  - show/focus/scroll the persistent confirmation,
+  - remove toast-timer logic so `PL-4821` remains on page (no auto-hide) in `site/index.html:31`.
+- Replaced generic `"Invalid input"` validation with explicit branch messages for name/email/date/time/waiver in `site/index.html:35`.
+- Added visible labels and input attributes:
+  - `name` with `autocomplete="name"`,
+  - `email` with `type="email"` + `autocomplete="email"`,
+  - `date` with `type="date"` and `YYYY-MM-DD` placeholder in `site/index.html:18`.
+- Replaced custom arrival-time div controls with native radio group (`fieldset` + `legend` + `input type="radio"`) while keeping button-like styling via `.time-option` in `site/index.html:21` and CSS in `site/index.html:4`.
+- Replaced custom waiver control with native labeled checkbox and JS now uses `$('waiver').checked` in `site/index.html:22` and `site/index.html:41`.
+- Converted cookie dismiss UI to a real accessible button with label and larger click target in `site/index.html:24` plus `.cookie-close` styling in `site/index.html:4`.
+- Renamed both CTAs from “Go” to “Book a free visit”, and changed `#nav-go` to call `openBooking()` instead of revealing `#prices` in `site/index.html:6` and `site/index.html:29`.
+
+If you want, I can run a quick local browser sanity pass (or help script a Kane-compatible manual checklist) before your next Kane run.

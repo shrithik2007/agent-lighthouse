@@ -1,0 +1,83 @@
+{
+  "type": "run_end",
+  "status": "failed",
+  "summary": "The test assumed that clicking the confirmation button had completed the booking and shown the expected reference. The recorded steps show the form was filled and the button was clicked, but they do not show a successful confirmation or that PL-4821 was ever displayed before the final check.\nUpdate the test to wait for and verify the booking-success message or reference immediately after confirmation, then perform the five-second persistence check. If PL-4821 is meant to be a fixed fixture, verify that the test setup supplies that fixture.",
+  "one_liner": "The run checked for PL-4821 without evidence that the booking confirmation page or reference had appeared.",
+  "final_state": {},
+  "reason": "Final verification failed: \"the text PL-4821 is still visible on the page\"",
+  "duration": 63.9,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "pl_4821_visible": {
+        "extracted_value": "false",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'false' -> 'false'; equals 'true' -> FAIL",
+        "analyzer_type": "visual",
+        "step": 12,
+        "query": "whether the text PL-4821 is present (on the page)",
+        "condition": "the text PL-4821 is still visible on the page",
+        "human_description": "Checking whether the text PL-4821 is present",
+        "expected_value": "true",
+        "subject": "the text PL-4821",
+        "must_be": "present"
+      }
+    },
+    "variables": {
+      "pl_4821_visible": {
+        "syntax": "{{pl_4821_visible}}",
+        "value": "false",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(failed) The run checked for PL-4821 without evidence that the booking confirmation page or reference had appeared."
+  },
+  "credits_consumed": 20.749695499999994,
+  "session_dir": "~/.testmuai/kaneai/sessions/637ca144-3771-4504-b197-19329a169c20",
+  "run_dir": "~/.testmuai/kaneai/sessions/637ca144-3771-4504-b197-19329a169c20/runs/0",
+  "result_code": 710,
+  "reason_code": "assertion_error.final_verification",
+  "per_flow_metadata": [
+    {
+      "result_code": "710",
+      "reason_code": "assertion_error.final_verification",
+      "error_message": "Final verification failed: \"the text PL-4821 is still visible on the page\"",
+      "summary": "The test assumed that clicking the confirmation button had completed the booking and shown the expected reference. The recorded steps show the form was filled and the button was clicked, but they do not show a successful confirmation or that PL-4821 was ever displayed before the final check.\nUpdate the test to wait for and verify the booking-success message or reference immediately after confirmation, then perform the five-second persistence check. If PL-4821 is meant to be a fixed fixture, verify that the test setup supplies that fixture.",
+      "one_liner": "The run checked for PL-4821 without evidence that the booking confirmation page or reference had appeared.",
+      "credits_consumed": 20.749695499999994
+    }
+  ],
+  "run_id": "run-0",
+  "verdict": {
+    "confirmed": false,
+    "status": "broken",
+    "family": "automation_bug",
+    "category": "state_transition_bug",
+    "category_proposal": "",
+    "severity": "minor",
+    "root_cause": "The test assumed that clicking the confirmation button had completed the booking and shown the expected reference. The recorded steps show the form was filled and the button was clicked, but they do not show a successful confirmation or that PL-4821 was ever displayed before the final check.",
+    "agent_fault_assessment": "The agent completed the recorded form interactions, including selecting noon, accepting the waiver, and clicking the confirmation button. However, it did not first confirm that this action changed the page to a successful booking state or that PL-4821 appeared before asserting that it remained visible. The failed assertion therefore follows an unsupported state assumption rather than demonstrated product behavior.",
+    "bug_title": "Booking reference asserted without confirmed booking state",
+    "signals": [],
+    "confidence": 0.86,
+    "suggestion": "Update the test to wait for and verify the booking-success message or reference immediately after confirmation, then perform the five-second persistence check. If PL-4821 is meant to be a fixed fixture, verify that the test setup supplies that fixture.",
+    "one_liner": "The run checked for PL-4821 without evidence that the booking confirmation page or reference had appeared.",
+    "relevant_steps": [
+      10,
+      12
+    ],
+    "culprit_step": "0-12",
+    "credits_consumed": 4.37355,
+    "mode": "terminal"
+  },
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QXDEV40MQ7FM9N3SQXS10A/dashboard/share/US_M6G29VM5X3SDUYPNFUTH8UKXKDC7FI4HMLNOSIAJVTBV817GJWU4MTHMQ65L1E4S?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T21:36:14.384Z"
+}
