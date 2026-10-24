@@ -37,6 +37,14 @@ h2 { margin: 0 0 12px; font-size: 14px; font-weight: 800; text-transform: upperc
 .chip[data-state="escalated"], .chip[data-state="error"] { background: var(--fail); color: #fff; }
 .chip[data-state="recorded"] { background: var(--hold); color: #14181F; }
 
+.cases { max-width: 1120px; margin: 0 auto; padding: 12px 24px 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.cases a { font-weight: 800; font-size: 14px; text-decoration: none; color: var(--ink); border: 2px solid var(--ink); padding: 6px 12px; border-radius: 999px; }
+.cases a[aria-current="page"] { background: var(--ink); color: var(--wall); }
+.savings { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.stat { display: flex; flex-direction: column; gap: 6px; background: var(--surface); padding: 16px; border-top: 4px solid var(--rope); }
+.mid { font-size: clamp(24px, 2.8vw, 34px); font-weight: 900; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.stat input { font: 700 16px var(--sans); width: 100%; max-width: 140px; padding: 6px 8px; border: 1px solid var(--concrete); border-radius: 4px; background: var(--wall); color: var(--ink); }
+.projection input { display: inline-block; width: 90px; margin: 0 4px; }
 .row { padding: 28px 0; border-bottom: 1px solid var(--concrete); }
 .state { padding: 64px 0; color: var(--muted); }
 .state.error { color: var(--fail); }
@@ -92,6 +100,8 @@ h2 { margin: 0 0 12px; font-size: 14px; font-weight: 800; text-transform: upperc
   .fail-card { grid-template-columns: 1fr; }
   .arrow { display: none; }
   .dots { grid-template-columns: 1fr; }
+  .savings { grid-template-columns: 1fr 1fr; }
+  .cases { padding: 12px 16px 0; }
 }
 @media print {
   :root { --ink: #14181F; --wall: #FFFFFF; --surface: #FFFFFF; --concrete: #D5DAE1; --muted: #4A5361; --rope: #1E3A5F; --pass: #1F7A4D; --fail: #B3261E; }

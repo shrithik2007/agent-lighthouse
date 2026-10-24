@@ -1,8 +1,42 @@
+import { savings } from '/dashboard/savings.js';
 // Renders results/latest.json (or results/demo-backup.json with ?recorded=1). Unknown values render as n/a.
 const params = new URLSearchParams(location.search);
 if (['light', 'dark'].includes(params.get('theme'))) document.documentElement.dataset.theme = params.get('theme');
 const recorded = params.has('recorded');
-const source = recorded ? '/results/demo-backup.json' : '/results/latest.json';
+const caseId = params.get('case') ?? 'demo';
+let source = recorded ? '/results/demo-backup.json' : '/results/latest.json';
+
+// Case switcher from results/cases.json; falls back to case 1 alone if the manifest is missing.
+async function loadCases() {
+  try {
+    const response = await fetch('/results/cases.json', { cache: 'no-store' });
+    if (!response.ok) return;
+    const cases = await response.json();
+    const current = cases.find(c => c.id === caseId) ?? cases[0];
+    source = `/${recorded && current.recorded ? current.recorded : current.latest}`;
+    document.getElementById('cases').replaceChildren(...cases.map(c => el('a', {
+      href: `?case=${encodeURIComponent(c.id)}${params.get('theme') ? `&theme=${params.get('theme')}` : ''}`,
+      'aria-current': c.id === current.id ? 'page' : null,
+    }, c.title)));
+  } catch { /* single-case view */ }
+}
+
+function renderSavings(view, data) {
+  // The note is set on the template; values update in the live page after insertion.
+  const slot = name => view.querySelector(`[data-slot="${name}"]`) ?? document.querySelector(`[data-slot="${name}"]`);
+  const after = data.postFix ?? data.referenceFix ?? null;
+  const update = () => {
+    const bookings = Number(document.getElementById('bookings').value);
+    const rateText = document.getElementById('rate').value.trim();
+    const result = savings({ agentTax: data.agentTax, before: data.before, after }, bookings, rateText === '' ? NaN : Number(rateText));
+    slot('saved').textContent = result.saved == null ? 'n/a' : `${result.saved.toFixed(1)} credits`;
+    slot('ratio').textContent = result.ratio == null ? 'n/a' : `${result.ratio.toFixed(1)}×`;
+    slot('monthly').textContent = result.monthly == null ? 'n/a' : `${Math.round(result.monthly).toLocaleString()} credits saved`;
+    slot('dollars').textContent = result.dollars == null ? 'Enter your plan’s rate to see dollars.' : `≈ $${result.dollars.toLocaleString(undefined, { maximumFractionDigits: 2 })} a month at your rate`;
+  };
+  slot('savings-note').textContent = `Per successful booking, from Agent Tax (${data.agentTaxBasis ?? 'n/a'}). Ratio compares median credits before (${num(data.before?.medianCredits, 1)}) with ${after ? `${after.label?.toLowerCase() ?? 'after'} (${num(after.medianCredits, 1)})` : 'n/a'}. No price is assumed.`;
+  return update;
+}
 
 const na = value => value == null || Number.isNaN(value) ? 'n/a' : value;
 const num = (value, digits = 0) => value == null ? 'n/a' : Number(value).toFixed(digits);
@@ -48,7 +82,7 @@ function dotsRow(groups) {
 function render(data) {
   const view = document.getElementById('report-template').content.cloneNode(true);
   const slot = name => view.querySelector(`[data-slot="${name}"]`);
-  document.getElementById('site-title').textContent = `${data.site?.name ?? 'Site'} · ${data.flow ?? 'flow'} flow`;
+  document.getElementById('site-title').textContent = data.case?.title ?? `${data.site?.name ?? 'Site'} · ${data.flow ?? 'flow'} flow`;
 
   // Row 1
   const row1 = view.querySelector('.row-1');
@@ -75,6 +109,8 @@ function render(data) {
     ref ? `Reference fix (hand-built AFTER fixture): ${na(ref.score)}, ${na(ref.passedCount)}/${na(ref.runCount)} passed, median ${num(ref.medianSteps)} steps.` : null,
     low ? 'Low confidence: fewer than three runs on one side.' : null,
   ].filter(Boolean).join(' ');
+
+  const updateSavings = renderSavings(view, data);
 
   // Row 2
   slot('dots').replaceChildren(...dotsRow(data.runGroups ?? []));
@@ -117,6 +153,8 @@ function render(data) {
   ] : [el('p', {}, 'No proposal yet.')]));
 
   report.replaceChildren(view);
+  for (const id of ['bookings', 'rate']) document.getElementById(id).addEventListener('input', updateSavings);
+  updateSavings();
   const outcome = data.outcome ?? 'baseline';
   if (recorded || data.recorded) setChip('recorded', 'Recorded run');
   else setChip(outcome, outcome === 'qualified' ? 'Qualified for owner review' : outcome === 'escalated' ? 'Escalated' : outcome === 'baseline' ? 'Baseline measured' : outcome);
@@ -130,6 +168,7 @@ function render(data) {
   );
 }
 
+await loadCases();
 try {
   const response = await fetch(source, { cache: 'no-store' });
   if (response.status === 404) { setChip('loading', 'No results'); showState(`No results yet: ${source} was not found. Run the baseline and loop first.`); }

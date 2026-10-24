@@ -1,0 +1,4 @@
+[
+  { "id": "demo", "title": "Case 1: Pitchline demo", "latest": "results/latest.json", "recorded": "results/demo-backup.json" },
+  { "id": "hard", "title": "Case 2: hard mode", "latest": "results/cases/hard/latest.json" }
+]

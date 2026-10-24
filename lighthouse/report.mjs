@@ -28,8 +28,8 @@ async function summarizeLoop(file) {
 }
 
 /** Compose results/latest.json from the recorded baseline and the newest loop record (if any). */
-export async function buildLatest({ cwd = process.cwd(), loopFile, proposeLoopFile, headline, links = {} } = {}) {
-  const baseline = JSON.parse(await readFile(join(cwd, 'results', 'baseline.json'), 'utf8'));
+export async function buildLatest({ cwd = process.cwd(), loopFile, proposeLoopFile, headline, links = {}, baselineFile = 'results/baseline.json', proposalFile = 'results/proposal.md', caseInfo = null } = {}) {
+  const baseline = JSON.parse(await readFile(join(cwd, baselineFile), 'utf8'));
   let loop = null;
   const loopDir = join(cwd, 'results', 'loop');
   if (loopFile) loop = JSON.parse(await readFile(loopFile, 'utf8'));
@@ -47,28 +47,28 @@ export async function buildLatest({ cwd = process.cwd(), loopFile, proposeLoopFi
     screenshot = await extractFailedScreenshot(failing.evidencePack.replace(/^~/, process.env.HOME), out).catch(() => null) ? join(failing.evidenceDir, 'failing-step.jpg') : null;
   }
   const failedStep = failing?.firstFailedStep;
-  const proposalPath = join(cwd, 'results', 'proposal.md');
-  const proposal = existsSync(proposalPath) ? { path: 'results/proposal.md', excerpt: (await readFile(proposalPath, 'utf8')).split('\n').slice(0, 14).join('\n') } : null;
+  const proposalPath = join(cwd, proposalFile);
+  const proposal = existsSync(proposalPath) ? { path: proposalFile, excerpt: (await readFile(proposalPath, 'utf8')).split('\n').slice(0, 14).join('\n') } : null;
 
   // The loop's own post-fix measurement and the hand-built reference fix are separate fields.
   const postFix = final ? sideSummary(final.summary, 'After loop repair') : null;
-  const referenceFix = sideSummary(baseline.after.summary, 'Reference fix (AFTER fixture)');
+  const referenceFix = baseline.after ? sideSummary(baseline.after.summary, 'Reference fix (AFTER fixture)') : null;
   const agentTaxValue = final?.agentTaxBefore ?? baseline.agentTax;
   const headlineSide = postFix ?? referenceFix;
   const scoreGap = baseline.before.summary.score != null && headlineSide?.score != null ? headlineSide.score - baseline.before.summary.score : null;
   return {
-    site: { name: 'Pitchline', beforeUrl: baseline.before.url, referenceUrl: baseline.after.url },
+    case: caseInfo, site: { name: 'Pitchline', beforeUrl: baseline.before.url, referenceUrl: baseline.after?.url ?? null },
     flow: baseline.flow, optimalSteps: baseline.optimalSteps, mode: loop?.mode ?? null, threshold: loop?.threshold ?? 80,
     outcome: loop?.outcome ?? 'baseline', loopId: loop?.loopId ?? null,
     headline: headline ?? (scoreGap != null && scoreGap >= 15 ? 'score' : 'tax'),
     before: sideSummary(baseline.before.summary, 'Before'),
     postFix, postFixScore: postFix?.score ?? null,
     referenceFix, referenceFixScore: referenceFix?.score ?? null,
-    agentTax: agentTaxValue, agentTaxBasis: final?.agentTaxBefore ? 'BEFORE vs repaired page, successful-run medians' : 'BEFORE vs AFTER reference fixture, successful-run medians',
+    agentTax: agentTaxValue, agentTaxBasis: final?.agentTaxBefore ? 'BEFORE vs repaired page, successful-run medians' : baseline.after ? 'BEFORE vs AFTER reference fixture, successful-run medians' : 'BEFORE vs optimalSteps only (no repaired measurement yet)',
     runGroups: [
       ['Before', beforeRuns.map(slim)],
       ...(loop?.attempts ?? []).filter(a => a.runs).map(a => [`Attempt ${a.attempt}`, [...a.runs, ...(a.humanPath ? [{ ...a.humanPath, humanPath: true }] : [])].map(slim)]),
-      ['Reference fix', baseline.after.runs.map(slim)],
+      ...(baseline.after ? [['Reference fix', baseline.after.runs.map(slim)]] : []),
     ],
     failingStep: failing ? {
       runLabel: failing.label, kaneRunId: failing.kaneRunId, site: failing.url, step: failedStep?.step ?? null,
@@ -94,8 +94,15 @@ export async function buildLatest({ cwd = process.cwd(), loopFile, proposeLoopFi
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2);
   const opt = name => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : undefined; };
-  const latest = await buildLatest({ loopFile: opt('loop'), proposeLoopFile: opt('propose-loop'), headline: opt('headline') });
-  await mkdir('results', { recursive: true });
-  await writeFile('results/latest.json', JSON.stringify(latest, null, 2) + '\n');
+  const flowPath = opt('flow');
+  const flow = flowPath ? JSON.parse(await readFile(flowPath, 'utf8')) : null;
+  const outDir = flow?.case?.outDir ?? 'results';
+  const latest = await buildLatest({
+    loopFile: opt('loop'), proposeLoopFile: opt('propose-loop'), headline: opt('headline'),
+    baselineFile: join(outDir, 'baseline.json'), proposalFile: join(outDir, 'proposal.md'),
+    caseInfo: flow?.case ? { id: flow.case.id, title: flow.case.title, reference: flow.expectedReference, optimalSteps: flow.optimalSteps } : null,
+  });
+  await mkdir(outDir, { recursive: true });
+  await writeFile(join(outDir, 'latest.json'), JSON.stringify(latest, null, 2) + '\n');
   console.log(`results/latest.json: headline ${latest.headline}, outcome ${latest.outcome}, before ${latest.before?.score ?? 'n/a'}, post-fix ${latest.postFixScore ?? 'n/a'}, reference fix ${latest.referenceFixScore ?? 'n/a'}`);
 }
