@@ -148,7 +148,8 @@ function render(el, d, title) {
     <div class="num"><small>Passed</small><b style="font-size:32px">${fmt(d.before?.passedCount)}/${fmt(d.before?.runCount)} → ${after ? `${fmt(after.passedCount)}/${fmt(after.runCount)}` : 'n/a'}</b></div></div>
     <p>${tax && tax.extraCredits != null ? `<span class="tax">Agent Tax: +${fmt(tax.extraSteps)} steps · +${fmt(tax.extraSeconds)} s · +${fmt(tax.extraCredits, 1)} credits per booking</span>` : '<span class="tax">Agent Tax: n/a (no successful booking to compare)</span>'}</p>
     <p class="note">${attempts.length ? `Loop: ${attempts.length} attempt${attempts.length > 1 ? 's' : ''}, outcome <b>${esc(d.outcome)}</b>; last attempt human path ${esc(final?.humanPath ?? 'n/a')}, gate ${esc(final?.gate ?? 'n/a')}.` : 'Loop not run yet.'}
-    ${d.failingStep ? `Kane: <code>${esc(d.failingStep.remark)}</code>.` : ''}</p>`;
+    ${d.failingStep ? `Kane: <code>${esc(d.failingStep.remark)}</code>.` : ''}</p>
+    ${d.operatorNote ? `<p style="border-left:4px solid var(--fail);padding-left:10px;font-weight:700">${esc(d.operatorNote)}</p>` : ''}`;
 }
 for (const [id, path, title] of [['case-demo', 'results/latest.json', 'Case 1: Pitchline (six planted problems)'], ['case-hard', 'results/cases/hard/latest.json', 'Case 2: hard mode (two-step booking, eleven problems)']]) {
   load(path).then(d => render(document.getElementById(id), d, title)).catch(e => { document.querySelector(`#${id} .note`).textContent = `Not available yet (${e.message}).`; });
