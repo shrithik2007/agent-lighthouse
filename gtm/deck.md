@@ -2,6 +2,8 @@
 
 Placeholders: [REPO_URL] · [VIDEO_URL]
 
+Presentable version (Slides artifact, private until shared): https://claude.ai/artifact/GoGwobRmwDmqZnt2gQKXoT
+
 ---
 
 ## 1. Agent Lighthouse
