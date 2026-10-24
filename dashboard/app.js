@@ -1,19 +1,22 @@
-import { savings } from '/dashboard/savings.js';
+import { savings } from './savings.js';
+// Paths resolve against the repo root, so the page works locally (:4100) and on GitHub Pages.
+const ROOT = new URL('../', import.meta.url);
+const at = path => new URL(path.replace(/^\/+/, ''), ROOT).href;
 // Renders results/latest.json (or results/demo-backup.json with ?recorded=1). Unknown values render as n/a.
 const params = new URLSearchParams(location.search);
 if (['light', 'dark'].includes(params.get('theme'))) document.documentElement.dataset.theme = params.get('theme');
 const recorded = params.has('recorded');
 const caseId = params.get('case') ?? 'demo';
-let source = recorded ? '/results/demo-backup.json' : '/results/latest.json';
+let source = at(recorded ? 'results/demo-backup.json' : 'results/latest.json');
 
 // Case switcher from results/cases.json; falls back to case 1 alone if the manifest is missing.
 async function loadCases() {
   try {
-    const response = await fetch('/results/cases.json', { cache: 'no-store' });
+    const response = await fetch(at('results/cases.json'), { cache: 'no-store' });
     if (!response.ok) return;
     const cases = await response.json();
     const current = cases.find(c => c.id === caseId) ?? cases[0];
-    source = `/${recorded && current.recorded ? current.recorded : current.latest}`;
+    source = at(recorded && current.recorded ? current.recorded : current.latest);
     document.getElementById('cases').replaceChildren(...cases.map(c => el('a', {
       href: `?case=${encodeURIComponent(c.id)}${params.get('theme') ? `&theme=${params.get('theme')}` : ''}`,
       'aria-current': c.id === current.id ? 'page' : null,
@@ -125,7 +128,7 @@ function render(data) {
       fail.reasonCode ? el('p', { class: 'meta' }, `Kane reason: ${fail.reasonCode}`) : null,
       fail.viewerCommand ? el('p', { class: 'meta' }, 'Open in Kane evidence viewer: ', el('code', {}, fail.viewerCommand)) : null,
       fail.testUrl ? el('p', {}, el('a', { href: fail.testUrl, target: '_blank', rel: 'noopener' }, 'Open the run in Test Manager')) : null),
-    fail.screenshot ? el('img', { src: `/${fail.screenshot}`, alt: `Kane screenshot at the failing step: ${fail.remark}` }) : el('p', { class: 'note' }, 'Screenshot: n/a'),
+    fail.screenshot ? el('img', { src: at(fail.screenshot), alt: `Kane screenshot at the failing step: ${fail.remark}` }) : el('p', { class: 'note' }, 'Screenshot: n/a'),
   ] : [el('p', {}, 'No failing step recorded.')]));
 
   // Row 4
@@ -149,7 +152,7 @@ function render(data) {
       ? `Propose-mode run ${data.proposeRun.loopId}: ${na(data.proposeRun.outcome)} on attempt ${na(data.proposeRun.attempts)}, score ${na(data.proposeRun.score)}, human path ${na(data.proposeRun.humanPath)}. Branch ${na(data.proposeRun.branch)} is left unmerged for the owner.`
       : `Mode: ${na(data.mode)} · outcome: ${na(data.outcome)}`),
     el('pre', {}, proposal.excerpt ?? ''),
-    el('a', { href: `/${proposal.path}` }, 'Read the full proposal'),
+    el('a', { href: at(proposal.path) }, 'Read the full proposal'),
   ] : [el('p', {}, 'No proposal yet.')]));
 
   report.replaceChildren(view);

@@ -4,14 +4,15 @@ import { extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.md': 'text/plain; charset=utf-8', '.jpg': 'image/jpeg', '.png': 'image/png' };
+const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.md': 'text/plain; charset=utf-8', '.jpg': 'image/jpeg', '.png': 'image/png', '.svg': 'image/svg+xml' };
 // Only the dashboard, the results it reads and committed evidence are served.
-const allowed = [/^dashboard\//, /^results\/(latest|demo-backup|cases)\.json$/, /^results\/cases\/[a-z0-9-]+\/(latest\.json|proposal\.md)$/, /^results\/proposal\.md$/, /^results\/loop\/[^/]+\.md$/, /^evidence\/.+\.(jpg|png|json|txt|md)$/];
+const allowed = [/^dashboard\//, /^results\/(latest|demo-backup|cases)\.json$/, /^results\/cases\/[a-z0-9-]+\/(latest\.json|proposal\.md)$/, /^results\/proposal\.md$/, /^results\/loop\/[^/]+\.md$/, /^evidence\/.+\.(jpg|png|json|txt|md)$/, /^site-public\//];
 
 export function createDashboardServer() {
   return http.createServer(async (req, res) => {
     let path = decodeURIComponent(new URL(req.url, 'http://localhost').pathname).replace(/^\/+/, '');
-    if (path === '' ) path = 'dashboard/index.html';
+    if (path === '' || path === 'dashboard') { res.writeHead(302, { Location: `/dashboard/${new URL(req.url, 'http://localhost').search}` }); return res.end(); }
+    if (path.endsWith('/')) path += 'index.html';
     const clean = normalize(path);
     if (clean.startsWith('..') || clean.includes(`..${sep}`) || !allowed.some(rule => rule.test(clean.split(sep).join('/')))) {
       res.writeHead(404); return res.end('Not found');
