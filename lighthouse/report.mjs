@@ -85,7 +85,7 @@ export async function buildLatest({ cwd = process.cwd(), loopFile, proposeLoopFi
     humanPath: { baseline: loop?.baseline.humanPath ? slim(loop.baseline.humanPath) : null, final: final?.humanPath ? slim(final.humanPath) : null },
     proposal,
     proposeRun: proposeLoopFile ? await summarizeLoop(proposeLoopFile) : null,
-    links: { runReport: 'https://kaneclihack.sh/t/lighthouse/proof', repo: null, video: null, ...links },
+    links: { runReport: 'https://kaneclihack.sh/t/lighthouse/proof', repo: 'https://github.com/shrithik2007/agent-lighthouse', video: null, ...links },
     recorded: false,
     generatedAt: new Date().toISOString(),
   };
@@ -100,7 +100,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const latest = await buildLatest({
     loopFile: opt('loop'), proposeLoopFile: opt('propose-loop'), headline: opt('headline'),
     baselineFile: join(outDir, 'baseline.json'), proposalFile: join(outDir, 'proposal.md'),
-    caseInfo: flow?.case ? { id: flow.case.id, title: flow.case.title, reference: flow.expectedReference, optimalSteps: flow.optimalSteps } : null,
+    caseInfo: flow?.case ? { id: flow.case.id, title: flow.case.title, siteDir: flow.case.siteFile.replace(/[^/]+$/, ''), reference: flow.expectedReference, optimalSteps: flow.optimalSteps } : null,
   });
   await mkdir(outDir, { recursive: true });
   await writeFile(join(outDir, 'latest.json'), JSON.stringify(latest, null, 2) + '\n');

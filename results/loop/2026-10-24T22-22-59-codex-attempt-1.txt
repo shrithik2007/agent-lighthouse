@@ -1,0 +1,16 @@
+Implemented all requested fixes in `site-hard/index.html` only, with the existing look/tone preserved and `PL-7302` retained.
+
+**What I Changed**
+- Removed CAPTCHA as a blocking requirement and replaced it with non-blocking demo copy (`site-hard/index.html:31`), and removed `human` from submit logic (`site-hard/index.html:100`).
+- Replaced custom waiver UI with a real required checkbox label/input (`site-hard/index.html:30`) and validation now checks `checked` (`site-hard/index.html:105`).
+- Replaced hover-only custom time dropdown with native labeled `<select id="time">` including `9am`, `12pm`, `6pm` (`site-hard/index.html:29`).
+- Added visible labels + better semantics for name/email, including `type="email"` and autocomplete (`site-hard/index.html:26`, `site-hard/index.html:27`).
+- Made calendar month controls real buttons and day cells real buttons with accessible names like `Select November 2, 2026` (`site-hard/index.html:28`, `site-hard/index.html:80`).
+- Added native labeled date input initialized to `2026-11-02` and initialized calendar view to November 2026 (`site-hard/index.html:28`, `site-hard/index.html:43`).
+- Replaced generic error text with field-specific guidance (`site-hard/index.html:108`-`site-hard/index.html:112`).
+- Updated confirmation flow: primary `Confirm booking`, secondary `Go back` (`site-hard/index.html:33`).
+- Added persistent live confirmation panel with `role="status"` / `aria-live` including `PL-7302` (`site-hard/index.html:34`), and extended toast visibility to 5 seconds (`site-hard/index.html:123`).
+- Converted tiny overlay dismiss controls to real labeled buttons for `#cookie-close`, `#news-close`, `#news-skip` (`site-hard/index.html:38`, `site-hard/index.html:39`) and stopped newsletter timer once booking starts (`site-hard/index.html:48`, `site-hard/index.html:65`).
+- Clarified CTAs: hero now `Book free first visit`, nav CTA now opens booking flow (`site-hard/index.html:15`, `site-hard/index.html:17`, `site-hard/index.html:52`).
+
+If you want, I can now run a quick Kane-style manual walkthrough checklist against this page to verify each acceptance step end-to-end.

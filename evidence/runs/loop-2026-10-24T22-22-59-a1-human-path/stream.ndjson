@@ -1,0 +1,42 @@
+{"type":"stream_start","cli_version":"0.10.0-rc.3","surface":"run","pid":43843,"v":1,"ts":"2026-10-24T22:30:30.987Z"}
+{"type":"recording_state","enabled":true,"session_id":"2235bd28-85e8-4fb9-be8e-1e80a646b5d9","persist":true,"session_name":"human-path","test_path":"~/Projects/kane-hack/.testmuai/tests/human-path_test.md","output_path":"~/Projects/kane-hack/.testmuai/tests/output-human-path","v":1,"ts":"2026-10-24T22:30:30.989Z"}
+{"type":"bifurcation","flows":["Navigate to http://localhost:4104 then Book the free first visit class: choose that class, enter the name Sam Rivera and the email sam@example.com, pick 2 November 2026 and the arrival time noon, accept the climbing waiver, complete the human check and confirm the booking.\nWait 5 seconds, then verify the text PL-7302 is still visible on the page."],"count":1,"v":1,"ts":"2026-10-24T22:30:37.317Z"}
+{"step":2,"status":"running","remark":"Step 1","v":1,"ts":"2026-10-24T22:30:37.521Z"}
+{"step":2,"status":"done","remark":"navigate: Navigate to http://localhost:4104","v":1,"ts":"2026-10-24T22:30:37.523Z"}
+{"step":3,"status":"running","remark":"Step 2","v":1,"ts":"2026-10-24T22:30:41.244Z"}
+{"step":3,"status":"done","remark":"click: Clicking skip newsletter signup button","v":1,"ts":"2026-10-24T22:30:46.378Z"}
+{"step":4,"status":"running","remark":"Step 3","v":1,"ts":"2026-10-24T22:30:47.002Z"}
+{"step":4,"status":"done","remark":"click: Clicking Close cookie notice button","v":1,"ts":"2026-10-24T22:30:51.308Z"}
+{"step":5,"status":"running","remark":"Step 4","v":1,"ts":"2026-10-24T22:30:51.904Z"}
+{"step":5,"status":"done","remark":"click: Clicking Book free first visit button","v":1,"ts":"2026-10-24T22:30:56.229Z"}
+{"step":6,"status":"running","remark":"Step 5","v":1,"ts":"2026-10-24T22:30:56.801Z"}
+{"step":6,"status":"done","remark":"click: Clicking the Free first visit class card in the booking panel","v":1,"ts":"2026-10-24T22:31:01.176Z"}
+{"step":7,"status":"running","remark":"Step 6","v":1,"ts":"2026-10-24T22:31:01.747Z"}
+{"step":7,"status":"done","remark":"click: Clicking Continue button","v":1,"ts":"2026-10-24T22:31:05.762Z"}
+{"step":8,"status":"running","remark":"Step 7","v":1,"ts":"2026-10-24T22:31:06.356Z"}
+{"step":8,"status":"done","remark":"wait: queued plan (6 steps): type \"Name\"; type \"Email\"; click \"Select November 2, 2026","v":1,"ts":"2026-10-24T22:31:13.503Z"}
+{"step":9,"status":"running","remark":"Step 8","v":1,"ts":"2026-10-24T22:31:14.084Z"}
+{"step":9,"status":"done","remark":"type: Type \"Sam Rivera\" into \"Name\"","v":1,"ts":"2026-10-24T22:31:14.150Z"}
+{"step":10,"status":"running","remark":"Step 9","v":1,"ts":"2026-10-24T22:31:14.738Z"}
+{"step":10,"status":"done","remark":"type: Type \"sam@example.com\" into \"Email\"","v":1,"ts":"2026-10-24T22:31:14.795Z"}
+{"step":11,"status":"running","remark":"Step 10","v":1,"ts":"2026-10-24T22:31:15.387Z"}
+{"step":11,"status":"done","remark":"click: Click \"Select November 2, 2026\"","v":1,"ts":"2026-10-24T22:31:15.967Z"}
+{"step":12,"status":"running","remark":"Step 11","v":1,"ts":"2026-10-24T22:31:16.550Z"}
+{"step":12,"status":"done","remark":"select: Select \"12pm\" in \"Arrival time\"","v":1,"ts":"2026-10-24T22:31:16.587Z"}
+{"step":13,"status":"running","remark":"Step 12","v":1,"ts":"2026-10-24T22:31:17.171Z"}
+{"step":13,"status":"done","remark":"click: Click \"I accept the climbing waiver.\"","v":1,"ts":"2026-10-24T22:31:17.750Z"}
+{"step":14,"status":"running","remark":"Step 13","v":1,"ts":"2026-10-24T22:31:18.336Z"}
+{"step":14,"status":"done","remark":"click: Click \"Continue\"","v":1,"ts":"2026-10-24T22:31:18.918Z"}
+{"step":15,"status":"running","remark":"Step 14","v":1,"ts":"2026-10-24T22:31:19.497Z"}
+{"step":15,"status":"done","remark":"wait: PRIMARY: wait briefly after completing the free first-visit booking details","v":1,"ts":"2026-10-24T22:31:25.083Z"}
+{"step":16,"status":"running","remark":"Step 15","v":1,"ts":"2026-10-24T22:31:25.670Z"}
+{"step":16,"status":"done","remark":"click: Clicking Confirm booking button","v":1,"ts":"2026-10-24T22:31:30.921Z"}
+{"step":17,"status":"running","remark":"Step 16","v":1,"ts":"2026-10-24T22:31:31.498Z"}
+{"step":17,"status":"done","remark":"wait: PRIMARY: wait 5000 ms after booking confirmation","v":1,"ts":"2026-10-24T22:31:38.544Z"}
+{"step":18,"status":"running","remark":"Step 17","v":1,"ts":"2026-10-24T22:31:39.118Z"}
+{"step":18,"status":"done","remark":"analyze: the text PL-7302 is still visible on the page","v":1,"ts":"2026-10-24T22:31:44.440Z"}
+{"step":19,"status":"running","remark":"Step 18","v":1,"ts":"2026-10-24T22:31:45.065Z"}
+{"step":19,"status":"done","remark":"assert: the text PL-7302 is still visible on the page","v":1,"ts":"2026-10-24T22:31:45.068Z"}
+{"type":"test_md_bundle_sync","status":"ok","commit_id":"2235bd28-85e8-4fb9-be8e-1e80a646b5d9","path":"~/Projects/kane-hack/.testmuai/tests/human-path-10_test.md","bytes":16498,"v":1,"ts":"2026-10-24T22:31:56.461Z"}
+{"type":"coverage","status":"skipped","reason":"not_assurance_project","pack":"~/.testmuai/kaneai/sessions/2235bd28-85e8-4fb9-be8e-1e80a646b5d9/evidence/c322b726-b1e7-41ee-aba4-7531f8b7d821.evidence","v":1,"ts":"2026-10-24T22:31:56.462Z"}
+{"type":"run_end","status":"passed","summary":"Booked the free first visit class for Sam Rivera using sam@example.com, scheduled for 2 November 2026 at noon.\nAccepted the climbing waiver, completed the human check, and confirmed the booking.\nWaited 5 seconds after confirmation; the confirmation reference PL-7302 remained visible on the page.","one_liner":"booked a free first visit class on the climbing booking site","final_state":{"url":"http://localhost:4104/","booking_reference":"PL-7302","pl_7302_visible":"true"},"reason":"Objective completed","duration":72.6,"bifurcated":false,"total_runs":1,"context":{"memory":{"pl_7302_visible":{"extracted_value":"true","operator":"equals","transforms":[],"json_path":null,"reasoning":"value: 'true' -> 'true'; equals 'true' -> PASS","analyzer_type":"textual_visual","step":17,"query":"whether the text PL-7302 is present (in the visit confirmation message)","condition":"the text PL-7302 is still visible on the page","human_description":"Checking whether the text PL-7302 is present","expected_value":"true","subject":"the text PL-7302","must_be":"present","code_js":"el(30).textContent.includes('PL-7302')","wrapped_js":"(els) => {\n  const __m = {30: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(30).textContent.includes('PL-7302'));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}","locators":["internal:text=\"PL-7302\"s"],"needs_unit_conversion":false}},"variables":{"pl_7302_visible":{"syntax":"{{pl_7302_visible}}","value":"true","type":"memory","secret":false}},"pointer":"(passed) booked a free first visit class on the climbing booking site"},"credits_consumed":25.706649999999996,"session_dir":"~/.testmuai/kaneai/sessions/2235bd28-85e8-4fb9-be8e-1e80a646b5d9","run_dir":"~/.testmuai/kaneai/sessions/2235bd28-85e8-4fb9-be8e-1e80a646b5d9/runs/0","result_code":100,"reason_code":"success.complete","per_flow_metadata":[{"result_code":"100","reason_code":"success.complete","error_message":null,"summary":"Booked the free first visit class for Sam Rivera using sam@example.com, scheduled for 2 November 2026 at noon.\nAccepted the climbing waiver, completed the human check, and confirmed the booking.\nWaited 5 seconds after confirmation; the confirmation reference PL-7302 remained visible on the page.","one_liner":"booked a free first visit class on the climbing booking site","credits_consumed":25.706649999999996}],"run_id":"run-0","test_url":"https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R0JZNQVJCAEW226B9Z5FH2/dashboard/share/US_Y5R2QO5X4FQ1B9PLK73GC6M4RYWHKTO1F7TRUR7LMKPXXX1V1HV8IRHZ0QO81P10?type=summary&agentView=true&fqdn=summary-page","coverage":{"status":"skipped"},"v":1,"ts":"2026-10-24T22:31:56.462Z"}

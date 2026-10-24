@@ -62,7 +62,7 @@ const showState = (text, error = false) => {
 };
 
 export function taxLine(tax) {
-  if (!tax) return 'Agent Tax: n/a';
+  if (!tax || [tax.extraSteps, tax.extraSeconds, tax.extraCredits].every(v => v == null)) return 'n/a: no successful booking before the repair to compare against';
   return `+${num(tax.extraSteps)} steps · +${num(tax.extraSeconds)} s · +${num(tax.extraCredits)} credits per booking`;
 }
 
@@ -143,11 +143,13 @@ function render(data) {
     el('td', {}, el('span', { class: `pill ${a.gate === 'pass' ? 'ok' : 'bad'}` }, na(a.gate)), a.gateReason ? el('div', { class: 'note' }, a.gateReason) : null),
   )) : [el('tr', {}, el('td', { colspan: 7 }, 'No repair attempts yet.'))]));
   const reverted = attempts.flatMap(a => a.scopeGuardReverted ?? []);
-  slot('scope-note').textContent = `Scope guard: the fixer may change only site/. ${reverted.length ? `Reverted outside scope: ${reverted.join(', ')}.` : 'Nothing outside site/ had to be reverted.'} Qualifies only when score ≥ ${na(data.threshold)} and the human path passes.`;
+  const scope = data.case?.siteDir ?? 'site/';
+  slot('scope-note').textContent = `Scope guard: the fixer may change only ${scope}. ${reverted.length ? `Reverted outside scope: ${reverted.join(', ')}.` : `Nothing outside ${scope} had to be reverted.`} Qualifies only when score ≥ ${na(data.threshold)} and the human path passes.`;
 
   // Row 5
   const proposal = data.proposal;
   slot('review').replaceChildren(...(proposal ? [
+    data.operatorNote ? el('p', { class: 'operator-note' }, data.operatorNote) : null,
     el('p', { class: 'meta' }, data.proposeRun
       ? `Propose-mode run ${data.proposeRun.loopId}: ${na(data.proposeRun.outcome)} on attempt ${na(data.proposeRun.attempts)}, score ${na(data.proposeRun.score)}, human path ${na(data.proposeRun.humanPath)}. Branch ${na(data.proposeRun.branch)} is left unmerged for the owner.`
       : `Mode: ${na(data.mode)} · outcome: ${na(data.outcome)}`),
@@ -160,6 +162,7 @@ function render(data) {
   updateSavings();
   const outcome = data.outcome ?? 'baseline';
   if (recorded || data.recorded) setChip('recorded', 'Recorded run');
+  else if (data.operatorNote) setChip('escalated', 'Qualified · reviewer says do not merge');
   else setChip(outcome, outcome === 'qualified' ? 'Qualified for owner review' : outcome === 'escalated' ? 'Escalated' : outcome === 'baseline' ? 'Baseline measured' : outcome);
 
   const links = data.links ?? {};

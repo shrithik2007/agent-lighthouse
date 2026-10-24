@@ -4,6 +4,8 @@ Kane measures booking friction. OpenAI proposes repairs. Kane verifies the chang
 
 **Track:** Web App · **Team:** Lighthouse · **Built:** October 24, 2026, Kane CLI Hack Day SF.
 
+**Product page:** https://shrithik2007.github.io/agent-lighthouse/ · **Live report:** https://shrithik2007.github.io/agent-lighthouse/dashboard/ (case switcher, savings panel; `?recorded=1` for the recorded demo run)
+
 ## What it does
 
 AI agents are starting to book things for people. Agent Lighthouse measures how hard a site makes that, repairs what trips the agent, and proves the repair before anyone merges it:
@@ -40,6 +42,24 @@ All numbers come from real Kane CLI 0.10.0-rc.3 runs on October 24, 2026, launch
   The baseline human path failed in every loop (KR-148, KR-154, KR-161). Agent Tax differs between loops because each repaired page is measured afresh, and Kane varies.
 - **Replay.** The named human-path run on the repaired site (KR-169) was saved as `tests/kane/human-path_test.md`, and `npm run kane:replay` replays it. It replayed once and passed in 12 s (KR-170). Replays are feature coverage only, never scored.
 
+## Case 2: hard mode
+
+A second sample site (`fixtures/hard/`, working copy `site-hard/` on :4103) has a two-step class booking with the six original problems plus five more: a newsletter modal that opens 3 s after load, time slots in a custom dropdown that opens on hover only, a date picker made of unlabeled divs that starts on the wrong month, an "Are you sure?" step whose primary button says "Go back", and a reCAPTCHA-style check that is a styled div. jsdom tests (`tests/hard.test.mjs`) prove a careful human can complete it. Reference `PL-7302`, optimalSteps 14 (reasoning in `flows/book-hard.json`; not yet owner-confirmed).
+
+| | Score | Passed | Median steps | Human path |
+| --- | --- | --- | --- | --- |
+| BEFORE (KR-190, KR-191, KR-193) | **0** | 0/3 | 12 | failed (KR-194) |
+| Proposed fix, attempt 1 (`134e5b8`, unmerged) | **98** | 3/3 | 16 | passed (KR-206) |
+
+- **What Kane caught:** every BEFORE run cleared the newsletter modal, cookie wall, class step, month navigation and hover-only dropdown, then stopped at the fake captcha with `reason_code: blocker.captcha`: "The booking could not be completed because a CAPTCHA required a human verification." Kane will not impersonate a human.
+- **Agent Tax: n/a.** No BEFORE run booked successfully, so there is no per-booking tax or credit ratio to compute; the dashboard says so instead of showing zero.
+- **The gate passed a patch an owner should reject.** The propose-mode loop qualified on attempt 1, but the fix removed the human-verification check ("Demo mode: no human verification required") and hard-coded the test's date (`selectedDate = '2026-11-02'`). The gate checks outcomes, not intent. The operator review note at the end of `results/cases/hard/proposal.md` says not to merge, and the dashboard chip reads "Qualified · reviewer says do not merge". This is why propose mode is the default: a person decides.
+- Records: `results/cases/hard/` (baseline, latest, proposal), `results/loop/2026-10-24T22-22-59.json`, evidence under `evidence/runs/hard-baseline-*` and `evidence/runs/loop-2026-10-24T22-22-59-*`, packs `evidence/packs/KR-190…`, `KR-194…`, `KR-196…`, `KR-206…`.
+
+## Savings panel
+
+The dashboard turns Agent Tax into credits saved per booking, the before/after credit ratio, and a projection "at N agent bookings a month" (N editable, default 500). For case 1: 36.2 credits saved per booking and a 2.9× ratio (55.4 vs 19.2 median credits); about 18,100 credits a month at 500 bookings. A dollar figure appears only if the viewer enters their plan's rate; no price is assumed. Everything is in Kane's unit, credits (`credits_consumed`), never tokens.
+
 ## Run locally
 
 Requires Node.js 24.15+ LTS and npm (Node 22.22.2+ and 26+ also work). The fix loop and measurements also need Google Chrome, `kane-cli` 0.10.0-rc (signed in), the event's `kanehack` helper, the `codex` CLI and an OpenAI API key.
@@ -47,8 +67,8 @@ Requires Node.js 24.15+ LTS and npm (Node 22.22.2+ and 26+ also work). The fix l
 ```sh
 npm ci
 npm test                    # unit, jsdom and stream-parser tests (no network)
-npm run serve               # :4101 BEFORE / working copy (site/), :4102 AFTER reference fix
-npm run dashboard           # :4100 audit report from results/latest.json (?recorded=1 for demo-backup.json)
+npm run serve               # :4101 BEFORE / working copy (site/), :4102 AFTER reference fix, :4103 hard mode (site-hard/)
+npm run dashboard           # :4100 → /dashboard/ (cases, savings) and /site-public/ (product page)
 
 # Measure a page: 3 fresh wrapped Kane runs
 node lighthouse/measure.mjs http://localhost:4101 3
@@ -56,6 +76,7 @@ node lighthouse/measure.mjs http://localhost:4101 3
 # Full loop (Kane always runs from your own shell, never inside a Codex sandbox)
 export OPENAI_API_KEY=...   # read from the environment only; never written or printed
 OPENAI_MODEL=gpt-5.5 npm run loop -- --flow book --threshold 80 --max-attempts 3 --mode propose   # or --mode apply
+OPENAI_MODEL=gpt-5.5 npm run loop -- --flow book-hard --mode propose   # case 2 (hard mode); propose only
 npm run report              # rebuild results/latest.json
 npm run demo:reset          # restore site/index.html from BEFORE (results and evidence kept)
 ```
@@ -68,13 +89,17 @@ Pitchline is fictional. Both pages run entirely in the browser and create no rea
 fixtures/before/index.html   Immutable baseline with the six planted problems
 fixtures/after/index.html    Reference fix that repairs each problem
 site/index.html              Editable working copy served on :4101; the loop's fixer edits only this
+fixtures/hard/index.html     Case 2: two-step class booking with eleven planted problems (reference PL-7302)
+site-hard/index.html         Case 2 working copy on :4103; the fixer edits only this for flows/book-hard.json
+site-public/                 Product page for site owners (published on GitHub Pages with the dashboard)
 flows/book.json              Objective, human-path objective, optimalSteps=10 and its reasoning
+flows/book-hard.json         Case 2 objective, human path, optimalSteps=14, extra checklist, case paths and ports
 core/score.mjs               Pure score, comparison, gate and Agent Tax functions
 lighthouse/kane.mjs          Wrapped Kane launcher (kanehack report → kane-cli run), raw capture
 lighthouse/parse.mjs         NDJSON stream → observation (steps, actions vs overhead, failures, credits)
 lighthouse/loop.mjs          Fix loop: diagnosis → fixer → scope guard → re-measure → human path → gate
 lighthouse/openai.mjs        OpenAI Responses client; logs every call to results/openai-calls.jsonl
-dashboard/                   Vanilla one-page audit report
+dashboard/                   Vanilla one-page audit report: case switcher, savings panel (credits, never tokens)
 evidence/                    Per-run streams, run_end, test_url, failing screenshots (see evidence/README.md)
 results/                     baseline.json, loop/*.json, proposal.md, latest.json, openai-calls.jsonl
 ```
@@ -110,6 +135,7 @@ Verified in this build against `kane-cli run --help` (0.10.0-rc.3):
 - Evidence packs (`.evidence`): failing-step screenshot, `failure.yaml`, console and network logs, read by the diagnosis; viewable with `kane-cli evidence serve <pack>`
 - Kane's own failure triage (`reason_code: assertion_error.confirmed_product_bug`)
 - `kanehack report` (event wrapper) to register every run on the team Proof tab
+- Kane's blocker classification (`blocker.captcha`) on the hard-mode site
 
 ## The planted fixture
 
@@ -145,6 +171,11 @@ All code was written on October 24, 2026 (see `git log`):
 - Kane varies from run to run (BEFORE took 14–24 steps). Three runs per side is a small sample, so we use repeated fresh measurements, never replays.
 - The fix loop is limited to sites we own. External pages would get a score only, stopping before submit, and score-only mode is not built.
 - Codex's ChatGPT-plan quota ran out during the first loop. That loop is kept as `results/loop/2026-10-24T21-11-48.json` (aborted). The fixer now passes the API key to Codex through the environment and falls back to the OpenAI API returning the whole file.
+- **The gate checks outcomes, not intent.** In case 2 it qualified a patch that removed human verification and hard-coded the objective's date. Propose mode and owner review caught it; intent checks in the scope guard are future work.
+- Kane refuses to complete captcha-style human checks (`blocker.captcha`), so sites with real bot protection need an owner-approved test path before they can be measured.
+- Case 2's optimalSteps (14) was counted during the post-evaluation build and has not been confirmed by the owner. Case 2 has no hand-built reference fix.
+- The demo loop's attempt server moved from :4103 to :4105 when :4103 became the hard-mode working copy (port only; the loop is otherwise unchanged).
+- The product page quotes an illustrative (not measured) 92% vs 12% figure from Future AGI and labels it as illustrative.
 - The first calibration run exited 2 because Kane was launched inside Codex's sandbox (EPERM on `~/.testmuai`, Chrome never started). Kane now always runs from the operator's shell.
 
 ## Checkpoint policy

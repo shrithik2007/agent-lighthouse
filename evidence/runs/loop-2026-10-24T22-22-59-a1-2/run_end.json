@@ -1,0 +1,99 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Booked the free first-visit class for Sam Rivera using sam@example.com for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed with reference code PL-7302.",
+  "one_liner": "booked a free first-visit class and accepted the waiver on the booking site",
+  "final_state": {
+    "url": "http://localhost:4104/",
+    "booking_reference": "PL-7302",
+    "booking_confirmation": "Booking confirmed"
+  },
+  "reason": "Objective completed",
+  "duration": 74.3,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "booking_confirmation_with_reference_code_shown": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 15,
+        "query": "whether a booking confirmation with a reference code is present (in the booking confirmation status message)",
+        "condition": "A booking confirmation with a reference code is shown.",
+        "human_description": "Checking whether the booking confirmation with reference code is present",
+        "expected_value": "true",
+        "subject": "a booking confirmation with a reference code",
+        "must_be": "present",
+        "code_js": "/booking confirmed/i.test(el(27).innerText) && /reference is\\s+\\S+/i.test(el(27).innerText)",
+        "wrapped_js": "(els) => {\n  const __m = {27: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (/booking confirmed/i.test(el(27).innerText) && /reference is\\s+\\S+/i.test(el(27).innerText));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Booking confirmedYour visit\"i"
+        ],
+        "needs_unit_conversion": false
+      },
+      "ref": {
+        "extracted_value": "PL-7302",
+        "operator": "equals",
+        "transforms": [
+          "strip"
+        ],
+        "json_path": null,
+        "reasoning": "value: 'PL-7302' (stored, no comparison)",
+        "analyzer_type": "textual_visual",
+        "step": 15,
+        "query": "the booking reference code in the booking confirmation message",
+        "condition": "The booking reference is stored as {{ref}}.",
+        "human_description": "Extracting the booking reference code from the confirmation",
+        "expected_value": "",
+        "code_js": "el(30).textContent.trim()",
+        "wrapped_js": "(els) => {\n  const __m = {30: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(30).textContent.trim());\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"PL-7302\"s"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "PL-7302",
+        "type": "memory",
+        "secret": false,
+        "source": "runtime"
+      },
+      "booking_confirmation_with_reference_code_shown": {
+        "syntax": "{{booking_confirmation_with_reference_code_shown}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) booked a free first-visit class and accepted the waiver on the booking site"
+  },
+  "credits_consumed": 26.234090000000002,
+  "session_dir": "~/.testmuai/kaneai/sessions/fb23a804-5d2a-45e8-9d44-027e1844edd3",
+  "run_dir": "~/.testmuai/kaneai/sessions/fb23a804-5d2a-45e8-9d44-027e1844edd3/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Booked the free first-visit class for Sam Rivera using sam@example.com for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed with reference code PL-7302.",
+      "one_liner": "booked a free first-visit class and accepted the waiver on the booking site",
+      "credits_consumed": 26.234090000000002
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R0DASJAJNGZ4P5MK18PVSH/dashboard/share/US_RIRPJSZ2RBK135AEE5ULLW19MKNQMDZRSR690DO508EHVFH9H3RSAH9DU9JZOAPM?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T22:28:52.729Z"
+}

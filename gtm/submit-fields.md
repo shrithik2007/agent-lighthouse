@@ -14,7 +14,9 @@ Numbers come from `results/latest.json` (generated from the apply-mode loop `202
 
 **Exact commit SHA (40 hex):** [COMMIT_SHA]
 
-**Live demo URL or run command:**
+**Live demo URL or run command:** https://shrithik2007.github.io/agent-lighthouse/ (product page) · https://shrithik2007.github.io/agent-lighthouse/dashboard/ (live report, two cases, savings)
+
+Local:
 ```
 npm ci && npm run serve & npm run dashboard
 # measure: node lighthouse/measure.mjs http://localhost:4101 3
@@ -38,11 +40,11 @@ Dashboard: http://localhost:4100 (recorded run: http://localhost:4100/?recorded=
 
 **Harness description:** Fresh goal-driven runs with a natural-language date (the ISO format is never mentioned) and three sequential runs per measurement; replays are never scored. A named human-path run checks that the reference PL-4821 is still visible five seconds after booking. Every completed step is counted, keyed by child context, and split into actions vs overhead. optimalSteps = 10 was hand-counted and confirmed.
 
-**Kane components used:** `kane-cli run --agent --headless --timeout 180` (NDJSON, `run_end`, exit codes), `--name human-path` saved run, `kane-cli testmd run` replay of the saved test, evidence packs (failing-step screenshot, failure.yaml, console/network logs) read by the diagnosis, `kane-cli evidence serve`, Kane's failure triage (`confirmed_product_bug`), and `kanehack report` to register runs.
+**Kane components used:** `kane-cli run --agent --headless --timeout 180` (NDJSON, `run_end`, exit codes), `--name human-path` saved run, `kane-cli testmd run` replay of the saved test, evidence packs (failing-step screenshot, failure.yaml, console/network logs) read by the diagnosis, `kane-cli evidence serve`, Kane's failure triage (`confirmed_product_bug`) and blocker classification (`blocker.captcha`), and `kanehack report` to register runs.
 
-**Measured impact:** BEFORE scored 51 (2/3 passed, median 22 steps). The loop's repair scored 97 (3/3 passed, median 12 steps, exactly 10 actions each), qualifying on attempt 1 with the human path passing. Agent Tax removed: +10 steps · +84 s · +36.2 credits per booking. The hand-built reference fix also scores 97. Repeatability: three full loops from BEFORE all qualified on attempt 1 (97 apply, 94 propose, 94 apply), each with a passing human path.
+**Measured impact:** BEFORE scored 51 (2/3 passed, median 22 steps). The loop's repair scored 97 (3/3 passed, median 12 steps, exactly 10 actions each), qualifying on attempt 1 with the human path passing. Agent Tax removed: +10 steps · +84 s · +36.2 credits per booking. The hand-built reference fix also scores 97. Repeatability: three full loops from BEFORE all qualified on attempt 1 (97 apply, 94 propose, 94 apply), each with a passing human path. Case 2 (hard mode, eleven problems): BEFORE 0 (0/3, every run stopped by a fake captcha, `blocker.captcha`), proposed fix 98 (3/3, human path passed), held for owner review because the fix removed human verification and hard-coded the test date. Savings for case 1: 36.2 credits per booking, 2.9× fewer credits, about 18,100 credits a month at 500 agent bookings.
 
-**Known limitations:** The Proof tab labels passing Kane 0.10 runs "errored": the `kanehack report` parser (`lib/stream.mjs`) treats Kane's `coverage` event as an assurance stream and ignores `run_end` (ticket H-0011). Exit codes and `run_end` are preserved, and raw streams are in `evidence/`. The score weights are a design choice and optimalSteps is hand-counted. The demo site has planted patterns and no booking backend. Kane varies from run to run (BEFORE took 14–24 steps), and three runs per side is a small sample. The fix loop is limited to sites we own, and score-only mode for external sites is not built.
+**Known limitations:** The Proof tab labels passing Kane 0.10 runs "errored": the `kanehack report` parser (`lib/stream.mjs`) treats Kane's `coverage` event as an assurance stream and ignores `run_end` (ticket H-0011). Exit codes and `run_end` are preserved, and raw streams are in `evidence/`. The score weights are a design choice and optimalSteps is hand-counted. The demo site has planted patterns and no booking backend. Kane varies from run to run (BEFORE took 14–24 steps), and three runs per side is a small sample. The fix loop is limited to sites we own, and score-only mode for external sites is not built. The gate checks outcomes, not intent: in case 2 it qualified a patch that removed human verification and hard-coded the test date, which owner review rejected. Kane refuses captcha-style checks, so sites with real bot protection need an owner-approved test path. Case 2's optimalSteps (14) is not owner-confirmed.
 
 **Screenshots:** `gtm/screenshots/dashboard-row1.png`, `gtm/screenshots/social-preview.png`, `gtm/screenshots/failing-step.jpg`, `gtm/screenshots/proposal.png`, `gtm/screenshots/terminal-run-end.png`
 

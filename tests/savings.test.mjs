@@ -22,3 +22,8 @@ test('unknown tax or medians stay null, never zero', () => {
   const result = savings({ agentTax: null, before: { medianCredits: null }, after: null }, 500, 0.01);
   assert.deepEqual(result, { saved: null, ratio: null, monthly: null, dollars: null });
 });
+
+test('no ratio when there is no tax (failed BEFORE runs are not a baseline)', () => {
+  const result = savings({ agentTax: { extraCredits: null }, before: { medianCredits: 27.1 }, after: { medianCredits: 26.8 } }, 500, NaN);
+  assert.equal(result.ratio, null);
+});

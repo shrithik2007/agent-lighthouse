@@ -1,0 +1,8 @@
+Running on: Desktop · Chrome
+evidence: view locally with `kane-cli evidence serve ~/.testmuai/kaneai/sessions/2235bd28-85e8-4fb9-be8e-1e80a646b5d9/evidence/c322b726-b1e7-41ee-aba4-7531f8b7d821.evidence`
+
+● exit 0 · no completion event (not a pass)
+! Uncommitted changes: the run is tied to HEAD, which isn't exactly what ran.
+Kane run KR-206: ERRORED (UNVERIFIED). Details: /t/lighthouse/proof#run-206
+! Exit code 0 but no completion event: not counted as a pass.
+→ Open Proof tab: https://kaneclihack.sh/t/lighthouse/proof#run-206

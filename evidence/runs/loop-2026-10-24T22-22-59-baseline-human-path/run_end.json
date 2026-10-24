@@ -1,0 +1,63 @@
+{
+  "type": "run_end",
+  "status": "failed",
+  "summary": "The booking form requires a captcha to be completed, and the browser automation could not pass that human-only check.\nUse a test environment with captcha disabled or a supported test bypass/token, then rerun the booking flow.",
+  "one_liner": "The booking could not be completed because a human-check captcha blocked the automated browser.",
+  "final_state": {},
+  "reason": "Hard blocker: captcha",
+  "duration": 74.3,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {},
+    "variables": {},
+    "pointer": "(failed) The booking could not be completed because a human-check captcha blocked the automated browser."
+  },
+  "credits_consumed": 31.42488,
+  "session_dir": "~/.testmuai/kaneai/sessions/a6e7596b-3c4a-48b6-9640-d34a5cc10d85",
+  "run_dir": "~/.testmuai/kaneai/sessions/a6e7596b-3c4a-48b6-9640-d34a5cc10d85/runs/0",
+  "result_code": 610,
+  "reason_code": "blocker.captcha",
+  "per_flow_metadata": [
+    {
+      "result_code": "610",
+      "reason_code": "blocker.captcha",
+      "error_message": "Hard blocker: captcha",
+      "summary": "The booking form requires a captcha to be completed, and the browser automation could not pass that human-only check.\nUse a test environment with captcha disabled or a supported test bypass/token, then rerun the booking flow.",
+      "one_liner": "The booking could not be completed because a human-check captcha blocked the automated browser.",
+      "credits_consumed": 31.42488
+    }
+  ],
+  "run_id": "run-0",
+  "verdict": {
+    "confirmed": false,
+    "status": "broken",
+    "family": "environment_issue",
+    "category": "bot_detection",
+    "category_proposal": "",
+    "severity": "major",
+    "root_cause": "The booking form requires a captcha to be completed, and the browser automation could not pass that human-only check.",
+    "agent_fault_assessment": "The agent correctly selected the free first-visit class, entered the requested name, moved the calendar to November, and selected November 2. The captcha was already shown on the booking form and is an external human-verification gate, so the agent's normal booking actions did not cause the block. The run configuration is not suitable for a flow that requires an unsolvable human check.",
+    "bug_title": "Human-check captcha blocks automated booking",
+    "signals": [],
+    "confidence": 0.94,
+    "suggestion": "Use a test environment with captcha disabled or a supported test bypass/token, then rerun the booking flow.",
+    "one_liner": "The booking could not be completed because a human-check captcha blocked the automated browser.",
+    "relevant_steps": [
+      4,
+      6,
+      8,
+      10,
+      11
+    ],
+    "culprit_step": "step 0-11",
+    "credits_consumed": 4.4327000000000005,
+    "mode": "terminal"
+  },
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R05809BRKDMY4EWZ8KAR8E/dashboard/share/US_W25M3Y9XSE22S5JGGKS6Y58IGBPHMVCEQROY6N1VHX96AIODN89HANGXMTODTPMT?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T22:24:28.728Z"
+}
