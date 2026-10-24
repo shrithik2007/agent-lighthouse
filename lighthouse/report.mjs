@@ -32,21 +32,25 @@ export async function buildLatest({ cwd = process.cwd(), loopFile, headline, lin
   const proposalPath = join(cwd, 'results', 'proposal.md');
   const proposal = existsSync(proposalPath) ? { path: 'results/proposal.md', excerpt: (await readFile(proposalPath, 'utf8')).split('\n').slice(0, 14).join('\n') } : null;
 
-  const after = final ? sideSummary(final.summary, 'After repair') : sideSummary(baseline.after.summary, 'Reference (AFTER fixture)');
+  // The loop's own post-fix measurement and the hand-built reference fix are separate fields.
+  const postFix = final ? sideSummary(final.summary, 'After loop repair') : null;
+  const referenceFix = sideSummary(baseline.after.summary, 'Reference fix (AFTER fixture)');
   const agentTaxValue = final?.agentTaxBefore ?? baseline.agentTax;
-  const scoreGap = baseline.before.summary.score != null && after?.score != null ? after.score - baseline.before.summary.score : null;
+  const headlineSide = postFix ?? referenceFix;
+  const scoreGap = baseline.before.summary.score != null && headlineSide?.score != null ? headlineSide.score - baseline.before.summary.score : null;
   return {
     site: { name: 'Pitchline', beforeUrl: baseline.before.url, referenceUrl: baseline.after.url },
     flow: baseline.flow, optimalSteps: baseline.optimalSteps, mode: loop?.mode ?? null, threshold: loop?.threshold ?? 80,
     outcome: loop?.outcome ?? 'baseline', loopId: loop?.loopId ?? null,
     headline: headline ?? (scoreGap != null && scoreGap >= 15 ? 'score' : 'tax'),
-    before: sideSummary(baseline.before.summary, 'Before'), after,
-    reference: sideSummary(baseline.after.summary, 'Reference (AFTER fixture)'),
+    before: sideSummary(baseline.before.summary, 'Before'),
+    postFix, postFixScore: postFix?.score ?? null,
+    referenceFix, referenceFixScore: referenceFix?.score ?? null,
     agentTax: agentTaxValue, agentTaxBasis: final?.agentTaxBefore ? 'BEFORE vs repaired page, successful-run medians' : 'BEFORE vs AFTER reference fixture, successful-run medians',
     runGroups: [
       ['Before', beforeRuns.map(slim)],
       ...(loop?.attempts ?? []).filter(a => a.runs).map(a => [`Attempt ${a.attempt}`, [...a.runs, ...(a.humanPath ? [{ ...a.humanPath, label: `${a.humanPath.label}` }] : [])].map(slim)]),
-      ['Reference', baseline.after.runs.map(slim)],
+      ['Reference fix', baseline.after.runs.map(slim)],
     ],
     failingStep: failing ? {
       runLabel: failing.label, kaneRunId: failing.kaneRunId, site: failing.url, step: failedStep?.step ?? null,
@@ -73,5 +77,5 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const latest = await buildLatest({ loopFile: opt('loop'), headline: opt('headline') });
   await mkdir('results', { recursive: true });
   await writeFile('results/latest.json', JSON.stringify(latest, null, 2) + '\n');
-  console.log(`results/latest.json: headline ${latest.headline}, outcome ${latest.outcome}, before ${latest.before?.score ?? 'n/a'}, after ${latest.after?.score ?? 'n/a'}`);
+  console.log(`results/latest.json: headline ${latest.headline}, outcome ${latest.outcome}, before ${latest.before?.score ?? 'n/a'}, post-fix ${latest.postFixScore ?? 'n/a'}, reference fix ${latest.referenceFixScore ?? 'n/a'}`);
 }

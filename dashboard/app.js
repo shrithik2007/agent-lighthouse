@@ -59,15 +59,19 @@ function render(data) {
   else row1.append(slot('tax-line'));
   slot('before-score').textContent = na(data.before?.score);
   slot('before-sub').textContent = `${na(data.before?.passedCount)}/${na(data.before?.runCount)} runs passed · median ${num(data.before?.medianSteps)} steps`;
-  slot('after-label').textContent = data.after?.label ?? 'After';
-  slot('after-score').textContent = na(data.after?.score);
-  slot('after-sub').textContent = `${na(data.after?.passedCount)}/${na(data.after?.runCount)} runs passed · median ${num(data.after?.medianSteps)} steps`;
-  const delta = data.before?.score != null && data.after?.score != null ? data.after.score - data.before.score : null;
+  // The loop's post-fix score leads; the hand-built reference fix is context, never substituted for it.
+  const after = data.postFix ?? null;
+  slot('after-label').textContent = after ? 'After loop repair' : 'After loop repair (not run yet)';
+  slot('after-score').textContent = na(after?.score);
+  slot('after-sub').textContent = after ? `${na(after.passedCount)}/${na(after.runCount)} runs passed · median ${num(after.medianSteps)} steps` : 'n/a';
+  const delta = data.before?.score != null && after?.score != null ? after.score - data.before.score : null;
   slot('delta').textContent = signed(delta);
-  const low = [data.before, data.after].some(side => side && side.runCount < 3);
+  const low = [data.before, after].some(side => side && side.runCount < 3);
+  const ref = data.referenceFix;
   slot('score-note').textContent = [
     data.headline === 'tax' ? 'Headline is Agent Tax: the extra work an agent spends per successful booking on BEFORE compared with the repaired page.' : null,
     'Steps count every completed Kane step (actions plus planning and wait overhead); overhead appears on both sides, so it largely nets out of Agent Tax.',
+    ref ? `Reference fix (hand-built AFTER fixture): ${na(ref.score)}, ${na(ref.passedCount)}/${na(ref.runCount)} passed, median ${num(ref.medianSteps)} steps.` : null,
     low ? 'Low confidence: fewer than three runs on one side.' : null,
   ].filter(Boolean).join(' ');
 

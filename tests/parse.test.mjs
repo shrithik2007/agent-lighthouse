@@ -66,3 +66,15 @@ test('reference is found under the key Kane chose', () => {
   assert.equal(findReference({ reference_code_shown: 'true' }), null);
   assert.equal(findReference({}), null);
 });
+
+test('genuine KR-133 BEFORE stream: failed at the confirmation assertion, remark captured', async () => {
+  const failed = await readFile(new URL('./fixtures/kane-run-before-failed-KR-133.ndjson', import.meta.url), 'utf8');
+  const run = parseRun(failed, { exitCode: 1 });
+  assert.equal(run.status, 'failed');
+  assert.equal(run.failedSteps, 1);
+  assert.equal(run.stepsTaken, 14);
+  assert.equal(run.reasonCode, 'assertion_error.confirmed_product_bug');
+  assert.deepEqual(run.failedRemarks, ['assert: a booking confirmation with a reference code is shown']);
+  assert.equal(run.firstFailedStep.remark, 'assert: a booking confirmation with a reference code is shown');
+  assert.equal(run.reference, null);
+});

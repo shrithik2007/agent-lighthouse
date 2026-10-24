@@ -5,7 +5,7 @@ import { existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { runKane } from './kane.mjs';
 import { collectRun, summarize } from './collect.mjs';
-import { packExcerpts } from './pack.mjs';
+import { packExcerpts, extractFailedScreenshot } from './pack.mjs';
 import { callOpenAI } from './openai.mjs';
 import { compare, agentTax, gateDecision } from '../core/score.mjs';
 import { createSiteServer } from '../scripts/serve.mjs';
@@ -66,64 +66,95 @@ function failureBrief(runs) {
   }));
 }
 
+// Kane's confirmed findings lead the brief; extra-step friction follows as secondary evidence.
+function leadFinding(runs, human) {
+  const failing = [...runs.filter(run => run.status !== 'passed'), ...(human?.status !== 'passed' ? [human] : [])];
+  failing.sort((a, b) => Number(/confirmed_product_bug/.test(b.reasonCode ?? '')) - Number(/confirmed_product_bug/.test(a.reasonCode ?? '')));
+  return failing[0] ?? null;
+}
+
+async function failingScreenshot(cwd, run, attempt) {
+  if (!run?.evidencePack) return null;
+  const out = join(cwd, 'results', 'loop', `attempt-${attempt}-failing-step.jpg`);
+  return extractFailedScreenshot(run.evidencePack.replace(/^~/, process.env.HOME), out).catch(() => null);
+}
+
 async function diagnose({ cwd, worktree, runs, human, attempt, previous }) {
+  const lead = leadFinding(runs, human);
   const failing = runs.filter(run => run.status !== 'passed');
   const excerpts = await Promise.all(failing.slice(0, 2).map(run => packExcerpts(run.evidencePack?.replace(/^~/, process.env.HOME))));
+  const screenshot = await failingScreenshot(cwd, lead, attempt);
   const html = await readFile(join(worktree, 'site', 'index.html'), 'utf8');
-  const input = JSON.stringify({
+  const passed = runs.filter(run => run.status === 'passed');
+  const brief = JSON.stringify({
+    leadKaneFinding: lead ? { run: lead.kaneRunId ?? lead.id, failedRemark: lead.failedRemarks?.[0] ?? null, oneLiner: lead.oneLiner, summary: lead.summary, reasonCode: lead.reasonCode, screenshotAttached: Boolean(screenshot) } : null,
+    secondaryFriction: { note: 'Passing runs needed extra actions; these show where the agent hesitated.', optimalSteps: 10, passingRuns: passed.map(run => ({ run: run.kaneRunId, steps: run.stepsTaken, actions: run.actionSteps, remarks: run.steps?.map(step => step.remark) })) },
     attempt, task: 'Book a free first visit for Sam Rivera on 2 November 2026 at noon and read back the reference PL-4821.',
     kaneFailures: failureBrief(runs), humanPath: { status: human.status, failedRemarks: human.failedRemarks, summary: human.summary },
     evidenceExcerpts: excerpts, previousAttempt: previous ?? null, checklist: FRICTION_CHECKLIST, file: 'site/index.html', html,
   });
-  return callOpenAI({
-    cwd, purpose: `diagnosis attempt ${attempt}`, schema: DIAGNOSIS_SCHEMA, input,
-    instructions: 'You diagnose why an AI browser agent (Kane CLI) struggles to complete a booking on a small owned website. Use the Kane failure remarks, step lists and evidence excerpts as primary evidence and the checklist as a guide. Only site/index.html may change. Keep the visual design, copy tone and the PL-4821 reference. Human visitors must still be able to complete the booking and see PL-4821 for at least five seconds.',
+  const content = [{ type: 'input_text', text: brief }];
+  if (screenshot) content.push({ type: 'input_image', image_url: `data:image/jpeg;base64,${(await readFile(screenshot)).toString('base64')}` });
+  const result = await callOpenAI({
+    cwd, purpose: `diagnosis attempt ${attempt}`, schema: DIAGNOSIS_SCHEMA, input: [{ role: 'user', content }],
+    instructions: 'You diagnose why an AI browser agent (Kane CLI) struggles to complete a booking on a small owned website. Lead with leadKaneFinding: its failed remark and the attached failing-step screenshot are the primary evidence; address it first. Then use secondaryFriction (extra actions in passing runs) and the checklist for further, smaller changes. Only site/index.html may change. Keep the visual design, copy tone and the PL-4821 reference. Human visitors must still be able to complete the booking and see PL-4821 for at least five seconds.',
   });
+  return { ...result, lead, screenshot };
 }
 
-function fixBrief(diagnosis, attempt) {
+function fixBrief(diagnosis, attempt, lead) {
   return [
     `You are fixing site/index.html (attempt ${attempt}) so an AI browser agent and a human can both book a free first visit.`,
-    `Root cause from Kane failures: ${diagnosis.cause}`,
-    'Make these changes:', ...diagnosis.changes.map(change => `- ${change}`),
+    lead ? `Kane's failing step (${lead.kaneRunId ?? lead.id}): "${lead.failedRemarks?.[0] ?? lead.oneLiner}". Kane said: ${lead.oneLiner ?? ''} The attached image is Kane's screenshot at that step.` : '',
+    `Root cause (OpenAI diagnosis): ${diagnosis.cause}`,
+    'Make these changes, first one first:', ...diagnosis.changes.map(change => `- ${change}`),
     `Acceptance check: ${diagnosis.acceptanceCheck}`,
     'Rules: edit ONLY site/index.html. Do not touch fixtures/, tests/, lighthouse/ or any other file. Keep the reference PL-4821 and the overall look. Vanilla HTML/CSS/JS only. Do not commit; just leave the edited file.',
-  ].join('\n');
+  ].filter(Boolean).join('\n');
 }
 
-/** Codex non-interactively in the attempt worktree; falls back to an OpenAI unified diff if Codex is unavailable. */
+const FILE_SCHEMA = { name: 'file', schema: { type: 'object', additionalProperties: false, required: ['html', 'summary'], properties: { html: { type: 'string' }, summary: { type: 'string' } } } };
+
+/** Codex non-interactively in the attempt worktree (API key via CODEX_API_KEY, env only); falls back to the OpenAI API returning the whole file. */
 async function applyFix({ cwd, worktree, diagnosis, attempt, log }) {
-  const brief = fixBrief(diagnosis.json, attempt);
+  const brief = fixBrief(diagnosis.json, attempt, diagnosis.lead);
   const lastMessage = join(cwd, 'results', 'loop', `codex-attempt-${attempt}.txt`);
+  const model = process.env.CODEX_MODEL ?? 'gpt-5.3-codex';
+  const args = ['exec', '-m', model, '-C', worktree, '-s', 'workspace-write', '--ephemeral', '--skip-git-repo-check', '-o', lastMessage];
+  if (diagnosis.screenshot) args.push('-i', diagnosis.screenshot);
+  args.push('-');
+  const startedAt = new Date().toISOString();
   const codex = await new Promise(resolvePromise => {
-    const child = spawn('codex', ['exec', '-C', worktree, '-s', 'workspace-write', '--ephemeral', '--skip-git-repo-check', '-o', lastMessage, '-'], { stdio: ['pipe', 'ignore', 'pipe'] });
-    let stderr = '';
+    const child = spawn('codex', args, { stdio: ['pipe', 'pipe', 'pipe'], env: { ...process.env, CODEX_API_KEY: process.env.OPENAI_API_KEY } });
+    let output = '';
     const timer = setTimeout(() => child.kill('SIGTERM'), 600_000);
-    child.stderr.on('data', chunk => { stderr += chunk; });
+    child.stdout.on('data', chunk => { output += chunk; });
+    child.stderr.on('data', chunk => { output += chunk; });
     child.on('error', error => resolvePromise({ code: null, error: error.message }));
-    child.on('close', code => { clearTimeout(timer); resolvePromise({ code, error: code ? stderr.slice(-500) : null }); });
+    child.on('close', code => { clearTimeout(timer); resolvePromise({ code, error: code ? (output.match(/ERROR: .*/g)?.at(-1) ?? output.trim().split('\n').at(-1) ?? 'exit ' + code) : null }); });
     child.stdin.end(brief);
   });
-  await appendCall(cwd, { purpose: `fixer attempt ${attempt}`, tool: 'codex exec', ok: codex.code === 0, error: codex.error ?? null });
-  if (codex.code === 0) { log(`  fixer: codex exec finished`); return { tool: 'codex exec', brief }; }
-  log(`  fixer: codex unavailable (${codex.error?.split('\n').at(-1) ?? 'error'}); falling back to an OpenAI diff`);
+  const key = process.env.OPENAI_API_KEY;
+  const error = codex.error ? String(codex.error).replaceAll(key, '[redacted]').slice(0, 300) : null;
+  await appendCall(cwd, { ts: startedAt, finishedAt: new Date().toISOString(), purpose: `fixer attempt ${attempt}`, tool: 'codex exec', model, ok: codex.code === 0, error });
+  if (codex.code === 0) { log(`  fixer: codex exec (${model}) finished`); return { tool: `codex exec (${model})`, brief }; }
+  log(`  fixer: codex failed (${error}); falling back to the OpenAI API`);
   const html = await readFile(join(worktree, 'site', 'index.html'), 'utf8');
   const result = await callOpenAI({
-    cwd, purpose: `fixer attempt ${attempt} (diff fallback)`,
-    instructions: 'Return only a unified diff (git apply format, paths a/site/index.html and b/site/index.html) implementing the brief. No prose.',
+    cwd, purpose: `fixer attempt ${attempt} (API fallback)`, schema: FILE_SCHEMA,
+    instructions: 'Return the complete corrected site/index.html implementing the brief, and a one-sentence summary. Change only what the brief needs.',
     input: `${brief}\n\n--- site/index.html ---\n${html}`,
   });
-  const patch = join(cwd, 'results', 'loop', `fallback-attempt-${attempt}.diff`);
-  await writeFile(patch, result.text.replace(/^```(?:diff)?\n|```\s*$/g, ''));
-  await exec('git', ['apply', '--include=site/*', patch], { cwd: worktree });
-  return { tool: 'openai diff', brief };
+  if (!result.json.html.includes('PL-4821')) throw new Error('fallback output dropped the PL-4821 reference');
+  await writeFile(join(worktree, 'site', 'index.html'), result.json.html);
+  return { tool: `openai api fallback (${result.model})`, brief };
 }
 
 // The fixer's own tool use is not an OpenAI API call from the product; it is recorded so the log is complete.
 async function appendCall(cwd, entry) {
   const { appendFile } = await import('node:fs/promises');
   await appendFile(join(cwd, 'results', 'openai-calls.jsonl'), JSON.stringify({
-    ts: new Date().toISOString(), model: null, inputTokens: null, outputTokens: null, totalTokens: null, ...entry,
+    ts: new Date().toISOString(), finishedAt: null, model: null, inputTokens: null, outputTokens: null, totalTokens: null, ...entry,
   }) + '\n');
 }
 
