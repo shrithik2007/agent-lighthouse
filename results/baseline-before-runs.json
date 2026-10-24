@@ -1,0 +1,23 @@
+[
+  {
+    "id": "2026-10-24T20-54-34.889Z-877313fe",
+    "url": "http://localhost:4101",
+    "exitCode": 1,
+    "metadataPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T20-54-34.889Z-877313fe.meta.json",
+    "rawPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T20-54-34.889Z-877313fe.ndjson"
+  },
+  {
+    "id": "2026-10-24T20-55-53.762Z-252140d7",
+    "url": "http://localhost:4101",
+    "exitCode": 0,
+    "metadataPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T20-55-53.762Z-252140d7.meta.json",
+    "rawPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T20-55-53.762Z-252140d7.ndjson"
+  },
+  {
+    "id": "2026-10-24T20-58-45.407Z-481b0bc3",
+    "url": "http://localhost:4101",
+    "exitCode": 0,
+    "metadataPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T20-58-45.407Z-481b0bc3.meta.json",
+    "rawPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T20-58-45.407Z-481b0bc3.ndjson"
+  }
+]

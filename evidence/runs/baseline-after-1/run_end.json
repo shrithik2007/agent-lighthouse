@@ -1,0 +1,98 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Booked a free first visit for Sam Rivera using sam@example.com for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed and the reference code PL-4821 was saved.",
+  "one_liner": "booked a free first visit on the local booking site",
+  "final_state": {
+    "url": "http://localhost:4102/",
+    "booking_reference": "PL-4821"
+  },
+  "reason": "Objective completed",
+  "duration": 50.5,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "booking_confirmation_with_reference_code_shown": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 11,
+        "query": "whether booking confirmation with a reference code is present (in the booking confirmation status message)",
+        "condition": "a booking confirmation with a reference code is shown",
+        "human_description": "Checking whether the booking confirmation with reference code is present",
+        "expected_value": "true",
+        "subject": "booking confirmation with a reference code",
+        "must_be": "present",
+        "code_js": "/booking confirmed/i.test(el(58).innerText) && /reference\\s+PL-4821/i.test(el(58).innerText)",
+        "wrapped_js": "(els) => {\n  const __m = {58: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (/booking confirmed/i.test(el(58).innerText) && /reference\\s+PL-4821/i.test(el(58).innerText));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Booking confirmedSam Rivera,\"i"
+        ],
+        "needs_unit_conversion": false
+      },
+      "ref": {
+        "extracted_value": "PL-4821",
+        "operator": "equals",
+        "transforms": [
+          "strip"
+        ],
+        "json_path": null,
+        "reasoning": "value: 'PL-4821' (stored, no comparison)",
+        "analyzer_type": "textual_visual",
+        "step": 11,
+        "query": "the reference code in the booking confirmation",
+        "condition": "the reference code from the booking confirmation is saved as {{ref}}",
+        "human_description": "Reading the reference code from the booking confirmation",
+        "expected_value": "",
+        "code_js": "el(61).innerText.match(/PL-\\d+/)?.[0] ?? null",
+        "wrapped_js": "(els) => {\n  const __m = {61: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(61).innerText.match(/PL-\\d+/)?.[0] ?? null);\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Reference PL-\"i"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "PL-4821",
+        "type": "memory",
+        "secret": false,
+        "source": "runtime"
+      },
+      "booking_confirmation_with_reference_code_shown": {
+        "syntax": "{{booking_confirmation_with_reference_code_shown}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) booked a free first visit on the local booking site"
+  },
+  "credits_consumed": 18.949455,
+  "session_dir": "~/.testmuai/kaneai/sessions/f6ee26fa-099f-44cd-a8cd-9ab4a13172eb",
+  "run_dir": "~/.testmuai/kaneai/sessions/f6ee26fa-099f-44cd-a8cd-9ab4a13172eb/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Booked a free first visit for Sam Rivera using sam@example.com for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed and the reference code PL-4821 was saved.",
+      "one_liner": "booked a free first visit on the local booking site",
+      "credits_consumed": 18.949455
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QVF9YST7S1FVHWH75143YZ/dashboard/share/US_13RISW1H9GEQSUFNLQFWTBEB8NHWL7Q53FS56V860UJ0UWFTADJ5QGVCCBWBPS6N?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T21:02:10.994Z"
+}

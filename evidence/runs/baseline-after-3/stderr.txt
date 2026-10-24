@@ -1,0 +1,7 @@
+Running on: Desktop · Chrome
+evidence: view locally with `kane-cli evidence serve ~/.testmuai/kaneai/sessions/b9ad6917-4e69-4de1-94a2-324dc725154f/evidence/a12b6d2a-10e0-4bda-95db-65baec0517df.evidence`
+
+● exit 0 · no completion event (not a pass)
+Kane run KR-141: ERRORED (UNVERIFIED). Details: /t/lighthouse/proof#run-141
+! Exit code 0 but no completion event: not counted as a pass.
+→ Open Proof tab: https://kaneclihack.sh/t/lighthouse/proof#run-141

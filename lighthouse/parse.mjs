@@ -57,6 +57,14 @@ export function countSteps(events) {
   };
 }
 
+// Kane picks its own key for "store the reference as 'ref'" (ref, reference_code, booking_reference).
+export function findReference(state) {
+  if (!state || typeof state !== 'object') return null;
+  if (typeof state.ref === 'string') return state.ref;
+  const match = Object.entries(state).find(([key, value]) => /ref/i.test(key) && typeof value === 'string' && /^[A-Z]{2,}-\d+$/.test(value));
+  return match?.[1] ?? null;
+}
+
 const num = value => typeof value === 'number' && Number.isFinite(value) ? value : null;
 
 export function parseRun(text, { exitCode, stderr = '' } = {}) {
@@ -87,7 +95,7 @@ export function parseRun(text, { exitCode, stderr = '' } = {}) {
     // run_end.duration is seconds: checked against event timestamps in tests/parse.test.mjs.
     durationSec: num(runEnd?.duration),
     credits: num(runEnd?.credits_consumed),
-    reference: typeof runEnd?.final_state?.ref === 'string' ? runEnd.final_state.ref : null,
+    reference: findReference(runEnd?.final_state),
     summary: runEnd?.summary ?? null,
     oneLiner: runEnd?.one_liner ?? null,
     reasonCode: runEnd?.reason_code ?? null,

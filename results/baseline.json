@@ -1,0 +1,938 @@
+{
+  "flow": "book",
+  "optimalSteps": 10,
+  "generatedAt": "2026-10-24T21:05:12.345Z",
+  "before": {
+    "url": "http://localhost:4101",
+    "summary": {
+      "score": 51,
+      "runCount": 3,
+      "passedCount": 2,
+      "passRate": 0.6666666666666666,
+      "medianSteps": 22,
+      "medianFailedSteps": 0,
+      "medianDurationSec": 141.14999999999998,
+      "medianCredits": 55.417741250000006,
+      "efficiency": 0.45454545454545453,
+      "cleanliness": 1,
+      "flakiness": 0.888888888888889,
+      "lowConfidence": false,
+      "timeoutCount": 0,
+      "excluded": 0
+    },
+    "runs": [
+      {
+        "label": "baseline-before-1",
+        "id": "2026-10-24T20-54-34.889Z-877313fe",
+        "url": "http://localhost:4101",
+        "startedAt": "2026-10-24T20:54:34.889Z",
+        "finishedAt": "2026-10-24T20:55:53.760Z",
+        "kaneRunId": "KR-133",
+        "wrapperLabel": "failed",
+        "evidenceDir": "evidence/runs/baseline-before-1",
+        "status": "failed",
+        "started": true,
+        "exitCode": 1,
+        "kaneStatus": "failed",
+        "stepsTaken": 14,
+        "failedSteps": 1,
+        "actionSteps": 11,
+        "overheadSteps": 3,
+        "durationSec": 68.6,
+        "credits": 29.07274,
+        "reference": null,
+        "summary": "The booking form stayed on screen after the user submitted valid visit details, rather than completing the booking and displaying its confirmation.\nCheck the booking submission handler and its success-state display. After a valid free-visit submission, show a confirmation containing a reference code so it can be saved.\nevidence: objective_contradiction: Checkpoint assertion failed: \"a booking confirmation with a reference code is shown\"",
+        "oneLiner": "The completed free-visit form did not show a booking confirmation or reference code after it was submitted.",
+        "reasonCode": "assertion_error.confirmed_product_bug",
+        "testUrl": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QV3AZD47XY97ZQ72VJ4T90/dashboard/share/US_HF6JTIU1Y9TRDO8TNSFW7YZAWY8P3ODL179EKD161DM365EUUQ9HZ6MGR9IONKOY?type=summary&agentView=true&fqdn=summary-page",
+        "sessionDir": "~/.testmuai/kaneai/sessions/09c76b18-4096-4070-9a1b-8de6cdb93cfc",
+        "evidencePack": "~/.testmuai/kaneai/sessions/09c76b18-4096-4070-9a1b-8de6cdb93cfc/evidence/bcb6ad4e-b4c2-4507-a09a-385520bf9f89.evidence",
+        "firstFailedStep": {
+          "step": 15,
+          "context": "root",
+          "status": "failed",
+          "remark": "assert: a booking confirmation with a reference code is shown",
+          "overhead": false
+        },
+        "failedRemarks": [
+          "assert: a booking confirmation with a reference code is shown"
+        ],
+        "rejectedLines": 0,
+        "steps": [
+          {
+            "step": 2,
+            "context": "root",
+            "status": "done",
+            "remark": "navigate: Navigate to http://localhost:4101",
+            "overhead": false
+          },
+          {
+            "step": 3,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Closing the cookie notice",
+            "overhead": false
+          },
+          {
+            "step": 4,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking the Go booking button in the top hero section",
+            "overhead": false
+          },
+          {
+            "step": 5,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (6 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"",
+            "overhead": true
+          },
+          {
+            "step": 6,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"Sam Rivera\" into \"Your name\"",
+            "overhead": false
+          },
+          {
+            "step": 7,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"sam@example.com\" into \"Email address\"",
+            "overhead": false
+          },
+          {
+            "step": 8,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 9,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"generic\"",
+            "overhead": false
+          },
+          {
+            "step": 10,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"generic\"",
+            "overhead": false
+          },
+          {
+            "step": 11,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"Confirm my free visit\"",
+            "overhead": false
+          },
+          {
+            "step": 12,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait briefly after booking submission while retaining the displayed con",
+            "overhead": true
+          },
+          {
+            "step": 13,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait briefly after accepted waiver and booking confirmation",
+            "overhead": true
+          },
+          {
+            "step": 14,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: ANALYZE(unknown, 'the booking reference code from the booking confirmation is sa",
+            "overhead": false
+          },
+          {
+            "step": 15,
+            "context": "root",
+            "status": "failed",
+            "remark": "assert: a booking confirmation with a reference code is shown",
+            "overhead": false
+          }
+        ]
+      },
+      {
+        "label": "baseline-before-2",
+        "id": "2026-10-24T20-55-53.762Z-252140d7",
+        "url": "http://localhost:4101",
+        "startedAt": "2026-10-24T20:55:53.762Z",
+        "finishedAt": "2026-10-24T20:58:45.406Z",
+        "kaneRunId": "KR-136",
+        "wrapperLabel": "errored",
+        "evidenceDir": "evidence/runs/baseline-before-2",
+        "status": "passed",
+        "started": true,
+        "exitCode": 0,
+        "kaneStatus": "passed",
+        "stepsTaken": 20,
+        "failedSteps": 0,
+        "actionSteps": 17,
+        "overheadSteps": 3,
+        "durationSec": 156.7,
+        "credits": 65.28598500000001,
+        "reference": "PL-4821",
+        "summary": "Booked a free first visit for Sam Rivera using sam@example.com for November 2, 2026 at 12:00 PM.\nAccepted the waiver to complete the booking.\nThe booking was confirmed, and the reference code PL-4821 was shown and saved.",
+        "oneLiner": "booked a free first visit on the booking site",
+        "reasonCode": "success.complete",
+        "testUrl": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QV5R2WBXYBNB2YV86Z0MCA/dashboard/share/US_Y4AMR7GVYH69ZX7S9WZN3S4FHT1QG3T19Q86TU94G6W6D3VZ00CR3MPCQQRGEQK7?type=summary&agentView=true&fqdn=summary-page",
+        "sessionDir": "~/.testmuai/kaneai/sessions/b7e496eb-879e-4f7d-833c-0cd4d7a5a51b",
+        "evidencePack": "~/.testmuai/kaneai/sessions/b7e496eb-879e-4f7d-833c-0cd4d7a5a51b/evidence/5ad4b0ad-0ad0-4e3c-ae3a-5f52f1276fa7.evidence",
+        "firstFailedStep": null,
+        "failedRemarks": [],
+        "rejectedLines": 0,
+        "steps": [
+          {
+            "step": 2,
+            "context": "root",
+            "status": "done",
+            "remark": "navigate: Navigate to http://localhost:4101",
+            "overhead": false
+          },
+          {
+            "step": 3,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking to dismiss the cookie notice",
+            "overhead": false
+          },
+          {
+            "step": 4,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Go to start first-visit booking",
+            "overhead": false
+          },
+          {
+            "step": 5,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (4 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"",
+            "overhead": true
+          },
+          {
+            "step": 6,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"Sam Rivera\" into \"Your name\"",
+            "overhead": false
+          },
+          {
+            "step": 7,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"sam@example.com\" into \"Email address\"",
+            "overhead": false
+          },
+          {
+            "step": 8,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 9,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"generic\"",
+            "overhead": false
+          },
+          {
+            "step": 10,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking I accept the climbing waiver control",
+            "overhead": false
+          },
+          {
+            "step": 11,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 12,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait for the booking confirmation to load",
+            "overhead": true
+          },
+          {
+            "step": 13,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 14,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 15,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: a reference code is shown",
+            "overhead": false
+          },
+          {
+            "step": 16,
+            "context": "root",
+            "status": "done",
+            "remark": "assert: a booking confirmation with a reference code is shown",
+            "overhead": false
+          },
+          {
+            "step": 17,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: ANALYZE(unknown, 'the reference code from the booking confirmation is saved as {",
+            "overhead": false
+          },
+          {
+            "step": 18,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 19,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: ANALYZE(unknown, 'the reference code from the booking confirmation is saved as {",
+            "overhead": false
+          },
+          {
+            "step": 20,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: ANALYZE(devtool_network, 'the reference code from the booking confirmation is sa",
+            "overhead": false
+          },
+          {
+            "step": 21,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: Waiting with completed booking and waiver verification",
+            "overhead": true
+          }
+        ]
+      },
+      {
+        "label": "baseline-before-3",
+        "id": "2026-10-24T20-58-45.407Z-481b0bc3",
+        "url": "http://localhost:4101",
+        "startedAt": "2026-10-24T20:58:45.407Z",
+        "finishedAt": "2026-10-24T21:01:05.871Z",
+        "kaneRunId": "KR-137",
+        "wrapperLabel": "errored",
+        "evidenceDir": "evidence/runs/baseline-before-3",
+        "status": "passed",
+        "started": true,
+        "exitCode": 0,
+        "kaneStatus": "passed",
+        "stepsTaken": 24,
+        "failedSteps": 0,
+        "actionSteps": 18,
+        "overheadSteps": 6,
+        "durationSec": 125.6,
+        "credits": 45.5494975,
+        "reference": "PL-4821",
+        "summary": "Booked a free first visit for Sam Rivera (sam@example.com) for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed with reference code PL-4821.",
+        "oneLiner": "booked a free first visit on localhost",
+        "reasonCode": "success.complete",
+        "testUrl": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QVB063NWWYP6N5FE4QHEDQ/dashboard/share/US_YTCPUIVICKRRWJ6FNUQYAHBCAOLEDNGNIQF9JWBFCJNWCL5E3PFPSR8TNW1K80RA?type=summary&agentView=true&fqdn=summary-page",
+        "sessionDir": "~/.testmuai/kaneai/sessions/e1da7d56-f66c-47db-819c-9ab81ec38822",
+        "evidencePack": "~/.testmuai/kaneai/sessions/e1da7d56-f66c-47db-819c-9ab81ec38822/evidence/177d0f44-454a-4b8d-b126-6605f4a7dcd2.evidence",
+        "firstFailedStep": null,
+        "failedRemarks": [],
+        "rejectedLines": 0,
+        "steps": [
+          {
+            "step": 2,
+            "context": "root",
+            "status": "done",
+            "remark": "navigate: Navigate to http://localhost:4101",
+            "overhead": false
+          },
+          {
+            "step": 3,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking the cookie notice close button",
+            "overhead": false
+          },
+          {
+            "step": 4,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking the first-visit booking Go button",
+            "overhead": false
+          },
+          {
+            "step": 5,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (5 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"",
+            "overhead": true
+          },
+          {
+            "step": 6,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"Sam Rivera\" into \"Your name\"",
+            "overhead": false
+          },
+          {
+            "step": 7,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"sam@example.com\" into \"Email address\"",
+            "overhead": false
+          },
+          {
+            "step": 8,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 9,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"generic\"",
+            "overhead": false
+          },
+          {
+            "step": 10,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"generic\"",
+            "overhead": false
+          },
+          {
+            "step": 11,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 12,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait 700 ms for the booking confirmation to render",
+            "overhead": true
+          },
+          {
+            "step": 13,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Typing visit date 11/02/2026",
+            "overhead": false
+          },
+          {
+            "step": 14,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Confirming my free visit",
+            "overhead": false
+          },
+          {
+            "step": 15,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait 700 ms for the booking confirmation to render",
+            "overhead": true
+          },
+          {
+            "step": 16,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (6 steps): type \"Visit date\"; click \"generic\"; click \"generic\"; clic",
+            "overhead": true
+          },
+          {
+            "step": 17,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 18,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"generic\"",
+            "overhead": false
+          },
+          {
+            "step": 19,
+            "context": "root",
+            "status": "done",
+            "remark": "",
+            "overhead": true
+          },
+          {
+            "step": 20,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking 12pm arrival-time option",
+            "overhead": false
+          },
+          {
+            "step": 21,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 22,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait 300 ms for the booking confirmation toast to appear",
+            "overhead": true
+          },
+          {
+            "step": 23,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit",
+            "overhead": false
+          },
+          {
+            "step": 24,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: the reference code is stored as {{ref}}",
+            "overhead": false
+          },
+          {
+            "step": 25,
+            "context": "root",
+            "status": "done",
+            "remark": "assert: a booking confirmation with a reference code is shown",
+            "overhead": false
+          }
+        ]
+      }
+    ]
+  },
+  "after": {
+    "url": "http://localhost:4102",
+    "summary": {
+      "score": 97,
+      "runCount": 3,
+      "passedCount": 3,
+      "passRate": 1,
+      "medianSteps": 12,
+      "medianFailedSteps": 0,
+      "medianDurationSec": 61.2,
+      "medianCredits": 19.7761475,
+      "efficiency": 0.8333333333333334,
+      "cleanliness": 1,
+      "flakiness": 0,
+      "lowConfidence": false,
+      "timeoutCount": 0,
+      "excluded": 0
+    },
+    "runs": [
+      {
+        "label": "baseline-after-1",
+        "id": "2026-10-24T21-01-05.912Z-946673f0",
+        "url": "http://localhost:4102",
+        "startedAt": "2026-10-24T21:01:05.912Z",
+        "finishedAt": "2026-10-24T21:02:11.917Z",
+        "kaneRunId": "KR-139",
+        "wrapperLabel": "errored",
+        "evidenceDir": "evidence/runs/baseline-after-1",
+        "status": "passed",
+        "started": true,
+        "exitCode": 0,
+        "kaneStatus": "passed",
+        "stepsTaken": 12,
+        "failedSteps": 0,
+        "actionSteps": 10,
+        "overheadSteps": 2,
+        "durationSec": 50.5,
+        "credits": 18.949455,
+        "reference": "PL-4821",
+        "summary": "Booked a free first visit for Sam Rivera using sam@example.com for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed and the reference code PL-4821 was saved.",
+        "oneLiner": "booked a free first visit on the local booking site",
+        "reasonCode": "success.complete",
+        "testUrl": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QVF9YST7S1FVHWH75143YZ/dashboard/share/US_13RISW1H9GEQSUFNLQFWTBEB8NHWL7Q53FS56V860UJ0UWFTADJ5QGVCCBWBPS6N?type=summary&agentView=true&fqdn=summary-page",
+        "sessionDir": "~/.testmuai/kaneai/sessions/f6ee26fa-099f-44cd-a8cd-9ab4a13172eb",
+        "evidencePack": "~/.testmuai/kaneai/sessions/f6ee26fa-099f-44cd-a8cd-9ab4a13172eb/evidence/23edd241-b77a-4935-be8b-ae4bb3006a3a.evidence",
+        "firstFailedStep": null,
+        "failedRemarks": [],
+        "rejectedLines": 0,
+        "steps": [
+          {
+            "step": 2,
+            "context": "root",
+            "status": "done",
+            "remark": "navigate: Navigate to http://localhost:4102",
+            "overhead": false
+          },
+          {
+            "step": 3,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Book a free first visit button",
+            "overhead": false
+          },
+          {
+            "step": 4,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (6 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"",
+            "overhead": true
+          },
+          {
+            "step": 5,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"Sam Rivera\" into \"Your name\"",
+            "overhead": false
+          },
+          {
+            "step": 6,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"sam@example.com\" into \"Email address\"",
+            "overhead": false
+          },
+          {
+            "step": 7,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 8,
+            "context": "root",
+            "status": "done",
+            "remark": "",
+            "overhead": true
+          },
+          {
+            "step": 9,
+            "context": "root",
+            "status": "done",
+            "remark": "select: Selecting 12pm (noon) in the arrival time selector",
+            "overhead": false
+          },
+          {
+            "step": 10,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Checking the climbing waiver acceptance checkbox",
+            "overhead": false
+          },
+          {
+            "step": 11,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 12,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: ANALYZE(textual_visual, 'the reference code from the booking confirmation is sav",
+            "overhead": false
+          },
+          {
+            "step": 13,
+            "context": "root",
+            "status": "done",
+            "remark": "assert: a booking confirmation with a reference code is shown",
+            "overhead": false
+          }
+        ]
+      },
+      {
+        "label": "baseline-after-2",
+        "id": "2026-10-24T21-02-11.917Z-08aeb0c7",
+        "url": "http://localhost:4102",
+        "startedAt": "2026-10-24T21:02:11.917Z",
+        "finishedAt": "2026-10-24T21:03:27.878Z",
+        "kaneRunId": "KR-140",
+        "wrapperLabel": "errored",
+        "evidenceDir": "evidence/runs/baseline-after-2",
+        "status": "passed",
+        "started": true,
+        "exitCode": 0,
+        "kaneStatus": "passed",
+        "stepsTaken": 15,
+        "failedSteps": 0,
+        "actionSteps": 10,
+        "overheadSteps": 5,
+        "durationSec": 61.5,
+        "credits": 19.7761475,
+        "reference": "PL-4821",
+        "summary": "Booked Sam Rivera’s free first visit for November 2, 2026 at 12:00 PM using sam@example.com.\nAccepted the waiver.\nThe booking was confirmed, with reference code PL-4821.",
+        "oneLiner": "booked a free first visit on the booking site",
+        "reasonCode": "success.complete",
+        "testUrl": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QVH95JZXF4SVRT6MRJRCWS/dashboard/share/US_AO3KF456F0R4G3TFBMX6824P4RJW4WEPHFB747PHRBY7BKEGODFWZXYXU6ZI0G60?type=summary&agentView=true&fqdn=summary-page",
+        "sessionDir": "~/.testmuai/kaneai/sessions/5cfac68a-acc9-4e7a-9896-71d8fd616ad5",
+        "evidencePack": "~/.testmuai/kaneai/sessions/5cfac68a-acc9-4e7a-9896-71d8fd616ad5/evidence/ae7e24f8-bda2-4524-831d-fdbb81d0829f.evidence",
+        "firstFailedStep": null,
+        "failedRemarks": [],
+        "rejectedLines": 0,
+        "steps": [
+          {
+            "step": 2,
+            "context": "root",
+            "status": "done",
+            "remark": "navigate: Navigate to http://localhost:4102",
+            "overhead": false
+          },
+          {
+            "step": 3,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Book a free first visit button",
+            "overhead": false
+          },
+          {
+            "step": 4,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (6 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"",
+            "overhead": true
+          },
+          {
+            "step": 5,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"Sam Rivera\" into \"Your name\"",
+            "overhead": false
+          },
+          {
+            "step": 6,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"sam@example.com\" into \"Email address\"",
+            "overhead": false
+          },
+          {
+            "step": 7,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 8,
+            "context": "root",
+            "status": "done",
+            "remark": "",
+            "overhead": true
+          },
+          {
+            "step": 9,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (3 steps): select \"Arrival time\"; click \"I accept the climbing waive",
+            "overhead": true
+          },
+          {
+            "step": 10,
+            "context": "root",
+            "status": "done",
+            "remark": "select: Select \"12pm (noon)\" in \"Arrival time\"",
+            "overhead": false
+          },
+          {
+            "step": 11,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"I accept the climbing waiver.\"",
+            "overhead": false
+          },
+          {
+            "step": 12,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Click \"Confirm my free visit\"",
+            "overhead": false
+          },
+          {
+            "step": 13,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait briefly after the confirmed booking submission",
+            "overhead": true
+          },
+          {
+            "step": 14,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: PRIMARY: wait briefly after the checked waiver acceptance and booking confirmati",
+            "overhead": true
+          },
+          {
+            "step": 15,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: ANALYZE(textual_visual, 'the reference code from the booking confirmation is sav",
+            "overhead": false
+          },
+          {
+            "step": 16,
+            "context": "root",
+            "status": "done",
+            "remark": "assert: a booking confirmation with a reference code is shown",
+            "overhead": false
+          }
+        ]
+      },
+      {
+        "label": "baseline-after-3",
+        "id": "2026-10-24T21-03-27.879Z-5c9cab20",
+        "url": "http://localhost:4102",
+        "startedAt": "2026-10-24T21:03:27.879Z",
+        "finishedAt": "2026-10-24T21:04:43.368Z",
+        "kaneRunId": "KR-141",
+        "wrapperLabel": "errored",
+        "evidenceDir": "evidence/runs/baseline-after-3",
+        "status": "passed",
+        "started": true,
+        "exitCode": 0,
+        "kaneStatus": "passed",
+        "stepsTaken": 12,
+        "failedSteps": 0,
+        "actionSteps": 10,
+        "overheadSteps": 2,
+        "durationSec": 61.2,
+        "credits": 20.413311500000002,
+        "reference": "PL-4821",
+        "summary": "Booked Sam Rivera’s free first visit for November 2, 2026 at 12:00 PM using sam@example.com.\nAccepted the waiver.\nThe booking was confirmed and the reference code was saved: PL-4821.",
+        "oneLiner": "booked a free first visit on the booking site",
+        "reasonCode": "success.complete",
+        "testUrl": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QVKKBH0K5T0S84HP80JE01/dashboard/share/US_2S7R5B3XIBZD8H7PEG2C0QN5Z5MU4F6H6GVYOE2BK9BU14XIK1CDMESCV0YWHDLG?type=summary&agentView=true&fqdn=summary-page",
+        "sessionDir": "~/.testmuai/kaneai/sessions/b9ad6917-4e69-4de1-94a2-324dc725154f",
+        "evidencePack": "~/.testmuai/kaneai/sessions/b9ad6917-4e69-4de1-94a2-324dc725154f/evidence/a12b6d2a-10e0-4bda-95db-65baec0517df.evidence",
+        "firstFailedStep": null,
+        "failedRemarks": [],
+        "rejectedLines": 0,
+        "steps": [
+          {
+            "step": 2,
+            "context": "root",
+            "status": "done",
+            "remark": "navigate: Navigate to http://localhost:4102",
+            "overhead": false
+          },
+          {
+            "step": 3,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking Book a free first visit button",
+            "overhead": false
+          },
+          {
+            "step": 4,
+            "context": "root",
+            "status": "done",
+            "remark": "wait: queued plan (6 steps): type \"Your name\"; type \"Email address\"; type \"Visit date\"",
+            "overhead": true
+          },
+          {
+            "step": 5,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"Sam Rivera\" into \"Your name\"",
+            "overhead": false
+          },
+          {
+            "step": 6,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"sam@example.com\" into \"Email address\"",
+            "overhead": false
+          },
+          {
+            "step": 7,
+            "context": "root",
+            "status": "done",
+            "remark": "type: Type \"2026-11-02\" into \"Visit date\"",
+            "overhead": false
+          },
+          {
+            "step": 8,
+            "context": "root",
+            "status": "done",
+            "remark": "",
+            "overhead": true
+          },
+          {
+            "step": 9,
+            "context": "root",
+            "status": "done",
+            "remark": "select: Selecting arrival time as 12pm (noon)",
+            "overhead": false
+          },
+          {
+            "step": 10,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking the climbing waiver acceptance checkbox",
+            "overhead": false
+          },
+          {
+            "step": 11,
+            "context": "root",
+            "status": "done",
+            "remark": "click: Clicking confirm my free visit button",
+            "overhead": false
+          },
+          {
+            "step": 12,
+            "context": "root",
+            "status": "done",
+            "remark": "analyze: ANALYZE(textual_visual, 'the reference code from the booking confirmation is sav",
+            "overhead": false
+          },
+          {
+            "step": 13,
+            "context": "root",
+            "status": "done",
+            "remark": "assert: a booking confirmation with a reference code is shown",
+            "overhead": false
+          }
+        ]
+      }
+    ]
+  },
+  "comparison": {
+    "scoreDelta": 46,
+    "stepsSaved": 10,
+    "secondsSaved": 79.94999999999997,
+    "creditsSaved": 35.641593750000006,
+    "lowConfidence": false
+  },
+  "agentTax": {
+    "extraSteps": 10,
+    "extraSeconds": 79.94999999999997,
+    "extraCredits": 35.641593750000006
+  }
+}

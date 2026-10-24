@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { parseRun, countSteps, parseEvents } from '../lighthouse/parse.mjs';
+import { parseRun, countSteps, parseEvents, findReference } from '../lighthouse/parse.mjs';
 
 const fixture = await readFile(new URL('./fixtures/kane-run-after-passed.ndjson', import.meta.url), 'utf8');
 
@@ -58,4 +58,11 @@ test('repeated step indices in separate child agents are counted separately; fin
   assert.equal(counts.failedSteps, 1);
   assert.equal(counts.overheadSteps, 2);
   assert.equal(counts.actionSteps, 2);
+});
+
+test('reference is found under the key Kane chose', () => {
+  assert.equal(findReference({ booking_reference: 'PL-4821' }), 'PL-4821');
+  assert.equal(findReference({ booking_confirmation_shown: 'true', reference_code: 'PL-4821' }), 'PL-4821');
+  assert.equal(findReference({ reference_code_shown: 'true' }), null);
+  assert.equal(findReference({}), null);
 });

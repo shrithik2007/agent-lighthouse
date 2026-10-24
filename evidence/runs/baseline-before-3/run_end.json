@@ -1,0 +1,108 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Booked a free first visit for Sam Rivera (sam@example.com) for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed with reference code PL-4821.",
+  "one_liner": "booked a free first visit on localhost",
+  "final_state": {
+    "url": "http://localhost:4101/",
+    "reference_code": "PL-4821",
+    "booking_confirmation_shown": "true"
+  },
+  "reason": "Objective completed",
+  "duration": 125.6,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "booking_confirmation_shown": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "visual",
+        "step": 23,
+        "query": "whether a booking confirmation is present (in the confirmation toast at the bottom of the page)",
+        "condition": "a booking confirmation is shown",
+        "human_description": "Checking whether the booking confirmation is shown",
+        "expected_value": "true",
+        "subject": "a booking confirmation",
+        "must_be": "present"
+      },
+      "reference_code_shown": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "visual",
+        "step": 23,
+        "query": "whether a reference code is present (in the confirmation toast at the bottom of the page)",
+        "condition": "a reference code is shown",
+        "human_description": "Checking whether the reference code is shown",
+        "expected_value": "true",
+        "subject": "a reference code",
+        "must_be": "present"
+      },
+      "ref": {
+        "extracted_value": "PL-4821",
+        "operator": "equals",
+        "transforms": [
+          "strip"
+        ],
+        "json_path": null,
+        "reasoning": "value: 'PL-4821' (stored, no comparison)",
+        "analyzer_type": "visual",
+        "step": 23,
+        "query": "the reference code is stored as {{ref}}",
+        "condition": "the reference code is stored as {{ref}}",
+        "human_description": "Reading the reference code from the booking confirmation",
+        "expected_value": ""
+      }
+    },
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "PL-4821",
+        "type": "memory",
+        "secret": false,
+        "source": "runtime"
+      },
+      "booking_confirmation_shown": {
+        "syntax": "{{booking_confirmation_shown}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      },
+      "reference_code_shown": {
+        "syntax": "{{reference_code_shown}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) booked a free first visit on localhost"
+  },
+  "credits_consumed": 45.5494975,
+  "session_dir": "~/.testmuai/kaneai/sessions/e1da7d56-f66c-47db-819c-9ab81ec38822",
+  "run_dir": "~/.testmuai/kaneai/sessions/e1da7d56-f66c-47db-819c-9ab81ec38822/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Booked a free first visit for Sam Rivera (sam@example.com) for November 2, 2026 at 12:00 PM.\nAccepted the waiver.\nThe booking was confirmed with reference code PL-4821.",
+      "one_liner": "booked a free first visit on localhost",
+      "credits_consumed": 45.5494975
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QVB063NWWYP6N5FE4QHEDQ/dashboard/share/US_YTCPUIVICKRRWJ6FNUQYAHBCAOLEDNGNIQF9JWBFCJNWCL5E3PFPSR8TNW1K80RA?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T21:01:04.103Z"
+}
