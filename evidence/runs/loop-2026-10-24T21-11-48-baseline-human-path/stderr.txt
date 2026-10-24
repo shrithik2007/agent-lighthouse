@@ -1,0 +1,7 @@
+Running on: Desktop · Chrome
+evidence: view locally with `kane-cli evidence serve ~/.testmuai/kaneai/sessions/251c774b-e104-47fa-b014-0ba047db0db5/evidence/23c9bca9-1937-4e63-be95-7cafb3c05ecd.evidence`
+
+● exit 1 · no completion event (not a pass)
+! Uncommitted changes: the run is tied to HEAD, which isn't exactly what ran.
+Kane run KR-146: FAILED (UNVERIFIED). 1 suspected defect(s) opened. Details: /t/lighthouse/proof#run-146
+→ Open Proof tab: https://kaneclihack.sh/t/lighthouse/proof#run-146

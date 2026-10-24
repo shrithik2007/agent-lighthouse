@@ -1,0 +1,91 @@
+{
+  "type": "run_end",
+  "status": "failed",
+  "summary": "The confirmation message is removed too soon, so the booking reference is no longer shown when it is meant to be checked.\nKeep the successful-booking reference visible for at least five seconds, or show it in a persistent confirmation area.\nevidence: objective_contradiction: Wait 5 seconds, then verify the text PL-4821 is still visible on the page.",
+  "one_liner": "The booking reference PL-4821 disappears after the required five-second wait.",
+  "final_state": {},
+  "reason": "Final verification failed: \"the text PL-4821 is still visible on the page\"",
+  "duration": 65.7,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "pl_4821_visible": {
+        "extracted_value": "false",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'false' -> 'false'; equals 'true' -> FAIL",
+        "analyzer_type": "visual",
+        "step": 13,
+        "query": "whether the text PL-4821 is present (on the page)",
+        "condition": "the text PL-4821 is still visible on the page",
+        "human_description": "Checking whether the text PL-4821 is visible",
+        "expected_value": "true",
+        "subject": "the text PL-4821",
+        "must_be": "present"
+      }
+    },
+    "variables": {
+      "pl_4821_visible": {
+        "syntax": "{{pl_4821_visible}}",
+        "value": "false",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(failed) The booking reference PL-4821 disappears after the required five-second wait."
+  },
+  "credits_consumed": 27.485954999999997,
+  "session_dir": "~/.testmuai/kaneai/sessions/251c774b-e104-47fa-b014-0ba047db0db5",
+  "run_dir": "~/.testmuai/kaneai/sessions/251c774b-e104-47fa-b014-0ba047db0db5/runs/0",
+  "result_code": 740,
+  "reason_code": "assertion_error.confirmed_product_bug",
+  "per_flow_metadata": [
+    {
+      "result_code": "740",
+      "reason_code": "assertion_error.confirmed_product_bug",
+      "error_message": "Final verification failed: \"the text PL-4821 is still visible on the page\"",
+      "summary": "The confirmation message is removed too soon, so the booking reference is no longer shown when it is meant to be checked.\nKeep the successful-booking reference visible for at least five seconds, or show it in a persistent confirmation area.\nevidence: objective_contradiction: Wait 5 seconds, then verify the text PL-4821 is still visible on the page.",
+      "one_liner": "The booking reference PL-4821 disappears after the required five-second wait.",
+      "credits_consumed": 27.485954999999997
+    }
+  ],
+  "run_id": "run-0",
+  "verdict": {
+    "confirmed": true,
+    "status": "failed",
+    "family": "application_issue",
+    "category": "ui_state_mismatch",
+    "category_proposal": "",
+    "severity": "minor",
+    "root_cause": "The confirmation message is removed too soon, so the booking reference is no longer shown when it is meant to be checked.",
+    "agent_fault_assessment": "The agent followed the required booking flow: it entered the specified date, submitted the form, and waited 5,000 ms before checking the reference. The click and both waits completed successfully, so its actions did not cause the missing reference.",
+    "bug_title": "Booking reference disappears before required five-second verification",
+    "signals": [
+      {
+        "step": "0-14",
+        "kind": "objective_contradiction",
+        "excerpt": "Wait 5 seconds, then verify the text PL-4821 is still visible on the page."
+      }
+    ],
+    "confidence": 0.96,
+    "suggestion": "Keep the successful-booking reference visible for at least five seconds, or show it in a persistent confirmation area.",
+    "one_liner": "The booking reference PL-4821 disappears after the required five-second wait.",
+    "relevant_steps": [
+      10,
+      11,
+      12,
+      14
+    ],
+    "culprit_step": "0-14",
+    "credits_consumed": 4.3237,
+    "mode": "terminal"
+  },
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QW2WDN4WJ7R1DMG3YKPEQ4/dashboard/share/US_99DS4UDF9A8KW8HKFL458KJTRLQTBSSEACDYWGJ7BBGJ4BDIKEOY5XSM3T6KH15Y?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T21:13:02.708Z"
+}

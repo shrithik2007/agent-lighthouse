@@ -1,0 +1,12 @@
+Implemented — I edited only `site/index.html` and applied the KR-133 fixes.
+
+**What Changed**
+- Replaced toast-only success with persistent inline confirmation panel (`aria-live="polite"`) that shows `Booking confirmed` + `Reference PL-4821` and does not auto-hide: `site/index.html:22`, `site/index.html:43`.
+- On submit, form now validates named fields, shows specific error text, hides the form, and reveals confirmation: `site/index.html:31`.
+- Kept `#toast` as secondary feedback, but removed timer dependency from success flow: `site/index.html:24`, `site/index.html:43`.
+- Updated both CTAs to clear accessible text and made `#nav-go` open booking directly via `openBooking()`: `site/index.html:6`, `site/index.html:8`, `site/index.html:29`.
+- Converted cookie close control to a real button with `type="button"` + `aria-label`, and adjusted clickable area styling: `site/index.html:24`, `site/index.html:4`.
+- Added visible labels for name/email/date, switched date input to `type="date"` with explicit hint text: `site/index.html:18`, `site/index.html:20`.
+- Replaced custom arrival-time divs with native radio group (`name="arrivalTime"`, default `12pm`) and custom waiver div with native checkbox in label: `site/index.html:21`, `site/index.html:22`.
+
+If you want, I can now do a quick manual run-through checklist against the exact Kane flow steps.

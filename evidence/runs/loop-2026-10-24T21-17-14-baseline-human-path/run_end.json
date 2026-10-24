@@ -1,0 +1,95 @@
+{
+  "type": "run_end",
+  "status": "failed",
+  "summary": "The confirmation reference is shown only briefly and disappears before the required follow-up check, even though the completed booking should remain identifiable on the page.\nKeep the booking reference visible in a persistent confirmation area, or extend the confirmation message so it remains visible for at least the required five seconds.\nevidence: objective_contradiction: Wait 5 seconds, then verify the text PL-4821 is still visible on the page.\nevidence: objective_contradiction: Final verification failed: \"the text PL-4821 is still visible on the page\"",
+  "one_liner": "The booking reference PL-4821 was not still shown after the required five-second wait.",
+  "final_state": {},
+  "reason": "Final verification failed: \"the text PL-4821 is still visible on the page\"",
+  "duration": 76.6,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "pl_4821_visible": {
+        "extracted_value": "false",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'false' -> 'false'; equals 'true' -> FAIL",
+        "analyzer_type": "visual",
+        "step": 14,
+        "query": "whether the text PL-4821 is present (on the page)",
+        "condition": "the text PL-4821 is still visible on the page",
+        "human_description": "Checking whether the text PL-4821 is visible",
+        "expected_value": "true",
+        "subject": "the text PL-4821",
+        "must_be": "present"
+      }
+    },
+    "variables": {
+      "pl_4821_visible": {
+        "syntax": "{{pl_4821_visible}}",
+        "value": "false",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(failed) The booking reference PL-4821 was not still shown after the required five-second wait."
+  },
+  "credits_consumed": 26.235810499999996,
+  "session_dir": "~/.testmuai/kaneai/sessions/b691e6fd-8823-433d-bf30-e12cc3b1dfbe",
+  "run_dir": "~/.testmuai/kaneai/sessions/b691e6fd-8823-433d-bf30-e12cc3b1dfbe/runs/0",
+  "result_code": 740,
+  "reason_code": "assertion_error.confirmed_product_bug",
+  "per_flow_metadata": [
+    {
+      "result_code": "740",
+      "reason_code": "assertion_error.confirmed_product_bug",
+      "error_message": "Final verification failed: \"the text PL-4821 is still visible on the page\"",
+      "summary": "The confirmation reference is shown only briefly and disappears before the required follow-up check, even though the completed booking should remain identifiable on the page.\nKeep the booking reference visible in a persistent confirmation area, or extend the confirmation message so it remains visible for at least the required five seconds.\nevidence: objective_contradiction: Wait 5 seconds, then verify the text PL-4821 is still visible on the page.\nevidence: objective_contradiction: Final verification failed: \"the text PL-4821 is still visible on the page\"",
+      "one_liner": "The booking reference PL-4821 was not still shown after the required five-second wait.",
+      "credits_consumed": 26.235810499999996
+    }
+  ],
+  "run_id": "run-0",
+  "verdict": {
+    "confirmed": true,
+    "status": "failed",
+    "family": "application_issue",
+    "category": "ui_state_mismatch",
+    "category_proposal": "",
+    "severity": "major",
+    "root_cause": "The confirmation reference is shown only briefly and disappears before the required follow-up check, even though the completed booking should remain identifiable on the page.",
+    "agent_fault_assessment": "The agent completed the required booking sequence: the date was entered, the waiver was selected, and it clicked the labeled confirmation button. The post-confirmation screenshot shows a successful reference, \"Done! Ref PL-4821\". The failure occurred only after waiting and checking the required persistence condition, so the agent's actions did not cause the reference to disappear.",
+    "bug_title": "Booking reference disappears after confirmation delay",
+    "signals": [
+      {
+        "step": "0-14",
+        "kind": "objective_contradiction",
+        "excerpt": "Wait 5 seconds, then verify the text PL-4821 is still visible on the page."
+      },
+      {
+        "step": "0-14",
+        "kind": "objective_contradiction",
+        "excerpt": "Final verification failed: \"the text PL-4821 is still visible on the page\""
+      }
+    ],
+    "confidence": 0.9,
+    "suggestion": "Keep the booking reference visible in a persistent confirmation area, or extend the confirmation message so it remains visible for at least the required five seconds.",
+    "one_liner": "The booking reference PL-4821 was not still shown after the required five-second wait.",
+    "relevant_steps": [
+      11,
+      12,
+      14
+    ],
+    "culprit_step": "0-14",
+    "credits_consumed": 4.623749999999999,
+    "mode": "terminal"
+  },
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QWCV0GTT8DZP67725HYDSJ/dashboard/share/US_9F3RRAEZ50WLM090CHV8TL5063JID7UYH5D1VEZ17BK15NLC16OHF8N7D67R51J8?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T21:18:38.935Z"
+}
