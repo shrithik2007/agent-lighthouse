@@ -114,3 +114,13 @@ test('Agent Tax is unknown with no success, no baseline successes or absent cred
   assert.deepEqual(agentTax(three(), { baselineRuns: three({ status: 'failed' }) }), unknown);
   assert.equal(agentTax(three({ credits: undefined }), { baselineRuns: three() }).extraCredits, null);
 });
+
+test('agentTax uses humanBaseline when no baseline runs exist, with optimalSteps as the step fallback', () => {
+  const human = { medianSteps: 6, medianSeconds: 12, sessions: 4, range: { from: '2026-10-01', to: '2026-10-24' } };
+  assert.deepEqual(agentTax(three({ stepsTaken: 10 }), { humanBaseline: human }), { extraSteps: 4, extraSeconds: 8, extraCredits: null });
+  assert.deepEqual(agentTax(three({ stepsTaken: 10 }), { humanBaseline: { ...human, medianSteps: null }, optimalSteps: 7 }), { extraSteps: 3, extraSeconds: 8, extraCredits: null });
+  // Measured baseline runs still win over the human substitute.
+  assert.deepEqual(agentTax(three({ stepsTaken: 10 }), { baselineRuns: three(), humanBaseline: human }), { extraSteps: 3, extraSeconds: 0, extraCredits: 0 });
+  assert.throws(() => agentTax(three(), { humanBaseline: { ...human, sessions: 0 } }), RangeError);
+  assert.throws(() => agentTax(three(), { humanBaseline: { ...human, medianSeconds: -1 } }), TypeError);
+});
