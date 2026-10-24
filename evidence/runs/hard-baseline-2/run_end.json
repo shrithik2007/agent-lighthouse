@@ -1,0 +1,71 @@
+{
+  "type": "run_end",
+  "status": "failed",
+  "summary": "The booking form requires a human CAPTCHA check, which the browser automation cannot complete.\nUse a test environment with CAPTCHA disabled or provide an approved automation bypass for this booking flow.",
+  "one_liner": "The booking could not be completed because an “I’m not a robot” CAPTCHA blocked the automated run.",
+  "final_state": {},
+  "reason": "Hard blocker: captcha",
+  "duration": 76,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {},
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "",
+        "type": "text",
+        "secret": false,
+        "source": "runtime"
+      }
+    },
+    "pointer": "(failed) The booking could not be completed because an “I’m not a robot” CAPTCHA blocked the automated run."
+  },
+  "credits_consumed": 27.938019999999998,
+  "session_dir": "~/.testmuai/kaneai/sessions/263dd47f-bb53-4397-b556-39f69e5ddf14",
+  "run_dir": "~/.testmuai/kaneai/sessions/263dd47f-bb53-4397-b556-39f69e5ddf14/runs/0",
+  "result_code": 610,
+  "reason_code": "blocker.captcha",
+  "per_flow_metadata": [
+    {
+      "result_code": "610",
+      "reason_code": "blocker.captcha",
+      "error_message": "Hard blocker: captcha",
+      "summary": "The booking form requires a human CAPTCHA check, which the browser automation cannot complete.\nUse a test environment with CAPTCHA disabled or provide an approved automation bypass for this booking flow.",
+      "one_liner": "The booking could not be completed because an “I’m not a robot” CAPTCHA blocked the automated run.",
+      "credits_consumed": 27.938019999999998
+    }
+  ],
+  "run_id": "run-0",
+  "verdict": {
+    "confirmed": false,
+    "status": "broken",
+    "family": "environment_issue",
+    "category": "bot_detection",
+    "category_proposal": "",
+    "severity": "major",
+    "root_cause": "The booking form requires a human CAPTCHA check, which the browser automation cannot complete.",
+    "agent_fault_assessment": "The agent followed the requested booking path: it selected the free first visit class, advanced to November 2026, selected November 2, and opened the arrival-time control. The CAPTCHA was present on the booking form and is an external anti-bot barrier rather than a wrong click or missed state by the agent.",
+    "bug_title": "CAPTCHA blocks automated booking completion",
+    "signals": [],
+    "confidence": 0.99,
+    "suggestion": "Use a test environment with CAPTCHA disabled or provide an approved automation bypass for this booking flow.",
+    "one_liner": "The booking could not be completed because an “I’m not a robot” CAPTCHA blocked the automated run.",
+    "relevant_steps": [
+      0,
+      6,
+      10,
+      11,
+      12
+    ],
+    "culprit_step": "0-12",
+    "credits_consumed": 4.25535,
+    "mode": "terminal"
+  },
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QZYNEDYVE6ZQ6C2YBWS65N/dashboard/share/US_HKSA8FUNDD2P7MTFCBNB50EGVP2BQNDSAPXN5DSEKK11UTZEF6VWWNW84EYA9HIH?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T22:20:53.751Z"
+}

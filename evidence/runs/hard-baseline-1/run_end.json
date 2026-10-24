@@ -1,0 +1,71 @@
+{
+  "type": "run_end",
+  "status": "failed",
+  "summary": "The booking form showed an “I’m not a robot” check before it could be submitted. This blocked the automated run from accepting the waiver, submitting the booking, and reading the confirmation reference.\nUse a test environment with CAPTCHA disabled or a supported test-verification bypass, then rerun the booking flow.",
+  "one_liner": "The booking could not be completed because a CAPTCHA required a human verification.",
+  "final_state": {},
+  "reason": "Hard blocker: captcha",
+  "duration": 67.1,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {},
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "",
+        "type": "text",
+        "secret": false,
+        "source": "runtime"
+      }
+    },
+    "pointer": "(failed) The booking could not be completed because a CAPTCHA required a human verification."
+  },
+  "credits_consumed": 26.756334999999996,
+  "session_dir": "~/.testmuai/kaneai/sessions/5414fd3c-4bd6-477f-b06f-39bce149573c",
+  "run_dir": "~/.testmuai/kaneai/sessions/5414fd3c-4bd6-477f-b06f-39bce149573c/runs/0",
+  "result_code": 610,
+  "reason_code": "blocker.captcha",
+  "per_flow_metadata": [
+    {
+      "result_code": "610",
+      "reason_code": "blocker.captcha",
+      "error_message": "Hard blocker: captcha",
+      "summary": "The booking form showed an “I’m not a robot” check before it could be submitted. This blocked the automated run from accepting the waiver, submitting the booking, and reading the confirmation reference.\nUse a test environment with CAPTCHA disabled or a supported test-verification bypass, then rerun the booking flow.",
+      "one_liner": "The booking could not be completed because a CAPTCHA required a human verification.",
+      "credits_consumed": 26.756334999999996
+    }
+  ],
+  "run_id": "run-0",
+  "verdict": {
+    "confirmed": false,
+    "status": "broken",
+    "family": "environment_issue",
+    "category": "bot_detection",
+    "category_proposal": "",
+    "severity": "major",
+    "root_cause": "The booking form showed an “I’m not a robot” check before it could be submitted. This blocked the automated run from accepting the waiver, submitting the booking, and reading the confirmation reference.",
+    "agent_fault_assessment": "The agent completed the available booking steps correctly: it selected the free first visit, advanced to November 2026, entered Sam Rivera's details, chose November 2, and reached the arrival-time control. The run could not continue because the page requires a human CAPTCHA challenge, which browser automation cannot complete.",
+    "bug_title": "CAPTCHA blocks automated booking completion",
+    "signals": [],
+    "confidence": 0.99,
+    "suggestion": "Use a test environment with CAPTCHA disabled or a supported test-verification bypass, then rerun the booking flow.",
+    "one_liner": "The booking could not be completed because a CAPTCHA required a human verification.",
+    "relevant_steps": [
+      6,
+      7,
+      8,
+      11,
+      12
+    ],
+    "culprit_step": "0-12",
+    "credits_consumed": 4.2222,
+    "mode": "terminal"
+  },
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QZW4R92EDS39S99F088VHH/dashboard/share/US_OO4KBBHP97IBNG2Y1VFVNJI87IYB5LBKZSP1MXULXHG2XGFDOCCA2AWYLXNUUCN2?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T22:19:23.431Z"
+}

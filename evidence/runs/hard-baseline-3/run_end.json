@@ -1,0 +1,71 @@
+{
+  "type": "run_end",
+  "status": "failed",
+  "summary": "A captcha was shown during booking, and the automation cannot complete that human verification step.\nUse a test environment with captcha disabled or a supported test-verification bypass before running this booking scenario.",
+  "one_liner": "The booking could not be completed because the site required a human captcha check.",
+  "final_state": {},
+  "reason": "Hard blocker: captcha",
+  "duration": 72.7,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {},
+    "variables": {
+      "ref": {
+        "syntax": "{{ref}}",
+        "value": "",
+        "type": "text",
+        "secret": false,
+        "source": "runtime"
+      }
+    },
+    "pointer": "(failed) The booking could not be completed because the site required a human captcha check."
+  },
+  "credits_consumed": 27.135830000000002,
+  "session_dir": "~/.testmuai/kaneai/sessions/3154e696-8920-483c-91e1-2e8856fc24b5",
+  "run_dir": "~/.testmuai/kaneai/sessions/3154e696-8920-483c-91e1-2e8856fc24b5/runs/0",
+  "result_code": 610,
+  "reason_code": "blocker.captcha",
+  "per_flow_metadata": [
+    {
+      "result_code": "610",
+      "reason_code": "blocker.captcha",
+      "error_message": "Hard blocker: captcha",
+      "summary": "A captcha was shown during booking, and the automation cannot complete that human verification step.\nUse a test environment with captcha disabled or a supported test-verification bypass before running this booking scenario.",
+      "one_liner": "The booking could not be completed because the site required a human captcha check.",
+      "credits_consumed": 27.135830000000002
+    }
+  ],
+  "run_id": "run-0",
+  "verdict": {
+    "confirmed": false,
+    "status": "broken",
+    "family": "environment_issue",
+    "category": "bot_detection",
+    "category_proposal": "",
+    "severity": "major",
+    "root_cause": "A captcha was shown during booking, and the automation cannot complete that human verification step.",
+    "agent_fault_assessment": "The agent successfully moved to November and entered the requested name and email. A captcha is an external anti-bot barrier rather than an incorrect click or mistyped value by the agent; its required human verification prevented the agent from finishing the date, time, waiver, confirmation, and reference capture.",
+    "bug_title": "Captcha blocks automated class booking",
+    "signals": [],
+    "confidence": 0.98,
+    "suggestion": "Use a test environment with captcha disabled or a supported test-verification bypass before running this booking scenario.",
+    "one_liner": "The booking could not be completed because the site required a human captcha check.",
+    "relevant_steps": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "culprit_step": "0-11",
+    "credits_consumed": 4.4172,
+    "mode": "terminal"
+  },
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5R01DN52NJ4ND6Q1N7Y9MJA/dashboard/share/US_P3MZ86HRMESRHJQ5CNN26XH1ZVV1DA2VNOXHIDIZI3RCSPXKDM1O8HZBAEB5X8O5?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T22:22:21.136Z"
+}
