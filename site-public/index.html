@@ -7,89 +7,94 @@
 <meta name="description" content="Measure how hard your website makes it for an AI agent to book, get a proven fix, and approve it yourself.">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
 <style>
-:root{--ink:#14181F;--rope:#1E3A5F;--hold:#F2C230;--wall:#F5F7FA;--concrete:#D5DAE1;--muted:#4A5361;--surface:#FFFFFF;--pass:#1F7A4D;--fail:#B3261E;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#EEF1F5;--wall:#11151B;--surface:#1A2029;--concrete:#2E3642;--muted:#A4ADBA;--rope:#8DB4E2;--pass:#5BC48D;--fail:#F2786F}}
-:root[data-theme="dark"]{--ink:#EEF1F5;--wall:#11151B;--surface:#1A2029;--concrete:#2E3642;--muted:#A4ADBA;--rope:#8DB4E2;--pass:#5BC48D;--fail:#F2786F}
-*{box-sizing:border-box}body{margin:0;background:var(--wall);color:var(--ink);font:17px/1.6 var(--sans)}
+:root{--ink:#14181F;--wall:#F5F7FA;--rope:#1E3A5F;--hold:#F2C230;--fail:#C2410C;--muted:#4A5361;--line:#D5DAE1;--surface:#FFFFFF;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+--t1:clamp(40px,6vw,72px);--t2:clamp(26px,3.2vw,36px);--t3:18px;--t4:14px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#EEF1F5;--wall:#11151B;--surface:#1A2029;--line:#2E3642;--muted:#A4ADBA;--rope:#8DB4E2;--fail:#F08A5D}}
+:root[data-theme="dark"]{--ink:#EEF1F5;--wall:#11151B;--surface:#1A2029;--line:#2E3642;--muted:#A4ADBA;--rope:#8DB4E2;--fail:#F08A5D}
+*{box-sizing:border-box}body{margin:0;background:var(--wall);color:var(--ink);font:var(--t3)/1.6 var(--sans)}
 a{color:var(--rope);font-weight:700}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
-header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px 0;border-bottom:4px solid var(--ink)}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}
-.brand img{width:36px;height:36px}
-nav.links{display:flex;gap:18px;flex-wrap:wrap;font-size:15px}
-.hero{padding:56px 0 40px}
-.eyebrow{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--rope);margin:0}
-h1{font-size:clamp(38px,6vw,68px);line-height:1.02;letter-spacing:-.03em;font-weight:900;margin:12px 0 18px;max-width:16ch}
-h1 span{background:var(--hold);color:#14181F;padding:0 .12em}
-.lede{font-size:20px;max-width:60ch;color:var(--muted);margin:0}
-section{padding:44px 0;border-top:1px solid var(--concrete)}
-h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.02em;line-height:1.1;margin:0 0 18px;font-weight:900}
-h3{font-size:19px;margin:0 0 6px}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;list-style:none;padding:0;margin:0}
-.facts li{background:var(--surface);border-left:5px solid var(--rope);padding:16px 18px}
-.facts .src{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 0;border-bottom:4px solid var(--ink)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:var(--t3);text-decoration:none;color:var(--ink)}.brand img{width:32px;height:32px}
+nav.links{display:flex;gap:16px;flex-wrap:wrap;font-size:var(--t4)}
+section{padding:40px 0;border-bottom:1px solid var(--line)}
+h1{font-size:var(--t1);line-height:1.02;letter-spacing:-.03em;font-weight:900;margin:0 0 16px;max-width:18ch}
+h1 mark{background:var(--hold);color:#14181F;padding:0 .1em}
+h2{font-size:var(--t2);letter-spacing:-.02em;line-height:1.1;margin:0 0 18px;font-weight:900}
+h3{font-size:var(--t3);margin:0 0 6px}
+.eyebrow{font-size:var(--t4);font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--rope);margin:0 0 8px}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.note{font-size:var(--t4);color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.stat{background:var(--surface);border-top:6px solid var(--rope);padding:18px}
+.stat b{display:block;font-size:var(--t1);line-height:1;font-weight:900;letter-spacing:-.03em}
+.stat p{margin:8px 0 6px;font-size:var(--t4)}.stat a{font-size:var(--t4)}
 .steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;counter-reset:s;list-style:none;padding:0;margin:0}
-.steps li{background:var(--surface);padding:18px;border-top:6px solid var(--rope)}
+.steps li{background:var(--surface);padding:16px;border-top:6px solid var(--rope);font-size:var(--t4)}
 .steps li:last-child{border-top-color:var(--hold)}
-.steps li:before{counter-increment:s;content:counter(s);display:block;font-size:40px;font-weight:900;line-height:1;color:var(--rope);margin-bottom:8px}
-.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.case{background:var(--surface);padding:22px;border:1px solid var(--concrete)}
-.nums{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 24px;margin:12px 0}
-.num{display:flex;flex-direction:column}.num b{font-size:56px;line-height:1;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums}.num small{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:800}
-.tax{font-weight:900;background:var(--hold);color:#14181F;padding:2px 8px;display:inline-block}
+.steps li:before{counter-increment:s;content:counter(s);display:block;font-size:var(--t2);font-weight:900;line-height:1;color:var(--rope);margin-bottom:6px}
+figure{margin:20px 0 0}figure img{width:100%;height:auto;background:var(--surface);border:1px solid var(--line)}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;background:var(--surface);font-size:var(--t4)}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:800}
+td code{word-break:break-word}
+.ok{color:#1F7A4D;font-weight:800}.bad{color:var(--fail);font-weight:800}
 .caught{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
-.caught pre{font:15px/1.5 var(--mono);white-space:pre-wrap;background:var(--surface);border-left:5px solid var(--fail);padding:16px;margin:0 0 12px}
-.caught img{width:100%;height:auto;border:1px solid var(--concrete)}
-.note{font-size:14px;color:var(--muted)}
-ul.plain{padding-left:20px}ul.plain li{margin:6px 0}
-footer{padding:32px 0 48px;border-top:4px solid var(--ink);font-size:15px;display:flex;flex-wrap:wrap;gap:8px 24px}
-@media (max-width:760px){.steps,.cases,.caught{grid-template-columns:1fr}nav.links{display:none}}
+pre{font:var(--t4)/1.5 var(--mono);white-space:pre-wrap;background:var(--surface);border-left:5px solid var(--fail);padding:14px;margin:0 0 12px}
+.caught p{font-size:var(--t4)}
+.caught img{width:100%;height:auto;border:1px solid var(--line)}
+.story{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.story div{background:var(--surface);padding:16px;border-left:5px solid var(--line);font-size:var(--t4)}
+.story .blocked{border-left-color:var(--fail)}.story .clean{border-left-color:var(--hold)}
+.story b.big{display:block;font-size:var(--t2);font-weight:900;line-height:1.1;margin-bottom:6px}
+.savings{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.savings div{background:var(--surface);padding:16px;border-top:6px solid var(--rope);font-size:var(--t4)}
+.savings b{display:block;font-size:var(--t2);font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
+.savings input{font:700 var(--t4) var(--sans);width:100%;max-width:120px;padding:6px 8px;border:1px solid var(--line);border-radius:4px;background:var(--wall);color:var(--ink)}
+ul.plain{padding-left:20px;margin:0}ul.plain li{margin:6px 0;font-size:var(--t4)}
+footer{padding:28px 0 44px;font-size:var(--t4);display:flex;flex-wrap:wrap;gap:8px 24px}
+@media (max-width:820px){.stats,.steps,.caught,.story,.savings{grid-template-columns:1fr}nav.links{display:none}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="top">
   <a class="brand" href="./"><img src="logo.svg" alt="">Agent Lighthouse</a>
-  <nav class="links" aria-label="Page"><a href="#problem">Problem</a><a href="#loop">How it works</a><a href="#cases">Results</a><a href="../dashboard/">Live report</a><a href="https://github.com/shrithik2007/agent-lighthouse">GitHub</a></nav>
+  <nav class="links" aria-label="Page"><a href="#how">How it works</a><a href="#cases">Cases</a><a href="#caught">What Kane caught</a><a href="#gate">The gate</a><a href="../dashboard/">Live report</a><a href="https://github.com/shrithik2007/agent-lighthouse">GitHub</a></nav>
 </header>
 
-<div class="hero">
+<section aria-labelledby="h-problem">
   <p class="eyebrow">For owners of booking websites</p>
-  <h1>Can an AI agent <span>book</span> on your site?</h1>
-  <p class="lede">Agent Lighthouse sends Kane CLI to try your booking flow, measures the extra work an agent burns, proposes a fix, and proves it with fresh runs and a human-path check before you approve anything. We never change a site without the owner’s say-so.</p>
-</div>
-
-<section id="problem" aria-labelledby="h-problem">
-  <h2 id="h-problem">Agents are starting to book. Most websites aren’t ready.</h2>
-  <ul class="facts">
-    <li>Google’s AI Mode can book restaurant tables, event tickets and beauty appointments straight from search, and ChatGPT’s agent mode can sign in to a booking site and reserve a table.<span class="src"><a href="https://li.solutions/blog/ai-booking-agents">li.solutions: AI booking agents</a></span></li>
-    <li>ChatGPT’s in-chat restaurant booking runs through OpenTable, Resy and Yelp, not through a restaurant’s own website.<span class="src"><a href="https://www.androidauthority.com/chatgpt-restaurant-reservations-and-waitlists-3696712/">Android Authority</a></span></li>
-    <li>On Online-Mind2Web (300 tasks, 136 live sites), the best agent succeeded on about 61% of tasks and most on about 30%.<span class="src"><a href="https://arxiv.org/abs/2504.01382">Xue et al., COLM 2025 (arXiv 2504.01382)</a></span></li>
-    <li>In an illustrative breakdown, an agent that scores 92% on the happy path drops to 12% when a modal interrupts.<span class="src"><a href="https://futureagi.com/blog/evaluating-browser-use-agents-2026/">Future AGI: evaluating browser-use agents (2026)</a></span></li>
-    <li>In a hands-on test, ChatGPT’s agent picked “2 people” instead of “3 people” on OpenTable’s site and handed the booking back to the user.<span class="src"><a href="https://explainx.ai/blog/chatgpt-restaurant-reservations-opentable-resy-yelp-august-2026">explainx.ai (Aug 2026), citing PCWorld</a></span></li>
-    <li>A single browser-agent task can take 35,000–90,000 tokens and cost $0.30–0.80.<span class="src"><a href="https://dev.to/arcede/your-browser-agent-costs-more-than-your-intern-heres-the-math-21ok">dev.to/arcede</a></span></li>
-    <li>Surveyed merchants say only 3% of their transactions involve AI agents, while 89% are preparing for agentic commerce (self-reported, Checkout.com).<span class="src"><a href="https://www.fintechweekly.com/magazine/articles/agentic-commerce-launch-month-liability-risk-2026">FinTech Weekly</a></span></li>
-  </ul>
+  <h1 id="h-problem">AI agents are starting to book for people, and most websites <mark>trip them up</mark>.</h1>
+  <p class="lede">Agent Lighthouse sends Kane CLI to book on your site, measures the extra work an agent burns, proposes a fix, and proves it with fresh runs and a human-path check before you approve anything.</p>
+  <div class="stats">
+    <div class="stat"><b>61%</b><p>The best agent’s success rate on live sites (Online-Mind2Web, 300 tasks on 136 sites); most agents managed about 30%.</p><a href="https://arxiv.org/abs/2504.01382">Xue et al., COLM 2025</a></div>
+    <div class="stat"><b>38%</b><p>Runs completed on sites whose consent banner blocked scrolling until dismissed, against 79% with non-blocking banners.</p><a href="https://maxaeo.ai/blog/ai-agents-blocked-cookie-banners/">maxaeo.ai</a></div>
+    <div class="stat"><b>76%</b><p>Of failed runs were caused by consent modals, bot challenges and gated pricing.</p><a href="https://maxaeo.ai/blog/ai-agents-blocked-cookie-banners/">maxaeo.ai</a></div>
+  </div>
 </section>
 
-<section id="loop" aria-labelledby="h-loop">
-  <h2 id="h-loop">The loop, in four steps</h2>
+<section id="how" aria-labelledby="h-how">
+  <h2 id="h-how">How it works</h2>
   <ol class="steps">
-    <li><h3>Measure</h3>Kane CLI books from scratch three times. Each run becomes a score and an <b>Agent Tax</b>: the extra steps, seconds and credits per successful booking.</li>
+    <li><h3>Measure</h3>Kane CLI books from scratch three times. Each run becomes a score and an <b>Agent Tax</b>: extra steps, seconds and credits per successful booking.</li>
     <li><h3>Diagnose</h3>The OpenAI API reads Kane’s failing step, its screenshot and the page, and names the cause.</li>
-    <li><h3>Fix</h3>Codex edits only your site’s files, on a separate branch. A scope guard undoes anything else.</li>
-    <li><h3>Prove</h3>Three fresh Kane runs plus a human-path run. A fix qualifies only at score 80+ <b>and</b> a passing human path.</li>
+    <li><h3>Fix</h3>Codex edits only your site’s files on a separate branch. A scope guard undoes anything else.</li>
+    <li><h3>Prove</h3>Three fresh Kane runs plus a human-path run. A fix qualifies only at score 80+, a passing human path and a clean fixture-leak check.</li>
   </ol>
-  <p class="note">You approve. By default the result is a proposal (a pull-request description with every change, the Kane failure it answers and the evidence). Automatic apply is only for sites you own and opt in.</p>
+  <figure><img src="../brand/workflow-simple.svg" alt="The Agent Lighthouse loop: measure, diagnose, fix, prove, owner review" onerror="this.closest('figure').remove()"></figure>
+  <p class="note">You approve. By default the result is a proposal: a pull-request description with every change, the Kane failure it answers and the evidence. Automatic apply is only for sites you own.</p>
 </section>
 
 <section id="cases" aria-labelledby="h-cases">
-  <h2 id="h-cases">Two sample sites, real numbers</h2>
-  <div class="cases">
-    <article class="case" id="case-demo"><h3>Case 1: Pitchline (six planted problems)</h3><p class="note">Loading results/latest.json…</p></article>
-    <article class="case" id="case-hard"><h3>Case 2: hard mode (two-step booking, eleven problems)</h3><p class="note">Loading results/cases/hard/latest.json…</p></article>
-  </div>
-  <p class="note">All numbers are read live from the repository’s <code>results/</code> files, produced by real Kane CLI 0.10.0-rc.3 runs on October 24, 2026. Three runs per side is a small sample.</p>
+  <h2 id="h-cases">Three sample sites, real numbers</h2>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Case</th><th>Score before → after</th><th>Passed</th><th>Median steps</th><th>Median credits</th><th>What Kane caught</th><th>Gate</th></tr></thead>
+    <tbody id="cases-body"><tr><td colspan="7" class="note">Loading results…</td></tr></tbody>
+  </table></div>
+  <p class="note">Read live from the repository’s <code>results/</code> files, produced by real Kane CLI 0.10.0-rc.3 runs on October 24, 2026. Three runs per side is a small sample. * Before medians from runs that all failed (no successful booking to compare). Case 3’s patterns come from published research; see <a href="https://github.com/shrithik2007/agent-lighthouse/blob/main/FRICTION.md">FRICTION.md</a>.</p>
 </section>
 
 <section id="caught" aria-labelledby="h-caught">
@@ -98,28 +103,45 @@ footer{padding:32px 0 48px;border-top:4px solid var(--ink);font-size:15px;displa
     <div>
       <pre>assert: a booking confirmation with a reference code is shown</pre>
       <p>Kane filed this as a <b>confirmed product bug</b>: “The completed free-visit form did not show a booking confirmation or reference code after it was submitted.” The confirmation was a toast that disappeared after 2.5 seconds.</p>
-      <p>On the hard-mode site, Kane cleared a newsletter pop-up, a cookie wall, a hover-only dropdown and an unlabeled calendar, then stopped at the “I’m not a robot” check: <i>blocker.captcha</i>. All three runs stopped there. <b>Kane refuses to pretend to be human</b>: an agent that solves human checks is one you couldn’t trust on your site. (A plain checkbox with the same label is just a form control, and Kane ticks it; neither is real bot protection.) Whether agents get a way through is the owner’s decision. Because no run succeeded before the fix, that case’s Agent Tax is n/a.</p>
+      <p>On the hard-mode site, Kane cleared a newsletter pop-up, a cookie wall, a hover-only dropdown and an unlabeled calendar, then stopped at the “I’m not a robot” check: <i>blocker.captcha</i>. All three runs stopped there. <b>Kane refuses to pretend to be human</b>: an agent that solves human checks is one you couldn’t trust on your site. (A plain checkbox with the same label is just a form control, and Kane ticks it; neither is real bot protection.)</p>
     </div>
     <img src="../evidence/runs/baseline-before-1/failing-step.jpg" alt="Kane’s screenshot at the failing step: the booking form is filled in and no confirmation is visible.">
   </div>
 </section>
 
-<section id="approval" aria-labelledby="h-approval">
-  <h2 id="h-approval">You stay in charge</h2>
-  <ul class="plain">
-    <li>Propose mode is the default: the fix waits on a branch with a PR description, linked Kane evidence and the human-path result.</li>
-    <li>A score alone never qualifies a fix. A person’s booking must still show its reference five seconds later.</li>
-    <li>Every repair is its own commit naming the Kane failure it answers. Every OpenAI call is logged.</li>
-  </ul>
+<section id="gate" aria-labelledby="h-gate">
+  <h2 id="h-gate">When the fixer cheated, the gate caught it</h2>
+  <div class="story">
+    <div><b class="big">98, rejected</b>First hard-mode loop: the fix passed every Kane run, but it removed the human check and hard-coded the test’s date. Owner review rejected it.</div>
+    <div class="blocked"><b class="big">98, blocked</b>With the fixture-leak check, the next loop’s attempt 1 did the same thing. The gate marked it <b>suspect, owner review required</b> and refused to qualify it.</div>
+    <div class="clean"><b class="big">95, clean</b>Attempt 2 was told why it was rejected, kept every control, used no test data and qualified on its own merits.</div>
+  </div>
+  <p class="note">A score alone never qualifies a fix: the human path must pass, and the patch must not contain the test’s data or remove a control people need.</p>
+</section>
+
+<section id="savings" aria-labelledby="h-savings">
+  <h2 id="h-savings">Savings on the Pitchline demo</h2>
+  <div class="savings">
+    <div>Credits saved per booking<b id="sv-saved">n/a</b></div>
+    <div>Fewer credits after the fix<b id="sv-ratio">n/a</b></div>
+    <div><label for="sv-n">At <input id="sv-n" type="number" min="0" step="50" value="500"> bookings a month</label><b id="sv-month">n/a</b></div>
+    <div><label for="sv-rate">Your plan’s rate ($ per credit)</label><input id="sv-rate" type="number" min="0" step="0.001" placeholder="optional"><span id="sv-dollars" class="note">Enter your rate to see dollars.</span></div>
+  </div>
+  <p class="note">From case 1’s Agent Tax. Credits are what Kane reports (<code>credits_consumed</code>). No price is assumed.</p>
+</section>
+
+<section id="architecture" aria-labelledby="h-arch">
+  <h2 id="h-arch">Architecture</h2>
+  <figure><img src="../brand/workflow.svg" alt="Architecture: Kane CLI runs, NDJSON parser, OpenAI diagnosis, Codex fixer, scope guard and fixture-leak gate, owner review" onerror="this.closest('section').remove()"></figure>
 </section>
 
 <section id="limits" aria-labelledby="h-limits">
   <h2 id="h-limits">Limitations</h2>
   <ul class="plain">
     <li>The score weights are a design choice, not a validated metric. Optimal step counts are hand-counted.</li>
-    <li>The sample sites have planted problems and no booking backend.</li>
-    <li>Kane varies from run to run, and three runs per side is a small sample.</li>
+    <li>The sample sites have planted problems and no booking backend. Kane varies from run to run, and three runs per side is a small sample.</li>
     <li>The repair loop only runs on sites the owner controls. External sites would get a score only, and that mode isn’t built yet.</li>
+    <li>The fixture-leak check catches test data and removed controls. It can’t judge every kind of shortcut, so owner review stays in the loop.</li>
     <li>The hackathon’s run-report wrapper labels passing Kane 0.10 runs “errored”, so the raw streams are in the repository for checking.</li>
   </ul>
 </section>
@@ -128,31 +150,51 @@ footer{padding:32px 0 48px;border-top:4px solid var(--ink);font-size:15px;displa
   <span>Repo: <a href="https://github.com/shrithik2007/agent-lighthouse">github.com/shrithik2007/agent-lighthouse</a></span>
   <span>Live report: <a href="../dashboard/">dashboard</a></span>
   <span>Kane run reports: <a href="https://kaneclihack.sh/t/lighthouse/proof">Proof tab</a></span>
-  <span>Video: <span id="video">coming soon</span></span>
+  <span>Video: coming soon</span>
   <span>Built at Kane CLI Hack Day SF, October 24, 2026.</span>
 </footer>
 </div>
 <script type="module">
+import { savings } from '../dashboard/savings.js';
 const ROOT = new URL('../', import.meta.url);
 const fmt = (v, d = 0) => v == null ? 'n/a' : Number(v).toFixed(d);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-async function load(path) { const r = await fetch(new URL(path, ROOT), { cache: 'no-store' }); if (!r.ok) throw new Error(`${path}: HTTP ${r.status}`); return r.json(); }
-function render(el, d, title) {
+const load = async path => { const r = await fetch(new URL(path, ROOT), { cache: 'no-store' }); if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); };
+const gateText = d => {
+  const gates = (d.attempts ?? []).map(a => a.gate);
+  if (!gates.length) return 'loop not run yet';
+  const parts = gates.map((g, i) => `attempt ${i + 1}: ${g}`).join(', ');
+  return `<span class="${d.outcome === 'qualified' ? 'ok' : 'bad'}">${esc(d.outcome)}</span> (${esc(parts)})`;
+};
+const row = (title, d, href) => {
   const after = d.postFix;
-  const tax = d.agentTax;
-  const attempts = d.attempts ?? [];
-  const final = attempts.at(-1);
-  el.innerHTML = `<h3>${esc(title)}</h3>
-    <div class="nums"><div class="num"><small>Before</small><b>${fmt(d.before?.score)}</b></div>
-    <div class="num"><small>After the loop</small><b>${fmt(after?.score)}</b></div>
-    <div class="num"><small>Passed</small><b style="font-size:32px">${fmt(d.before?.passedCount)}/${fmt(d.before?.runCount)} → ${after ? `${fmt(after.passedCount)}/${fmt(after.runCount)}` : 'n/a'}</b></div></div>
-    <p>${tax && tax.extraCredits != null ? `<span class="tax">Agent Tax: +${fmt(tax.extraSteps)} steps · +${fmt(tax.extraSeconds)} s · +${fmt(tax.extraCredits, 1)} credits per booking</span>` : '<span class="tax">Agent Tax: n/a (no successful booking to compare)</span>'}</p>
-    <p class="note">${attempts.length ? `Loop: ${attempts.length} attempt${attempts.length > 1 ? 's' : ''}, outcome <b>${esc(d.outcome)}</b>; last attempt human path ${esc(final?.humanPath ?? 'n/a')}, gate ${esc(final?.gate ?? 'n/a')}.` : 'Loop not run yet.'}
-    ${d.failingStep ? `Kane: <code>${esc(d.failingStep.remark)}</code>.` : ''}</p>
-    ${d.operatorNote ? `<p style="border-left:4px solid var(--fail);padding-left:10px;font-weight:700">${esc(d.operatorNote)}</p>` : ''}`;
-}
-for (const [id, path, title] of [['case-demo', 'results/latest.json', 'Case 1: Pitchline (six planted problems)'], ['case-hard', 'results/cases/hard/latest.json', 'Case 2: hard mode (two-step booking, eleven problems)']]) {
-  load(path).then(d => render(document.getElementById(id), d, title)).catch(e => { document.querySelector(`#${id} .note`).textContent = `Not available yet (${e.message}).`; });
+  return `<tr><td><a href="${href}">${esc(title)}</a></td>
+    <td class="num">${fmt(d.before?.score)} → ${fmt(after?.score)}</td>
+    <td class="num">${fmt(d.before?.passedCount)}/${fmt(d.before?.runCount)} → ${after ? `${fmt(after.passedCount)}/${fmt(after.runCount)}` : 'n/a'}</td>
+    <td class="num">${fmt(d.before?.medianSteps)} → ${fmt(after?.medianSteps)}</td>
+    <td class="num">${fmt(d.before?.medianCredits, 1)}${d.before?.passedCount === 0 ? '*' : ''} → ${fmt(after?.medianCredits, 1)}</td>
+    <td>${d.failingStep ? `<code>${esc(d.failingStep.remark)}</code>${d.failingStep.reasonCode ? ` <span class="note">(${esc(d.failingStep.reasonCode)})</span>` : ''}` : 'n/a'}</td>
+    <td>${gateText(d)}</td></tr>`;
+};
+const cases = [
+  ['Case 1: Pitchline demo', 'results/latest.json', '../dashboard/?case=demo'],
+  ['Case 2: hard mode', 'results/cases/hard/latest.json', '../dashboard/?case=hard'],
+  ['Case 3: worst of the real web', 'results/cases/worst/latest.json', '../dashboard/?case=worst'],
+];
+const rows = await Promise.all(cases.map(([title, path, href]) => load(path).then(d => ({ title, d, href })).catch(() => null)));
+document.getElementById('cases-body').innerHTML = rows.filter(Boolean).map(r => row(r.title, r.d, r.href)).join('') || '<tr><td colspan="7">Results unavailable.</td></tr>';
+const demo = rows[0]?.d;
+if (demo) {
+  const update = () => {
+    const rate = document.getElementById('sv-rate').value.trim();
+    const s = savings({ agentTax: demo.agentTax, before: demo.before, after: demo.postFix }, Number(document.getElementById('sv-n').value), rate === '' ? NaN : Number(rate));
+    document.getElementById('sv-saved').textContent = s.saved == null ? 'n/a' : `${s.saved.toFixed(1)} credits`;
+    document.getElementById('sv-ratio').textContent = s.ratio == null ? 'n/a' : `${s.ratio.toFixed(1)}×`;
+    document.getElementById('sv-month').textContent = s.monthly == null ? 'n/a' : `${Math.round(s.monthly).toLocaleString()} credits`;
+    document.getElementById('sv-dollars').textContent = s.dollars == null ? 'Enter your rate to see dollars.' : `≈ $${s.dollars.toLocaleString(undefined, { maximumFractionDigits: 2 })} a month at your rate`;
+  };
+  ['sv-n', 'sv-rate'].forEach(id => document.getElementById(id).addEventListener('input', update));
+  update();
 }
 </script>
 </body>
