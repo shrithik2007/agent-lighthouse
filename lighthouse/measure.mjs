@@ -16,8 +16,8 @@ export async function measure({ flowPath = 'flows/book.json', url, count = 3, cw
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const [url, count = '3'] = process.argv.slice(2);
-  if (!url) { console.error('usage: node lighthouse/measure.mjs <url> [count]'); process.exit(2); }
-  const runs = await measure({ url, count: Number(count) });
+  const [url, count = '3', flowPath = 'flows/book.json'] = process.argv.slice(2);
+  if (!url) { console.error('usage: node lighthouse/measure.mjs <url> [count] [flow.json]'); process.exit(2); }
+  const runs = await measure({ url, count: Number(count), flowPath });
   console.log(JSON.stringify(runs, null, 2));
 }
