@@ -17,8 +17,18 @@ const sideSummary = (summary, label) => summary ? {
   medianSteps: summary.medianSteps, medianDurationSec: summary.medianDurationSec, medianCredits: summary.medianCredits, lowConfidence: summary.lowConfidence,
 } : null;
 
+async function summarizeLoop(file) {
+  const loop = JSON.parse(await readFile(file, 'utf8'));
+  const final = loop.attempts.find(a => a.attempt === loop.qualified?.attempt) ?? loop.attempts.at(-1);
+  return {
+    loopId: loop.loopId, mode: loop.mode, outcome: loop.outcome, attempts: loop.attempts.length,
+    branch: loop.qualified?.branch ?? null, commit: loop.qualified?.commit ?? null,
+    score: final?.summary?.score ?? null, humanPath: final?.humanPath?.status ?? null,
+  };
+}
+
 /** Compose results/latest.json from the recorded baseline and the newest loop record (if any). */
-export async function buildLatest({ cwd = process.cwd(), loopFile, headline, links = {} } = {}) {
+export async function buildLatest({ cwd = process.cwd(), loopFile, proposeLoopFile, headline, links = {} } = {}) {
   const baseline = JSON.parse(await readFile(join(cwd, 'results', 'baseline.json'), 'utf8'));
   let loop = null;
   const loopDir = join(cwd, 'results', 'loop');
@@ -74,6 +84,7 @@ export async function buildLatest({ cwd = process.cwd(), loopFile, headline, lin
     })),
     humanPath: { baseline: loop?.baseline.humanPath ? slim(loop.baseline.humanPath) : null, final: final?.humanPath ? slim(final.humanPath) : null },
     proposal,
+    proposeRun: proposeLoopFile ? await summarizeLoop(proposeLoopFile) : null,
     links: { runReport: 'https://kaneclihack.sh/t/lighthouse/proof', repo: null, video: null, ...links },
     recorded: false,
     generatedAt: new Date().toISOString(),
@@ -83,7 +94,7 @@ export async function buildLatest({ cwd = process.cwd(), loopFile, headline, lin
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = process.argv.slice(2);
   const opt = name => { const i = args.indexOf(`--${name}`); return i >= 0 ? args[i + 1] : undefined; };
-  const latest = await buildLatest({ loopFile: opt('loop'), headline: opt('headline') });
+  const latest = await buildLatest({ loopFile: opt('loop'), proposeLoopFile: opt('propose-loop'), headline: opt('headline') });
   await mkdir('results', { recursive: true });
   await writeFile('results/latest.json', JSON.stringify(latest, null, 2) + '\n');
   console.log(`results/latest.json: headline ${latest.headline}, outcome ${latest.outcome}, before ${latest.before?.score ?? 'n/a'}, post-fix ${latest.postFixScore ?? 'n/a'}, reference fix ${latest.referenceFixScore ?? 'n/a'}`);

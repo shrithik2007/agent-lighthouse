@@ -1,0 +1,71 @@
+{
+  "type": "run_end",
+  "status": "passed",
+  "summary": "Opened the free first-visit booking form.\nEntered Sam Rivera’s details, selected 2 November 2026 at noon, accepted the climbing waiver, and confirmed the booking.\nWaited 5 seconds after confirmation; the booking reference PL-4821 remained visible on the confirmation page.",
+  "one_liner": "confirmed a free first-visit booking on the booking site",
+  "final_state": {
+    "url": "http://localhost:4103/",
+    "booking_reference": "PL-4821",
+    "pl_4821_visible": "true"
+  },
+  "reason": "Objective completed",
+  "duration": 60.9,
+  "bifurcated": false,
+  "total_runs": 1,
+  "context": {
+    "memory": {
+      "pl_4821_visible": {
+        "extracted_value": "true",
+        "operator": "equals",
+        "transforms": [],
+        "json_path": null,
+        "reasoning": "value: 'true' -> 'true'; equals 'true' -> PASS",
+        "analyzer_type": "textual_visual",
+        "step": 13,
+        "query": "whether the text PL-4821 is present (in the booking confirmation message)",
+        "condition": "the text PL-4821 is still visible on the page",
+        "human_description": "Checking whether the booking reference is present",
+        "expected_value": "true",
+        "subject": "the text PL-4821",
+        "must_be": "present",
+        "code_js": "el(40).textContent.includes('PL-4821')",
+        "wrapped_js": "(els) => {\n  const __m = {40: 0};\n  const el = (i) => els[__m[i]];\n  const __v = (el(40).textContent.includes('PL-4821'));\n  return (typeof __v === 'boolean' ? String(__v) : __v);\n}",
+        "locators": [
+          "internal:text=\"Reference PL-4821\"s"
+        ],
+        "needs_unit_conversion": false
+      }
+    },
+    "variables": {
+      "pl_4821_visible": {
+        "syntax": "{{pl_4821_visible}}",
+        "value": "true",
+        "type": "memory",
+        "secret": false
+      }
+    },
+    "pointer": "(passed) confirmed a free first-visit booking on the booking site"
+  },
+  "credits_consumed": 9.43906,
+  "session_dir": "~/.testmuai/kaneai/sessions/57359003-284d-43af-b84f-9536a3ae7021",
+  "run_dir": "~/.testmuai/kaneai/sessions/57359003-284d-43af-b84f-9536a3ae7021/runs/0",
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "per_flow_metadata": [
+    {
+      "result_code": "100",
+      "reason_code": "success.complete",
+      "error_message": null,
+      "summary": "Opened the free first-visit booking form.\nEntered Sam Rivera’s details, selected 2 November 2026 at noon, accepted the climbing waiver, and confirmed the booking.\nWaited 5 seconds after confirmation; the booking reference PL-4821 remained visible on the confirmation page.",
+      "one_liner": "confirmed a free first-visit booking on the booking site",
+      "credits_consumed": 9.43906
+    }
+  ],
+  "run_id": "run-0",
+  "test_url": "https://test-manager.lambdatest.com/projects/01M5QT7HV41JP0TZK95KVHS6K2/test-cases/01M5QXAFSWDYVTD1D1QANW0EXC/dashboard/share/US_RQJ7PBE50ZW8UOHD5UZFGTUFHPVUSESZ0SH8NWLFBJFEOV930FNA5UU8SS6KUAXQ?type=summary&agentView=true&fqdn=summary-page",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T21:34:40.504Z"
+}

@@ -109,7 +109,9 @@ function render(data) {
   // Row 5
   const proposal = data.proposal;
   slot('review').replaceChildren(...(proposal ? [
-    el('p', { class: 'meta' }, `Mode: ${na(data.mode)} · outcome: ${na(data.outcome)}`),
+    el('p', { class: 'meta' }, data.proposeRun
+      ? `Propose-mode run ${data.proposeRun.loopId}: ${na(data.proposeRun.outcome)} on attempt ${na(data.proposeRun.attempts)}, score ${na(data.proposeRun.score)}, human path ${na(data.proposeRun.humanPath)}. Branch ${na(data.proposeRun.branch)} is left unmerged for the owner.`
+      : `Mode: ${na(data.mode)} · outcome: ${na(data.outcome)}`),
     el('pre', {}, proposal.excerpt ?? ''),
     el('a', { href: `/${proposal.path}` }, 'Read the full proposal'),
   ] : [el('p', {}, 'No proposal yet.')]));

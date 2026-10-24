@@ -1,43 +1,45 @@
 # Agent Lighthouse: repair proposal for book
 
-Qualified on attempt 1: score 97 (threshold 80) and the human path passed.
+Qualified on attempt 1: score 94 (threshold 80) and the human path passed.
 
-Mode: **apply** (applied to main at 94a7f80).
-Branch: `lighthouse/2026-10-24T21-17-14/attempt-1` · commit `94a7f80`
+Mode: **propose** (not merged; review the branch below).
+Branch: `lighthouse/2026-10-24T21-25-00/attempt-1` · commit `6c8bed1`
 
 ## Before and after
 
 | | BEFORE | Proposed |
 | --- | --- | --- |
-| Score | 51 | 97 |
+| Score | 51 | 94 |
 | Passed runs | 2/3 | 3/3 |
-| Median steps | 22 | 12 |
+| Median steps | 22 | 14 |
 | Human path (PL-4821 visible after 5 s) | failed | passed |
 
-Agent Tax of BEFORE per successful booking: +10 steps · +84 s · +36.2 credits.
+Agent Tax of BEFORE per successful booking: +8 steps · +67 s · +35.6 credits.
 
 ## Changes, each linked to the Kane failure it answers
 
-### Attempt 1 · `94a7f80` · gate **pass**
+### Attempt 1 · `6c8bed1` · gate **pass**
 
-Cause (OpenAI gpt-5.5-2026-04-23): KR-133 failed at “assert: a booking confirmation with a reference code is shown” because the submit handler only flashes the transient #toast (“Done! Ref PL-4821”) for 2.5 seconds and never renders a persistent booking confirmation; the failing-step screenshot shows the form still on screen after submission.
-- Replace the #toast-only success path in the #booking-form submit handler with a persistent inline confirmation inside the booking section: hide or disable the form after valid submission and show a visible .status panel containing text like “Booking confirmed” and “Reference PL-4821”. Do not auto-hide this panel; keep PL-4821 visible well beyond five seconds.
-- Add an aria-live="polite" confirmation container near the form, for example <div id="confirmation" class="status" role="status" aria-live="polite" hidden>, so Kane and screen readers can observe the completed state immediately after submit.
-- Keep the existing #toast only as optional secondary feedback, or remove its timer/hiding dependency; the booking must not depend on the toast for the reference being visible.
-- Change #nav-go from opening #prices to calling openBooking(), and give both primary CTAs clearer accessible text such as “Book a free first visit” while preserving the visual style and tone.
-- Turn #cookie-close into a real <button type="button" id="cookie-close" class="cookie-close" aria-label="Close cookie notice">×</button>, with enough clickable area, while keeping the same visual placement.
-- Add visible <label for="name">Your name</label>, <label for="email">Email address</label>, and <label for="date">Visit date</label>; keep placeholders if desired but do not rely on them.
-- Make the date field explicit with type="date" or a visible hint such as “Use YYYY-MM-DD, for example 2026-11-02”; improve the validation error to name missing/invalid fields instead of only “Invalid input”.
-- Replace the custom arrival-time divs with a native radio group named arrivalTime with labels for 9am, 12pm, and 6pm, or at minimum add button/role/radio semantics and checked state; defaulting or clearly selecting 12pm after click must remain possible.
-- Replace the custom waiver div with a native <input type="checkbox" id="waiver-check"> inside a <label>, so one click reliably accepts the waiver and form validation can read checkbox.checked.
+Cause (OpenAI gpt-5.5-2026-04-23): KR-133 failed at “assert: a booking confirmation with a reference code is shown” because the submit handler only flashes a short-lived toast, leaves the form in place, and never renders a persistent booking confirmation containing PL-4821.
+- Add a persistent confirmation element inside the booking section, initially hidden, with role="status"/aria-live and copy such as “Booking confirmed” plus “Reference PL-4821”.
+- Change the submit success path for #booking-form so a valid submission hides or disables the form and reveals the persistent confirmation immediately; keep PL-4821 visible indefinitely, or at minimum longer than five seconds.
+- Stop relying on the #toast as the booking confirmation; either remove its auto-hide reference behavior or make it secondary only. If retained, increase its timeout to at least 5000 ms, but the persistent confirmation should be the source of truth.
+- Replace the custom waiver div behavior with a real <input type="checkbox" id="waiver-accepted" required> associated with its visible label, while preserving the current visual styling.
+- Replace the custom arrival-time divs with native radio inputs named time, with labels for 9am, 12pm, and 6pm; style the labels to keep the same three-button appearance. Ensure the 12pm option has value "12:00" and is easy to identify by text.
+- Add visible <label for="name">Your name</label>, <label for="email">Email address</label>, and <label for="date">Visit date</label>; add helpful attributes such as autocomplete="name" and autocomplete="email".
+- Update date handling so both "2026-11-02" and "2 November 2026" / "November 2, 2026" normalize to the same valid date. Add a hint beside the field, e.g. “Use 2026-11-02 or 2 November 2026.”
+- Replace the generic error text “Invalid input” with specific guidance naming missing or invalid fields, especially date format, arrival time, and waiver acceptance.
+- Change #nav-go so it opens the booking form instead of the hidden prices panel, or relabel it clearly if it is not a booking CTA. Prefer descriptive CTA text such as “Book free visit” for both hero and nav while keeping the tone and visual style.
+- Replace the cookie close div with a real button, e.g. <button id="cookie-close" class="cookie-close" type="button" aria-label="Dismiss cookie notice">×</button>, preserving the small close styling but making it accessible and reliably clickable.
+- After successful submission, scroll/focus the confirmation heading so a browser agent and human user can immediately observe the completion state.
 Fixer: codex exec (gpt-5.3-codex). Files: site/index.html. Scope guard reverted: nothing.
-Result: score 97, 3/3 passed, human path passed. score 97 vs threshold 80.
+Result: score 94, 3/3 passed, human path passed. score 94 vs threshold 80.
 
 ## Evidence
 
 - BEFORE failing runs: KR-133 (`evidence/runs/baseline-before-1`)
-- Proposed runs: KR-150 passed (`evidence/runs/loop-2026-10-24T21-17-14-a1-1`), KR-151 passed (`evidence/runs/loop-2026-10-24T21-17-14-a1-2`), KR-152 passed (`evidence/runs/loop-2026-10-24T21-17-14-a1-3`)
-- Human path: baseline KR-148 failed; proposed KR-153 passed
+- Proposed runs: KR-156 passed (`evidence/runs/loop-2026-10-24T21-25-00-a1-1`), KR-157 passed (`evidence/runs/loop-2026-10-24T21-25-00-a1-2`), KR-159 passed (`evidence/runs/loop-2026-10-24T21-25-00-a1-3`)
+- Human path: baseline KR-154 failed; proposed KR-160 passed
 - Kane run reports: https://kaneclihack.sh/t/lighthouse/proof (the event wrapper labels Kane 0.10 runs "errored"; see README limitations)
 
 A score alone never qualifies a patch: the named human-path run must also pass. Generated by `lighthouse loop`.

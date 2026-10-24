@@ -1,0 +1,15 @@
+Implemented — I only edited `site/index.html` and addressed KR-133’s root cause.
+
+**What I changed**
+- Added persistent in-section confirmation (`role="status"`, `aria-live`) with visible `Reference PL-4821`, initially hidden, then revealed on successful submit: `site/index.html:22`.
+- Updated submit flow to stop using toast as source of truth: on valid submit it hides the form, shows persistent confirmation, keeps reference visible, scrolls + focuses confirmation heading, and leaves toast secondary with 5000ms timeout: `site/index.html:56`.
+- Replaced custom time/waiver controls with real form inputs:
+  - Native radios (`name="time"`, `12pm` has `value="12:00"`) styled like buttons: `site/index.html:21`.
+  - Native required waiver checkbox with associated label: `site/index.html:22`.
+- Added visible labels and autocomplete for name/email/date plus date hint text: `site/index.html:18`.
+- Added date normalization for `2026-11-02`, `2 November 2026`, and `November 2, 2026` to the same ISO-valid date: `site/index.html:28`.
+- Replaced generic `"Invalid input"` with specific per-field guidance (name/email/date/time/waiver): `site/index.html:63`.
+- Changed CTAs so both hero and nav use “Book free visit,” and `#nav-go` now opens booking form (no longer opens prices): `site/index.html:6`, `site/index.html:53`.
+- Replaced cookie close `div` with accessible button (`type="button"`, `aria-label`) while keeping close control styling: `site/index.html:24`.
+
+If you want, I can do a quick local browser sanity pass for the exact Kane sequence next.

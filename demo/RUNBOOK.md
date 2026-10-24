@@ -4,7 +4,7 @@
 - `npm run serve` (:4101 working copy, :4102 reference fix) and `npm run dashboard` (:4100).
 - `npm run demo:reset` so `site/` is BEFORE again, then commit the reset.
 - In one terminal, `export OPENAI_API_KEY=...`.
-- Tabs, in order: 1 the dashboard http://localhost:4100 · 2 BEFORE page http://localhost:4101 · 3 the evidence viewer (`kane-cli evidence serve evidence/packs/KR-133-before-failed.evidence`, open the printed URL on step 14) · 4 the Proof tab https://kaneclihack.sh/t/lighthouse/proof · 5 `results/proposal.md` · 6 a terminal in the repo.
+- Tabs, in order: 1 the dashboard http://localhost:4100 · 2 BEFORE page http://localhost:4101 · 3 the evidence viewer (`kane-cli evidence serve evidence/packs/KR-133-before-failed.evidence`, open the printed URL on step 14; allow **Local network access** for evidence.lambdatest.com once, or use "Open .evidence file") · 4 the Proof tab https://kaneclihack.sh/t/lighthouse/proof · 5 `results/proposal.md` · 6 a terminal in the repo.
 
 | Time | Say | Show |
 | --- | --- | --- |
