@@ -492,7 +492,7 @@
   },
   "links": {
     "runReport": "https://kaneclihack.sh/t/lighthouse/proof",
-    "repo": null,
+    "repo": "https://github.com/shrithik2007/agent-lighthouse",
     "video": null
   },
   "recorded": false,
