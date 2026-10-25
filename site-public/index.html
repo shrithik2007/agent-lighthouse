@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent Lighthouse</title>
-<meta name="description" content="Measure how hard your website makes it for an AI agent to book, get a proven fix, and approve it yourself.">
+<meta name="description" content="A booking page for everyone: measure how hard your site makes it for an AI agent to book, get a fix proven for agents and for people, and approve it yourself.">
 <link rel="icon" href="logo.svg" type="image/svg+xml">
 <style>
 :root{--ink:#14181F;--wall:#F5F7FA;--rope:#1E3A5F;--hold:#F2C230;--fail:#C2410C;--muted:#4A5361;--line:#D5DAE1;--surface:#FFFFFF;--sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
@@ -67,8 +67,8 @@ footer{padding:28px 0 44px;font-size:var(--t4);display:flex;flex-wrap:wrap;gap:8
 
 <section aria-labelledby="h-problem">
   <p class="eyebrow">For owners of booking websites</p>
-  <h1 id="h-problem">AI agents are starting to book for people, and most websites <mark>trip them up</mark>.</h1>
-  <p class="lede">Agent Lighthouse sends Kane CLI to book on your site, measures the extra work an agent burns, proposes a fix, and proves it with fresh runs and a human-path check before you approve anything.</p>
+  <h1 id="h-problem">Your booking page should work for everyone: the people who book, and the <mark>agents booking for them</mark>.</h1>
+  <p class="lede">Agent Lighthouse sends Kane CLI to book on your site, measures the extra work an agent burns, proposes a fix, and proves it works for agents with fresh runs and for people with a human-path check, before you approve anything.</p>
   <div class="stats">
     <div class="stat"><b>61%</b><p>The best agent’s success rate on live sites (Online-Mind2Web, 300 tasks on 136 sites); most agents managed about 30%.</p><a href="https://arxiv.org/abs/2504.01382">Xue et al., COLM 2025</a></div>
     <div class="stat"><b>38%</b><p>Runs completed on sites whose consent banner blocked scrolling until dismissed, against 79% with non-blocking banners.</p><a href="https://maxaeo.ai/blog/ai-agents-blocked-cookie-banners/">maxaeo.ai</a></div>
@@ -140,6 +140,7 @@ footer{padding:28px 0 44px;font-size:var(--t4);display:flex;flex-wrap:wrap;gap:8
   <ul class="plain">
     <li>The score weights are a design choice, not a validated metric. Optimal step counts are hand-counted.</li>
     <li>The sample sites have planted problems and no booking backend. Kane varies from run to run, and three runs per side is a small sample.</li>
+    <li>The loop runs by hand today. Running it on every deploy in a release pipeline is the next step and is not built.</li>
     <li>The repair loop only runs on sites the owner controls. External sites would get a score only, and that mode isn’t built yet.</li>
     <li>The fixture-leak check catches test data and removed controls. It can’t judge every kind of shortcut, so owner review stays in the loop.</li>
     <li>The hackathon’s run-report wrapper labels passing Kane 0.10 runs “errored”, so the raw streams are in the repository for checking.</li>

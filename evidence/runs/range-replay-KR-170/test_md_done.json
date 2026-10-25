@@ -1,0 +1,11 @@
+{
+  "type": "test_md_done",
+  "overall_status": "passed",
+  "duration_s": 12,
+  "session_id": "66bf2ae2-6974-4a05-b9a8-81b21ca5efe2",
+  "coverage": {
+    "status": "skipped"
+  },
+  "v": 1,
+  "ts": "2026-10-24T21:45:43.613Z"
+}

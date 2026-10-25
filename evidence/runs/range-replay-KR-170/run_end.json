@@ -1,0 +1,36 @@
+{
+  "type": "run_end",
+  "run_id": "run-0",
+  "status": "passed",
+  "summary": "",
+  "reason": "replay completed",
+  "duration": 9.94,
+  "final_url": "http://localhost:4101/",
+  "actions_executed": 13,
+  "screenshot_path": "~/.testmuai/kaneai/sessions/66bf2ae2-6974-4a05-b9a8-81b21ca5efe2/scratch/0/replay-test/screenshots/step_013.png",
+  "run_dir": "~/.testmuai/kaneai/sessions/66bf2ae2-6974-4a05-b9a8-81b21ca5efe2/scratch/0/replay-test",
+  "total_runs": 1,
+  "context": {
+    "memory": {},
+    "variables": {
+      "pl_4821_visible": {
+        "syntax": "{{pl_4821_visible}}",
+        "value": "true",
+        "secret": false
+      }
+    },
+    "pointer": ""
+  },
+  "variables_out": {
+    "pl_4821_visible": {
+      "syntax": "{{pl_4821_visible}}",
+      "value": "true",
+      "secret": false
+    }
+  },
+  "store_out": {},
+  "result_code": 100,
+  "reason_code": "success.complete",
+  "v": 1,
+  "ts": "2026-10-24T21:45:41.431Z"
+}

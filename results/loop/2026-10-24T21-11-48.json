@@ -296,7 +296,7 @@
         "model": "gpt-5.5-2026-04-23",
         "responseId": "resp_00632f15e74ea40c006add1f615fcc87d0a9d7f40caffa4d16"
       },
-      "error": "Command failed: git apply --include=site/* /Users/shrit/Projects/kane-hack/results/loop/fallback-attempt-1.diff\nerror: patch fragment without header at /Users/shrit/Projects/kane-hack/results/loop/fallback-attempt-1.diff:16: @@ -22,7 +23,7 @@\n",
+      "error": "Command failed: git apply --include=site/* ~/Projects/kane-hack/results/loop/fallback-attempt-1.diff\nerror: patch fragment without header at ~/Projects/kane-hack/results/loop/fallback-attempt-1.diff:16: @@ -22,7 +23,7 @@\n",
       "gate": "retry",
       "finishedAt": "2026-10-24T21:14:18.599Z"
     }

@@ -1,6 +1,6 @@
 # Agent Lighthouse
 
-Kane measures booking friction. OpenAI proposes repairs. Kane verifies the change before the owner reviews it.
+A booking page that works for everyone: the people who book and the AI agents booking for them. Kane measures booking friction, OpenAI proposes repairs, and Kane verifies each change for agents and for people before the owner reviews it.
 
 **Track:** Web App · **Team:** Lighthouse · **Built:** October 24, 2026, Kane CLI Hack Day SF.
 
@@ -8,7 +8,7 @@ Kane measures booking friction. OpenAI proposes repairs. Kane verifies the chang
 
 ## What it does
 
-AI agents are starting to book things for people. Agent Lighthouse measures how hard a site makes that, repairs what trips the agent, and proves the repair before anyone merges it:
+AI agents are starting to book things for people, and a booking page should work for both. Agent Lighthouse measures how hard a site makes it for an agent, repairs what trips the agent, and proves the repair still works for people before anyone merges it:
 
 1. **Measure.** Three fresh, goal-driven Kane CLI runs try to book a free first visit at Pitchline, a fictional climbing gym. Each run's NDJSON stream becomes a score and an **Agent Tax**: the extra steps, seconds and credits an agent spends per successful booking.
 2. **Diagnose.** The OpenAI API (gpt-5.5) reads Kane's failing remark, the failing-step screenshot, console and network excerpts, and a checklist of six friction patterns. It returns a cause, files to touch, concrete changes and an acceptance check.
@@ -82,6 +82,10 @@ A third sample site (`fixtures/worst/`, working copy `site-worst/` on :4104) pla
 ## Savings panel
 
 The dashboard turns Agent Tax into credits saved per booking, the before/after credit ratio, and a projection "at N agent bookings a month" (N editable, default 500). For case 1: 36.2 credits saved per booking and a 2.9× ratio (55.4 vs 19.2 median credits); about 18,100 credits a month at 500 bookings. A dollar figure appears only if the viewer enters their plan's rate; no price is assumed. Everything is in Kane's unit, credits (`credits_consumed`), never tokens.
+
+## Where it goes
+
+The loop runs by hand today. The next step is a company running it in its release pipeline: every deploy gets fresh Kane runs on the booking flow plus the human path, so a change that slows agents down or breaks booking for people is caught before customers see it. A GitHub Action for this was cut for time and is not built.
 
 ## Run locally
 
