@@ -24,7 +24,7 @@ Where it goes next: Lighthouse in a company's release pipeline. Every deploy get
 
 Product page: https://shrithik2007.github.io/agent-lighthouse/
 Repository: https://github.com/shrithik2007/agent-lighthouse
-Demo: https://d3nl4wy7jovhq0.cloudfront.net/public/p67/46fc29a94a4322b98009d56cb59b64fea3306548686ac0f2b11b07a3d1b8d275.mp4
+Demo: https://d3nl4wy7jovhq0.cloudfront.net/public/p67/c5d37e8fd7e882a138bcff7dc45dc77d70e354f4c27bb30ab9a2f15ffb907e1a.mp4
 
 Thank you to @TestMu AI for Kane CLI and @OpenAI for the models behind the diagnosis and the fixer.
 

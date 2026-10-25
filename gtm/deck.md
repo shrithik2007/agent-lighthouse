@@ -57,7 +57,7 @@ Team Lighthouse · Kane CLI Hack Day SF · October 24, 2026 · https://github.co
 
 **Agent Tax removed: +10 steps · +84 s · +36 credits per booking.** Qualified on attempt 1; commit `94a7f80 fix(site): attempt 1 answers Kane KR-133`.
 
-> Speaker notes: Show the dashboard, then the evidence viewer on KR-133 step 14. Demo video: https://d3nl4wy7jovhq0.cloudfront.net/public/p67/46fc29a94a4322b98009d56cb59b64fea3306548686ac0f2b11b07a3d1b8d275.mp4.
+> Speaker notes: Show the dashboard, then the evidence viewer on KR-133 step 14. Demo video: https://d3nl4wy7jovhq0.cloudfront.net/public/p67/c5d37e8fd7e882a138bcff7dc45dc77d70e354f4c27bb30ab9a2f15ffb907e1a.mp4.
 
 ---
 
