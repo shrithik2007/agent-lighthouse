@@ -48,7 +48,7 @@ Dashboard: http://localhost:4100 (recorded run: http://localhost:4100/?recorded=
 
 **Screenshots:** `gtm/screenshots/dashboard-row1.png`, `gtm/screenshots/social-preview.png`, `gtm/screenshots/failing-step.jpg`, `gtm/screenshots/proposal.png`, `gtm/screenshots/dashboard-full.png`
 
-**Demo video:** https://d3nl4wy7jovhq0.cloudfront.net/public/p67/46fc29a94a4322b98009d56cb59b64fea3306548686ac0f2b11b07a3d1b8d275.mp4
+**Demo video:** https://d3nl4wy7jovhq0.cloudfront.net/public/p67/c5d37e8fd7e882a138bcff7dc45dc77d70e354f4c27bb30ab9a2f15ffb907e1a.mp4
 
 **Team credits (consent):** Team Lighthouse: Sreesanth Nitillan Senthilkumar (LinkedIn shrithiksk, X @shrithik2007). Built with Codex (Phase 0) and Claude Code. Consent to be credited: confirm on the Submit tab.
 
