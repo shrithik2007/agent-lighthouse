@@ -1,4 +1,5 @@
 import { savings } from './savings.js';
+import { humanLine } from './human.js';
 // Paths resolve against the repo root, so the page works locally (:4100) and on GitHub Pages.
 const ROOT = new URL('../', import.meta.url);
 const at = path => new URL(path.replace(/^\/+/, ''), ROOT).href;
@@ -116,6 +117,10 @@ function render(data) {
   slot('tax-line').replaceChildren('Agent Tax ', el('strong', {}, taxLine(tax)));
   if (taxFirst) row1.prepend(slot('tax-line'));
   else row1.append(slot('tax-line'));
+  const human = humanLine(data.humanBaseline);
+  slot('tax-line').after(slot('human-line'));
+  slot('human-line').textContent = human ?? '';
+  slot('human-line').hidden = !human;
   slot('before-score').textContent = na(data.before?.score);
   slot('before-sub').textContent = `${na(data.before?.passedCount)}/${na(data.before?.runCount)} runs passed · median ${num(data.before?.medianSteps)} steps`;
   // The loop's post-fix score leads; the hand-built reference fix is context, never substituted for it.

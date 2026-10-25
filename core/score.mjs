@@ -92,17 +92,32 @@ export function gateDecision({ score, threshold, attempt, maxAttempts }) {
   return attempt >= maxAttempts ? 'escalate' : 'retry';
 }
 
-/** Tax is per successful booking. No successful observations means no computable tax. */
-export function agentTax(runs, { optimalSteps, baselineRuns } = {}) {
+// Observed human medians (lighthouse/human-baseline.mjs). Humans spend no credits, so credits stay unknown.
+function validateHumanBaseline(human) {
+  if (!human || typeof human !== 'object') throw new TypeError('humanBaseline must be an object');
+  for (const field of ['medianSteps', 'medianSeconds']) {
+    if (human[field] != null && (!finite(human[field]) || human[field] < 0)) throw new TypeError(`humanBaseline.${field} must be non-negative or null`);
+  }
+  if (!Number.isInteger(human.sessions) || human.sessions < 1) throw new RangeError('humanBaseline.sessions must be a positive integer');
+}
+
+/**
+ * Tax is per successful booking. No successful observations means no computable tax.
+ * Reference precedence: baselineRuns, then humanBaseline (substitute when no baseline runs), then optimalSteps for steps.
+ */
+export function agentTax(runs, { optimalSteps, baselineRuns, humanBaseline } = {}) {
   validateRuns(runs);
-  if (optimalSteps == null && baselineRuns == null) throw new TypeError('provide optimalSteps or baselineRuns');
+  if (optimalSteps == null && baselineRuns == null && humanBaseline == null) throw new TypeError('provide optimalSteps, baselineRuns or humanBaseline');
   if (optimalSteps != null) validateOptimal(optimalSteps);
   if (baselineRuns != null) validateRuns(baselineRuns, { allowEmpty: true });
+  if (humanBaseline != null) validateHumanBaseline(humanBaseline);
   const passing = runs.filter(run => run.status === 'passed');
   const baseline = baselineRuns?.filter(run => run.status === 'passed');
+  const human = baseline ? null : humanBaseline;
+  const humanReference = { stepsTaken: human?.medianSteps, durationSec: human?.medianSeconds, credits: null };
   const extra = (key, fallback = null) => {
     const value = metricMedian(passing, key);
-    const reference = baseline ? metricMedian(baseline, key) : fallback;
+    const reference = baseline ? metricMedian(baseline, key) : human ? humanReference[key] ?? fallback : fallback;
     return value == null || reference == null ? null : Math.max(0, value - reference);
   };
   return { extraSteps: extra('stepsTaken', optimalSteps), extraSeconds: extra('durationSec'), extraCredits: extra('credits') };

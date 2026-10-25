@@ -9,3 +9,4 @@ coverage/
 .lighthouse/
 # kane-cli context store: shared through a location, never merged with git
 .context/
+dist/

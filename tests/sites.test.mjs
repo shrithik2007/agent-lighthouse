@@ -139,3 +139,17 @@ test('working copy initially matches BEFORE exactly', async () => {
   const [working, before] = await Promise.all(['../site/index.html', '../fixtures/before/index.html'].map(path => readFile(new URL(path, import.meta.url), 'utf8')));
   assert.equal(working, before);
 });
+
+test('PostHog snippet is inert without a build-time key and loads only once one is set', async t => {
+  for (const variant of ['before', 'after']) {
+    const { dom } = await load(t, variant);
+    assert.equal(dom.window.posthog, undefined);
+    assert.equal(dom.window.document.querySelector('script[src*="posthog"]'), null);
+  }
+  const html = (await readFile(new URL('../fixtures/before/index.html', import.meta.url), 'utf8'))
+    .replace("'__POSTHOG_PUBLIC_KEY__'", "'phc_stub'").replace("'__POSTHOG_PUBLIC_HOST__'", "'https://us.i.posthog.com'");
+  const dom = new JSDOM(html, { runScripts: 'dangerously', url: 'http://localhost/' });
+  t.after(() => dom.window.close());
+  assert.equal(dom.window.document.querySelector('script[src]')?.src, 'https://us-assets.i.posthog.com/static/array.js');
+  assert.equal(dom.window.posthog._i[0][0], 'phc_stub');
+});
