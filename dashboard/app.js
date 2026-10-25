@@ -185,7 +185,7 @@ function render(data) {
       : `Mode: ${na(data.mode)} · outcome: ${na(data.outcome)}`),
     el('pre', {}, proposal.excerpt ?? ''),
     el('a', { href: at(proposal.path) }, 'Read the full proposal'),
-  ] : [el('p', {}, 'No proposal yet.')]));
+  ].filter(Boolean) : [el('p', {}, 'No proposal yet.')]));
 
   report.replaceChildren(view);
   for (const id of ['bookings', 'rate']) document.getElementById(id).addEventListener('input', updateSavings);
