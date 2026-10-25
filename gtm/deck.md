@@ -2,7 +2,7 @@
 
 Placeholders still to fill: [VIDEO_URL]
 
-Presentable version (Slides artifact, private until shared): https://claude.ai/artifact/GoGwobRmwDmqZnt2gQKXoT
+Presentable version (Slides artifact, 10 slides, private until shared): https://claude.ai/artifact/QaHLWG2R1h92BwK8QEfH5a. Positioning: a booking page that works for everyone; every fix is checked for agents (Kane runs) and for people (human path). Release-pipeline integration is the next step, not built.
 
 ---
 

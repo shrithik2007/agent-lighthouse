@@ -2,31 +2,30 @@
 
 Placeholders still to fill: [VIDEO_URL]
 
-Attach: `screenshots/dashboard-row1.png`. Tag the official **TestMu AI** company page by typing "@TestMu AI" and picking the page from the menu, and tag **OpenAI** the same way.
+Attach: `screenshots/dashboard-row1.png`. Tag the official **TestMu AI** company page by typing "@TestMu AI" and picking the page from the menu, and tag **OpenAI** the same way. No exclamation marks. Ask two people to comment before the judges review.
 
 ---
 
-AI agents are starting to book things for people. ChatGPT already books restaurants through formal integrations with OpenTable, Resy and Yelp. But most small businesses only have a website. Can an agent actually book on it?
+A booking page should work for everyone who books: the person on their phone, and the AI agent booking on someone's behalf. Most small-business booking pages were never tested with an agent.
 
-At the Kane CLI Hack Day in San Francisco I built Agent Lighthouse to answer that, and to fix it.
+At Kane CLI Hack Day SF today, Team Lighthouse built Agent Lighthouse. Kane CLI is the agent, the evidence and the verifier. It tries a real booking three times in a real browser, and we read its step log to produce a score and an Agent Tax: the extra steps, seconds and credits that friction costs per successful booking. Kane's failing step and screenshot go to the OpenAI API for a diagnosis, and Codex patches only the site, on its own branch. Kane then re-runs the booking three times, plus a human-path run that books the way a person would. A fix only counts if both pass. Nothing touches a live site. Repairs arrive as a pull request with Kane's evidence attached.
 
-It runs Kane CLI against a booking flow three times from scratch and turns each run into a score and an "Agent Tax": the extra steps, seconds and credits an agent burns per successful booking.
+On our demo page Kane booked 2 of 3 times. The third run failed, and Kane filed it as a confirmed product bug: the confirmation disappeared after 2.5 seconds. Even the runs that passed cost +10 steps, +84 seconds and 2.9× the credits. One repair loop took the score from 51 to 97, with the human path passing.
 
-On our demo climbing-gym site, Kane scored the original page 51/100. One run failed, and Kane filed it as a confirmed product bug: "The completed free-visit form did not show a booking confirmation or reference code after it was submitted." The confirmation was a toast that vanished after 2.5 seconds.
+We tested two more sites. On a hard one, all three Kane runs stopped at a fake captcha. Kane will not pretend to be human, which is exactly what you want from a judge. On a site built from published agent-failure research, Kane booked every time but needed 33 steps where 14 would do. The loop cut that to 26.
 
-Then the loop:
-→ the OpenAI API diagnoses the failure from Kane's remark and its failing-step screenshot
-→ Codex patches only the site's files, on a branch
-→ Kane re-measures with fresh runs, plus a human-path check that a person still sees the booking reference five seconds later
-→ only a patch that scores 80+ and passes the human path goes to the owner for review
+Two additions from late in the day, both behind flags:
+- REA captured the demo page's scripts, and our scan found the setTimeout hiding the confirmation after 2.5 seconds. Kane found the bug by trying to book. REA found the line of code. The loop can now put both in the fix brief.
+- A PostHog human baseline. It counts real visitors' clicks, field changes and submits on the booking page and takes the median steps and seconds, so the Agent Tax can be compared with people, not just a hand-counted optimum. It's tested against stubbed PostHog data and not yet run on a live project.
 
-Result: 97/100 on the first attempt, human path green, and an Agent Tax of +10 steps, +84 seconds and +36 credits per booking removed.
+The part we didn't plan: on the hard site, the coding agent got past Kane by removing the human check and hard-coding the test date. Both automated checks accepted it. Owner review did not. We added a fixture-leak check, and on the re-run it blocked the same trick and qualified a clean fix at 95.
 
-What's honest about it: three runs per side is a small sample, the weights are my design choice, and the site has planted problems. Everything is in the repo: raw Kane streams, evidence packs and every OpenAI call logged.
+Where it goes next: Lighthouse in a company's release pipeline. Every deploy gets Kane runs on the booking flow plus the human-path check, so a change that slows agents down or breaks booking for people is caught before customers see it. We built the loop today; the pipeline integration is the next step.
 
-Repo: https://github.com/shrithik2007/agent-lighthouse
+Product page: https://shrithik2007.github.io/agent-lighthouse/
+Repository: https://github.com/shrithik2007/agent-lighthouse
 Demo: [VIDEO_URL]
 
-Thanks @TestMu AI for Kane CLI and @OpenAI for the models behind the diagnosis and the fixer.
+Thank you to @TestMu AI for Kane CLI and @OpenAI for the models behind the diagnosis and the fixer.
 
-#KaneCLIHackDay #KaneCLI #AIAgents #Accessibility
+#KaneCLIHackDay #KaneCLI #AIAgents
