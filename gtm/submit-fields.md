@@ -14,7 +14,7 @@ Numbers come from `results/latest.json` (generated from the apply-mode loop `202
 
 **Exact commit SHA (40 hex):** [COMMIT_SHA]
 
-**Live demo URL or run command:** https://shrithik2007.github.io/agent-lighthouse/ (product page) · https://shrithik2007.github.io/agent-lighthouse/dashboard/ (live report, two cases, savings)
+**Live demo URL or run command:** https://shrithik2007.github.io/agent-lighthouse/ (product page) · https://shrithik2007.github.io/agent-lighthouse/dashboard/ (live report, three cases, savings)
 
 Local:
 ```
@@ -24,7 +24,7 @@ npm ci && npm run serve & npm run dashboard
 ```
 Dashboard: http://localhost:4100 (recorded run: http://localhost:4100/?recorded=1)
 
-**Kane run report / evidence:** https://kaneclihack.sh/t/lighthouse/proof. Key runs: KR-133 (BEFORE failed: confirmation assertion, triaged `confirmed_product_bug`), KR-150 (green rerun after the repair), KR-148 and KR-153 (human path failed before, passed after), and KR-170, a `testmd` replay of the saved human-path test, labelled PASSED (VERIFIED). The packs are committed in `evidence/packs/` and the per-run streams in `evidence/runs/`. Passing runs show as "errored" on the Proof tab because of a wrapper bug (see limitations).
+**Kane run report / evidence:** https://kaneclihack.sh/t/lighthouse/proof. Every run is indexed in `evidence/README.md`. Key runs: KR-133 (BEFORE failed: confirmation assertion, triaged `confirmed_product_bug`), KR-150 (green rerun after the repair), KR-148 and KR-153 (human path failed before, passed after), and KR-170, a `testmd` replay of the saved human-path test, labelled PASSED (VERIFIED). The packs are committed in `evidence/packs/` and the per-run streams in `evidence/runs/`. Passing runs show as "errored" on the Proof tab because of a wrapper bug (see limitations).
 
 **Problem:** AI agents are starting to book things for people, but they only work smoothly where there's a formal integration. ChatGPT books restaurants through OpenTable, Resy and Yelp. On the open web, general agents still fail often: on Online-Mind2Web the best agent succeeded on about 61% of tasks and most on about 30%. A small business with only a website has no way to know whether an agent can book with it, or what to fix.
 
@@ -46,7 +46,7 @@ Dashboard: http://localhost:4100 (recorded run: http://localhost:4100/?recorded=
 
 **Known limitations:** The Proof tab labels passing Kane 0.10 runs "errored": the `kanehack report` parser (`lib/stream.mjs`) treats Kane's `coverage` event as an assurance stream and ignores `run_end` (ticket H-0011). Exit codes and `run_end` are preserved, and raw streams are in `evidence/`. The score weights are a design choice and optimalSteps is hand-counted. The demo site has planted patterns and no booking backend. Kane varies from run to run (BEFORE took 14–24 steps), and three runs per side is a small sample. The fix loop is limited to sites we own, and score-only mode for external sites is not built. In case 2 the first loop's gate qualified a patch that removed human verification and hard-coded the test date; owner review rejected it, and the gate now has a fixture-leak check that marks such patches "suspect, owner review required" (run on history it also flags mild test-data leaks, such as hint and placeholder text, in the three case 1 repairs). Kane refuses captcha-style checks, so sites with real bot protection need an owner-approved test path. Human baseline (flag --human-baseline) is tested against stubbed PostHog responses only; not run against a real project. Human steps (click/change/submit) and Kane steps (include planning and waits) are different units; the comparison is indicative.
 
-**Screenshots:** `gtm/screenshots/dashboard-row1.png`, `gtm/screenshots/social-preview.png`, `gtm/screenshots/failing-step.jpg`, `gtm/screenshots/proposal.png`, `gtm/screenshots/terminal-run-end.png`
+**Screenshots:** `gtm/screenshots/dashboard-row1.png`, `gtm/screenshots/social-preview.png`, `gtm/screenshots/failing-step.jpg`, `gtm/screenshots/proposal.png`, `gtm/screenshots/dashboard-full.png`
 
 **Demo video:** [VIDEO_URL]
 

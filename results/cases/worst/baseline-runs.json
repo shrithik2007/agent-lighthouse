@@ -3,21 +3,21 @@
     "id": "2026-10-24T23-16-07.473Z-64aa1183",
     "url": "http://localhost:4104",
     "exitCode": 0,
-    "metadataPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T23-16-07.473Z-64aa1183.meta.json",
-    "rawPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T23-16-07.473Z-64aa1183.ndjson"
+    "metadataPath": "~/Projects/kane-hack/results/raw/2026-10-24T23-16-07.473Z-64aa1183.meta.json",
+    "rawPath": "~/Projects/kane-hack/results/raw/2026-10-24T23-16-07.473Z-64aa1183.ndjson"
   },
   {
     "id": "2026-10-24T23-18-57.965Z-acd7e433",
     "url": "http://localhost:4104",
     "exitCode": 0,
-    "metadataPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T23-18-57.965Z-acd7e433.meta.json",
-    "rawPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T23-18-57.965Z-acd7e433.ndjson"
+    "metadataPath": "~/Projects/kane-hack/results/raw/2026-10-24T23-18-57.965Z-acd7e433.meta.json",
+    "rawPath": "~/Projects/kane-hack/results/raw/2026-10-24T23-18-57.965Z-acd7e433.ndjson"
   },
   {
     "id": "2026-10-24T23-22-03.857Z-4d18a16a",
     "url": "http://localhost:4104",
     "exitCode": 0,
-    "metadataPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T23-22-03.857Z-4d18a16a.meta.json",
-    "rawPath": "/Users/shrit/Projects/kane-hack/results/raw/2026-10-24T23-22-03.857Z-4d18a16a.ndjson"
+    "metadataPath": "~/Projects/kane-hack/results/raw/2026-10-24T23-22-03.857Z-4d18a16a.meta.json",
+    "rawPath": "~/Projects/kane-hack/results/raw/2026-10-24T23-22-03.857Z-4d18a16a.ndjson"
   }
 ]
