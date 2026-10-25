@@ -1,6 +1,6 @@
 # Submit-tab fields (https://kaneclihack.sh/t/lighthouse/submit)
 
-Placeholders still to fill: [COMMIT_SHA] · [VIDEO_URL] · [DEVPOST_URL]
+Placeholders still to fill: none
 
 Numbers come from `results/latest.json` (generated from the apply-mode loop `2026-10-24T21-17-14` and the baseline in `results/baseline.json`).
 
@@ -12,7 +12,7 @@ Numbers come from `results/latest.json` (generated from the apply-mode loop `202
 
 **Repository URL:** https://github.com/shrithik2007/agent-lighthouse
 
-**Exact commit SHA (40 hex):** [COMMIT_SHA]
+**Exact commit SHA (40 hex):** efa42b43c38919821d6d25ae70af459a32881005 (main at the 6:00 PM lock; later commits on main are dashboard and link fixes only)
 
 **Live demo URL or run command:** https://shrithik2007.github.io/agent-lighthouse/ (product page) · https://shrithik2007.github.io/agent-lighthouse/dashboard/ (live report, three cases, savings)
 
@@ -48,10 +48,10 @@ Dashboard: http://localhost:4100 (recorded run: http://localhost:4100/?recorded=
 
 **Screenshots:** `gtm/screenshots/dashboard-row1.png`, `gtm/screenshots/social-preview.png`, `gtm/screenshots/failing-step.jpg`, `gtm/screenshots/proposal.png`, `gtm/screenshots/dashboard-full.png`
 
-**Demo video:** [VIDEO_URL]
+**Demo video:** https://d3nl4wy7jovhq0.cloudfront.net/public/p67/46fc29a94a4322b98009d56cb59b64fea3306548686ac0f2b11b07a3d1b8d275.mp4
 
 **Team credits (consent):** Team Lighthouse: Sreesanth Nitillan Senthilkumar (LinkedIn shrithiksk, X @shrithik2007). Built with Codex (Phase 0) and Claude Code. Consent to be credited: confirm on the Submit tab.
 
-**Devpost link:** [DEVPOST_URL]
+**Blog (dev.to):** https://dev.to/anudeep_bonagiri/kane-booked-it-2-of-3-times-its-step-log-said-the-page-cost-the-agent-29x-the-credits-4o16
 
 **Evidence location:** `evidence/` in the repo (`evidence/README.md` explains each item), plus `results/` for the scores, loop records, proposal and OpenAI call log.

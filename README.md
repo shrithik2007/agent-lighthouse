@@ -4,7 +4,7 @@ A booking page that works for everyone: the people who book and the AI agents bo
 
 **Track:** Web App · **Team:** Lighthouse · **Built:** October 24, 2026, Kane CLI Hack Day SF.
 
-**Product page:** https://shrithik2007.github.io/agent-lighthouse/ · **Live report:** https://shrithik2007.github.io/agent-lighthouse/dashboard/ (case switcher, savings panel; `?recorded=1` for the recorded demo run)
+**Demo video (2:49):** https://d3nl4wy7jovhq0.cloudfront.net/public/p67/46fc29a94a4322b98009d56cb59b64fea3306548686ac0f2b11b07a3d1b8d275.mp4 · **Product page:** https://shrithik2007.github.io/agent-lighthouse/ · **Live report:** https://shrithik2007.github.io/agent-lighthouse/dashboard/ (case switcher, savings panel; `?recorded=1` for the recorded demo run)
 
 ## What it does
 
