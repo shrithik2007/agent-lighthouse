@@ -161,6 +161,7 @@ Verified in this build against `kane-cli run --help` (0.10.0-rc.3):
 - Kane's blocker classification (`blocker.captcha`) on the hard-mode site
 - Kane's official GitHub Action (`LambdaTest/kane-cli/integrations/github-action/kane-cli-browser-run`), in `.github/workflows/kane.yml`: on every pull request it serves the PR's sites, replays the committed human-path test for the site the PR changes (`tests/kane/`) with `--headless --agent`, uploads the evidence pack and posts Kane's verdict on the PR. Credentials come only from the `LT_USERNAME` and `LT_ACCESS_KEY` repository secrets
 - Assurance: `kane-cli context ingest` (6 requirements, one owner question answered), `context review --approve uc-1`, `design tests` (15 acceptance criteria, 5 scenarios, 5 Kane-designed `_test.md` tests, 3 gaps), `cover` (0%, nothing run yet; the designed tests wait at Kane's design checkpoint for owner approval). Record in `evidence/assurance/`
+- REA code evidence (flag --rea): rea-agents 6.7.0 captured the BEFORE page's scripts; our scan found the 2.5 s timer hiding the confirmation and the duplicate Go handlers, matching Kane's finding.
 
 ## The planted fixture
 
@@ -203,6 +204,7 @@ All code was written on October 24, 2026 (see `git log`):
 - The demo loop's attempt server moved from :4103 to :4105 when :4103 became the hard-mode working copy (port only; the loop is otherwise unchanged).
 - The product page quotes an illustrative (not measured) 92% vs 12% figure from Future AGI and labels it as illustrative.
 - The first calibration run exited 2 because Kane was launched inside Codex's sandbox (EPERM on `~/.testmuai`, Chrome never started). Kane now always runs from the operator's shell.
+- Human baseline (flag --human-baseline) is tested against stubbed PostHog responses only; not run against a real project. Human steps (click/change/submit) and Kane steps (include planning and waits) are different units; the comparison is indicative.
 
 ## Checkpoint policy
 
