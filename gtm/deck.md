@@ -1,6 +1,6 @@
 # Agent Lighthouse: 6-slide deck
 
-Placeholders still to fill: [VIDEO_URL]
+Placeholders still to fill: none
 
 Presentable version (Slides artifact, 10 slides, private until shared): https://claude.ai/artifact/QaHLWG2R1h92BwK8QEfH5a. Positioning: a booking page that works for everyone; every fix is checked for agents (Kane runs) and for people (human path). Release-pipeline integration is the next step, not built.
 
@@ -57,7 +57,7 @@ Team Lighthouse · Kane CLI Hack Day SF · October 24, 2026 · https://github.co
 
 **Agent Tax removed: +10 steps · +84 s · +36 credits per booking.** Qualified on attempt 1; commit `94a7f80 fix(site): attempt 1 answers Kane KR-133`.
 
-> Speaker notes: Show the dashboard, then the evidence viewer on KR-133 step 14. Demo video: [VIDEO_URL].
+> Speaker notes: Show the dashboard, then the evidence viewer on KR-133 step 14. Demo video: https://d3nl4wy7jovhq0.cloudfront.net/public/p67/46fc29a94a4322b98009d56cb59b64fea3306548686ac0f2b11b07a3d1b8d275.mp4.
 
 ---
 

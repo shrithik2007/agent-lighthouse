@@ -1,6 +1,6 @@
 # LinkedIn post
 
-Placeholders still to fill: [VIDEO_URL]
+Placeholders still to fill: none
 
 Attach: `screenshots/dashboard-row1.png`. Tag the official **TestMu AI** company page by typing "@TestMu AI" and picking the page from the menu, and tag **OpenAI** the same way. No exclamation marks. Ask two people to comment before the judges review.
 
@@ -24,7 +24,7 @@ Where it goes next: Lighthouse in a company's release pipeline. Every deploy get
 
 Product page: https://shrithik2007.github.io/agent-lighthouse/
 Repository: https://github.com/shrithik2007/agent-lighthouse
-Demo: [VIDEO_URL]
+Demo: https://d3nl4wy7jovhq0.cloudfront.net/public/p67/46fc29a94a4322b98009d56cb59b64fea3306548686ac0f2b11b07a3d1b8d275.mp4
 
 Thank you to @TestMu AI for Kane CLI and @OpenAI for the models behind the diagnosis and the fixer.
 

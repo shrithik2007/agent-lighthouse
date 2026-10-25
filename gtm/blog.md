@@ -4,7 +4,7 @@ published: false
 tags: ai, testing, accessibility, webdev
 ---
 
-<!-- Placeholders: [VIDEO_URL]. Upload the images in gtm/screenshots/ to dev.to and replace the relative paths. -->
+<!-- Placeholders: https://d3nl4wy7jovhq0.cloudfront.net/public/p67/46fc29a94a4322b98009d56cb59b64fea3306548686ac0f2b11b07a3d1b8d275.mp4. Upload the images in gtm/screenshots/ to dev.to and replace the relative paths. -->
 
 A browser agent can finish a task and still show you the page is broken. In one day at Kane CLI Hack Day we turned Kane's step log into a score site owners can act on, built a repair loop that proves its own fixes for agents and for people, watched a review step catch the coding agent cheating, and added a second witness, REA, that found the same bug in the page's code.
 
@@ -69,4 +69,4 @@ Running in the release pipeline. The loop we built today runs by hand. The next 
 - Codex's ChatGPT-plan quota ran out during the first loop. That loop is kept as `results/loop/2026-10-24T21-11-48.json` (aborted). The fixer now passes the API key to Codex through the environment and falls back to the OpenAI API returning the whole file.
 - The first calibration run exited 2 because Kane was launched inside Codex's sandbox (EPERM on `~/.testmuai`, Chrome never started). Kane now always runs from the operator's shell.
 
-Repo: https://github.com/shrithik2007/agent-lighthouse · Demo video: [VIDEO_URL] · Built for #KaneCLIHackDay
+Repo: https://github.com/shrithik2007/agent-lighthouse · Demo video: https://d3nl4wy7jovhq0.cloudfront.net/public/p67/46fc29a94a4322b98009d56cb59b64fea3306548686ac0f2b11b07a3d1b8d275.mp4 · Built for #KaneCLIHackDay
